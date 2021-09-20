@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "60890709044",
+    "project_id": "chocolate-store-1e941",
+    "storage_bucket": "chocolate-store-1e941.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60890709044:android:550d12f883ef1380505e61",
+        "android_client_info": {
+          "package_name": "com.chocolatestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60890709044-7ovjh9rgq6724ltt7g0q27n6892siasf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYYLS68WkJYd8_wd7MeKD6uT2sPu7lMjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60890709044-7ovjh9rgq6724ltt7g0q27n6892siasf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

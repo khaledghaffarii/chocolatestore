@@ -208,22 +208,10 @@ import {
   Dimensions,
   Button,
 } from 'react-native';
-// import GridImageView from 'react-native-grid-image-viewer';
 import firestore from '@react-native-firebase/firestore';
-// import LoginScreen from '../screens/LoginScreen';
-// import {NavigationContainer, useNavigation} from '@react-navigation/native';
-// import Carousel from 'react-native-snap-carousel';
-//import Carousel from '../components/Carousel';
-//import {dummyData} from '../data/Data';
 import {Card} from 'react-native-elements';
-// import * as RootNavigation from './RootNavigation';
+
 import CarouselScreens from '../screens/CarouselScreens';
-import {
-  collection,
-  query,
-  where,
-  onSnapshot,
-} from '@react-native-firebase/firestore';
 const AppStack = ({navigation}) => {
   const Stack = createStackNavigator();
   const [active, setActive] = useState('');
@@ -373,16 +361,7 @@ const AppStack = ({navigation}) => {
                         marginLeft: 10,
                         width: 120,
                       }}>
-                      <Button
-                        color="rgb(27,25,110)"
-                        title="أضف إلى السلة"
-                        // onPress={() => {
-                        //   navigation.navigate('product', {
-                        //     category: category,
-                        //     otherCategory: otherCategory,
-                        //   });
-                        // }}
-                      />
+                      <Button color="rgb(27,25,110)" title="أضف إلى السلة" />
                     </View>
                   </Card>
                 </TouchableOpacity>
@@ -467,27 +446,13 @@ const AppStack = ({navigation}) => {
                         marginLeft: 10,
                         width: 120,
                       }}>
-                      <Button
-                        color="rgb(27,25,110)"
-                        title="أضف إلى السلة"
-                        // onPress={() => {
-                        //   navigation.navigate('product', {
-                        //     category: category,
-                        //     otherCategory: otherCategory,
-                        //   });
-                        // }}
-                      />
+                      <Button color="rgb(27,25,110)" title="أضف إلى السلة" />
                     </View>
                   </Card>
                 </TouchableOpacity>
               );
             })}
         </ScrollView>
-        {/* <Button
-          title=" test"
-          color="#f9ab37"
-          onPress={() => RootNavigation.navigate('product', {userName: 'Lucy'})}
-        /> */}
       </View>
       {/* /////////////////////////////////////////////////////  drink category /////////////////////////////////////////////*/}
       <View
@@ -704,7 +669,7 @@ const styles = StyleSheet.create({
   categoriesPhoto: {
     width: 120,
     height: 120,
-    marginLeft:12,
+    marginLeft: 12,
     borderRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,

@@ -299,7 +299,6 @@ const AppStack = ({
         }}>
         <CarouselScreens />
       </View>
-
       {/*///////////////////////////////////////////////////// chocolate category   /////////////////////////////////////////////////*/}
       <View
         style={{
@@ -382,7 +381,13 @@ const AppStack = ({
                         marginLeft: 10,
                         width: 120,
                       }}>
-                      <Button color="rgb(27,25,110)" title="أضف إلى السلة" />
+                      <Button
+                        onPress={() => {
+                          addItemToBasket();
+                        }}
+                        color="rgb(27,25,110)"
+                        title="أضف إلى السلة"
+                      />
                     </View>
                   </Card>
                 </TouchableOpacity>

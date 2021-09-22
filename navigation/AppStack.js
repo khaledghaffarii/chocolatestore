@@ -210,15 +210,36 @@ import {
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {Card} from 'react-native-elements';
-
+import {useDispatch} from 'react-redux';
 import CarouselScreens from '../screens/CarouselScreens';
-const AppStack = ({navigation}) => {
+import {addToBasket} from '../slice/BasketSlice';
+import * as Animatable from 'react-native-animatable';
+
+const AppStack = ({
+  navigation,
+  title,
+  imageUrl,
+  Calories,
+  decription,
+  price,
+}) => {
   const Stack = createStackNavigator();
   const [active, setActive] = useState('');
   const [category, setCategory] = useState('');
   const [LessCake, setLessCake] = useState('');
   const [LessDrink, setLessDrink] = useState('');
   const [kandy, setKandy] = useState('');
+  const dispatch = useDispatch();
+  const addItemToBasket = () => {
+    const product = {
+      title,
+      imageUrl,
+      Calories,
+      decription,
+      price,
+    };
+    dispatch(addToBasket(product));
+  };
   useEffect(() => {
     const getCategory = async () => {
       try {

@@ -13,9 +13,8 @@ import {useRoute} from '@react-navigation/native';
 
 import firestore from '@react-native-firebase/firestore';
 
-
 import {Card} from 'react-native-elements';
-
+import FooterScreen from './FooterScreen';
 const Product = ({navigation}) => {
   const [allChocolate, setAllChocolate] = useState('');
   const getAllChocolate = async () => {
@@ -94,6 +93,7 @@ const Product = ({navigation}) => {
           })}
         </View>
       </View>
+      <FooterScreen />
     </ScrollView>
   );
 };

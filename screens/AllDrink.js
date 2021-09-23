@@ -16,6 +16,7 @@ import firestore from '@react-native-firebase/firestore';
 
 import {Card} from 'react-native-elements';
 
+      import FooterScreen from './FooterScreen';
 const AllDrink = () => {
   const navigation = useNavigation();
   const [allDrink, setAllDrink] = useState('');
@@ -95,6 +96,7 @@ const AllDrink = () => {
           })}
         </View>
       </View>
+      <FooterScreen />
     </ScrollView>
   );
 };

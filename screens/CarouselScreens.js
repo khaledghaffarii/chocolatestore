@@ -7,11 +7,11 @@ const CarouselScreens = () => {
   const navigation = useNavigation();
   return (
     <Slick
-      style={styles.wrapper}
       showsButtons={true}
+      style={styles.wrapper}
       autoplay={true}
       autoplayDirection={true}
-      autoplayTimeout={3}>
+      autoplayTimeout={5}>
       <View style={styles.slide1}>
         <TouchableOpacity onPress={() => navigation.navigate('all_drink')}>
           <Image
@@ -49,7 +49,7 @@ const CarouselScreens = () => {
 };
 
 var styles = StyleSheet.create({
-  wrapper: {height: 200, marginBottom: -10},
+  wrapper: {height: 130},
   slide1: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -60,14 +60,8 @@ var styles = StyleSheet.create({
   },
   tinyLogo: {
     width: 395,
-    height: 120,
-    marginTop: 25,
-    marginLeft: 0,
-    borderRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    borderColor: '#fff5',
-    borderWidth: 3,
+    height: 175,
+    marginLeft: 0
   },
   slide3: {
     flex: 1,

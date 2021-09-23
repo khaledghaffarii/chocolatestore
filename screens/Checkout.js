@@ -14,13 +14,14 @@ import {Card} from 'react-native-elements';
 import {useSelector} from 'react-redux';
 import {selectItems} from '../slice/BasketSlice';
 import CheckoutProduct from './CheckoutProduct';
+import FooterScreen from './FooterScreen';
 const Checkout = ({navigation}) => {
   const items = useSelector(selectItems);
 
   return (
     <View>
       {items.length ? (
-        <View style={{flex: 1}}>
+        <ScrollView style={{}}>
           <Card
             // eslint-disable-next-line react-native/no-inline-styles
             containerStyle={{
@@ -45,6 +46,7 @@ const Checkout = ({navigation}) => {
               ))}
             </ScrollView>
           </Card>
+
           <Card
             // eslint-disable-next-line react-native/no-inline-styles
             containerStyle={{
@@ -52,7 +54,7 @@ const Checkout = ({navigation}) => {
               height: 220,
               borderWidth: 0,
             }}>
-            <ScrollView horizontal={true} style={styles.container}>
+            <ScrollView style={styles.container}>
               <View>
                 <View style={{marginLeft: 250}}>
                   <Card.Title> المجموع : </Card.Title>
@@ -87,8 +89,10 @@ const Checkout = ({navigation}) => {
               </View>
             </ScrollView>
           </Card>
-        </View>
+          <FooterScreen />
+        </ScrollView>
       ) : (
+          <ScrollView  style={styles.container}>
         <Card
           // eslint-disable-next-line react-native/no-inline-styles
           containerStyle={{
@@ -97,7 +101,6 @@ const Checkout = ({navigation}) => {
             borderWidth: 0,
             marginTop: 100,
           }}>
-          <ScrollView horizontal={true} style={styles.container}>
             <View>
               <View style={{marginLeft: 250}}>
                 <Card.Title> المجموع : </Card.Title>
@@ -126,8 +129,10 @@ const Checkout = ({navigation}) => {
                 </View>
               </View>
             </View>
-          </ScrollView>
+
         </Card>
+          <FooterScreen />
+          </ScrollView>
       )}
     </View>
   );

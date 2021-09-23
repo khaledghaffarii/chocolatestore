@@ -77,7 +77,7 @@ import {
   Dimensions,
   Button,
 } from 'react-native';
-// import {navigationRef} from './RootNavigation';
+import {navigationRef} from './RootNavigation';
 import AllCake from '../screens/AllCake';
 import ChocolateShow from '../screens/ChocolateShow';
 import CakeShow from '../screens/CakeShow';
@@ -88,7 +88,10 @@ import AllDrink from '../screens/AllDrink';
 import DrinkShow from '../screens/DrinkShow';
 import AllKandy from '../screens/AllKandy';
 import KandyShow from '../screens/KandyShow';
+import Checkout from '../screens/Checkout';
+import {useNavigation} from '@react-navigation/native';
 const Routes = navigation => {
+  //const navigation = useNavigation();
   const {user, setUser} = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
   const Stack = createStackNavigator();
@@ -165,6 +168,33 @@ const Routes = navigation => {
             headerBackTitleVisible: false,
           }}
           component={LoginScreen}
+        />
+        <Stack.Screen
+          name="checkout"
+          options={{
+            title: 'سلة  المشتريات  ',
+            headerRight: () => (
+              <View style={{marginRight: 15}}>
+                <ShoppingCartIcon />
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: '#ffff',
+              height: 50,
+              shadowColor: '#000',
+              elevation: 50,
+            },
+            headerTitleAlign: 'center',
+
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontSize: 21,
+            },
+            backgroundColor: '#2e64e515',
+            margin: 0,
+            headerBackTitleVisible: false,
+          }}
+          component={Checkout}
         />
         <Stack.Screen
           name="allChocolate"

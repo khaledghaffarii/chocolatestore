@@ -218,6 +218,7 @@ import CarouselScreens from '../screens/CarouselScreens';
 import {addToBasket} from '../slice/BasketSlice';
 import * as Animatable from 'react-native-animatable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FooterScreen from '../screens/FooterScreen';
 const AppStack = ({
   navigation,
   title,
@@ -302,7 +303,6 @@ const AppStack = ({
           متخصصين بالحلا المميز ،مـعـكـم بـكـل حـب
         </Text>
         <View style={styles.instagramIcon}>
-         
           <Pressable
             onPress={() => {
               Linking.openURL('https://www.instagram.com/dallah_hala/');
@@ -422,7 +422,7 @@ const AppStack = ({
           <Pressable
             style={styles.button}
             onPress={() => {
-              navigation.navigate('allChocolate');
+              navigation.navigate('allCake');
             }}>
             <Text style={styles.text}> مزيد</Text>
           </Pressable>
@@ -508,7 +508,7 @@ const AppStack = ({
           <Pressable
             style={styles.button}
             onPress={() => {
-              navigation.navigate('allChocolate');
+              navigation.navigate('all_drink');
             }}>
             <Text style={styles.text}> مزيد</Text>
           </Pressable>
@@ -599,7 +599,7 @@ const AppStack = ({
           <Pressable
             style={styles.button}
             onPress={() => {
-              navigation.navigate('allChocolate');
+              navigation.navigate('all_kandy');
             }}>
             <Text style={styles.text}> مزيد</Text>
           </Pressable>
@@ -670,6 +670,7 @@ const AppStack = ({
           onPress={() => RootNavigation.navigate('product', {userName: 'Lucy'})}
         /> */}
       </View>
+      <FooterScreen />
     </ScrollView>
   );
 };
@@ -727,7 +728,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     marginTop: 50,
-    fontFamily: 'arial',
   },
   instagramIcon: {
     alignItems: 'center',

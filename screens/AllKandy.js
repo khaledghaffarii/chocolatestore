@@ -15,7 +15,7 @@ import {useRoute, useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 
 import {Card} from 'react-native-elements';
-
+      import FooterScreen from './FooterScreen';
 const AllKandy = () => {
   const navigation = useNavigation();
   const [allKandy, setAllKandy] = useState('');
@@ -42,8 +42,8 @@ const AllKandy = () => {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate('drink_show', {
-                    drink: allKandys,
+                  navigation.navigate('Kandy_show', {
+                    kandy: allKandys,
                   })
                 }
                 key={i}>
@@ -72,7 +72,12 @@ const AllKandy = () => {
                         marginLeft: 30,
                         padding: 10,
                       }}>
-                      <Text style={{width: 100,textAlign: 'center',paddingRight:10}}>
+                      <Text
+                        style={{
+                          width: 100,
+                          textAlign: 'center',
+                          paddingRight: 10,
+                        }}>
                         {allKandys.title}
                       </Text>
                       <Card.Divider />
@@ -97,6 +102,8 @@ const AllKandy = () => {
           })}
         </View>
       </View>
+
+      <FooterScreen />
     </ScrollView>
   );
 };

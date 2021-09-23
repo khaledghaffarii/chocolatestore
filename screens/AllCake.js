@@ -23,7 +23,7 @@ import LoginScreen from './LoginScreen';
 import Carousel from '../components/Carousel';
 import {dummyData} from '../data/Data';
 import {SearchBar, Card} from 'react-native-elements';
-
+  import FooterScreen from './FooterScreen';
 const Product = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -31,15 +31,15 @@ const Product = () => {
   const [allCake, setAllCake] = useState('');
 
   const getAllCake = async () => {
- try {
-   await firestore()
-     .collection('MoreCake')
-     .onSnapshot(snapshot => {
-       setAllCake(snapshot.docs.map(doc => doc.data()));
-     });
- } catch (error) {
-   console.log(error);
- }
+    try {
+      await firestore()
+        .collection('MoreCake')
+        .onSnapshot(snapshot => {
+          setAllCake(snapshot.docs.map(doc => doc.data()));
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     getAllCake();
@@ -113,6 +113,8 @@ const Product = () => {
           })}
         </View>
       </View>
+    
+      <FooterScreen />
     </ScrollView>
   );
 };

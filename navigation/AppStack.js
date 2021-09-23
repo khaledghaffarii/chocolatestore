@@ -207,14 +207,17 @@ import {
   TouchableOpacity,
   Dimensions,
   Button,
+  Pressable,
+  Linking,
 } from 'react-native';
+import {Link} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import {Card} from 'react-native-elements';
 import {useDispatch} from 'react-redux';
 import CarouselScreens from '../screens/CarouselScreens';
 import {addToBasket} from '../slice/BasketSlice';
 import * as Animatable from 'react-native-animatable';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const AppStack = ({
   navigation,
   title,
@@ -293,12 +296,22 @@ const AppStack = ({
   }, []);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
-      <View
-        style={{
-          marginTop: 5,
-        }}>
-        <CarouselScreens />
+      <CarouselScreens />
+      <View style={styles.advertisement}>
+        <Text style={styles.advertisementText}>
+          متخصصين بالحلا المميز ،مـعـكـم بـكـل حـب
+        </Text>
+        <View style={styles.instagramIcon}>
+         
+          <Pressable
+            onPress={() => {
+              Linking.openURL('https://www.instagram.com/dallah_hala/');
+            }}>
+            <Ionicons name="ios-logo-instagram" size={20} color="#fff" />
+          </Pressable>
+        </View>
       </View>
+
       {/*///////////////////////////////////////////////////// chocolate category   /////////////////////////////////////////////////*/}
       <View
         style={{
@@ -307,24 +320,26 @@ const AppStack = ({
           justifyContent: 'space-between',
         }}>
         <Text style={styles.recomended}>شوكولاطات</Text>
-        <View
-          style={{
-            marginRight: 10,
-            marginTop: 0,
-            width: 110,
-          }}>
-          <Button
+        <View style={styles.moreButton}>
+          {/* <Button
             styleContainer={{
               borderRadius: 100,
               borderBottomLeftRadius: 100,
               borderBottomRightRadius: 100,
             }}
             title=" مزيد"
-            color="#f9ab37"
+            color="#82644A"
             onPress={() => {
               navigation.navigate('allChocolate');
             }}
-          />
+          /> */}
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('allChocolate');
+            }}>
+            <Text style={styles.text}> مزيد</Text>
+          </Pressable>
         </View>
       </View>
       <View>
@@ -343,10 +358,11 @@ const AppStack = ({
                   <Card
                     containerStyle={{
                       elevation: 10,
-                      height: 250,
+                      height: 185,
+                      width: 150,
                       marginBottom: 15,
-                      borderRadius: 20,
-                      borderColor: '#f9ab37',
+                      borderRadius: 10,
+                      borderColor: '#82644A',
                       borderWidth: 0,
                     }}>
                     <Image
@@ -357,35 +373,27 @@ const AppStack = ({
                       <Text
                         style={{
                           marginTop: 0,
-                          fontSize: 20,
+                          fontSize: 15,
                           fontWeight: 'bold',
+                          marginTop: 7,
 
                           textAlign: 'center',
                         }}>
                         {img.title}
                       </Text>
-                      <Text
-                        style={{
-                          marginTop: 5,
-                          fontSize: 15,
-
-                          color: 'gray',
-
-                          textAlign: 'center',
-                        }}></Text>
                     </View>
                     <View
                       style={{
                         marginRight: 8,
-                        marginTop: 10,
-                        marginLeft: 10,
+                        marginTop: 20,
+
                         width: 120,
                       }}>
                       <Button
                         onPress={() => {
                           addItemToBasket();
                         }}
-                        color="rgb(27,25,110)"
+                        color="#82644A"
                         title="أضف إلى السلة"
                       />
                     </View>
@@ -402,20 +410,22 @@ const AppStack = ({
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.recomended1}>كيك و مخبوزات </Text>
-        <View
-          style={{
-            marginRight: 10,
-            marginTop: 0,
-            width: 110,
-          }}>
-          <Button
+        <Text style={styles.recomended}>كيك و مخبوزات </Text>
+        <View style={styles.moreButton}>
+          {/* <Button
             title=" مزيد"
-            color="#f9ab37"
+            color="#82644A"
             onPress={() => {
               navigation.navigate('allCake');
             }}
-          />
+          /> */}
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('allChocolate');
+            }}>
+            <Text style={styles.text}> مزيد</Text>
+          </Pressable>
         </View>
       </View>
       <View>
@@ -434,10 +444,11 @@ const AppStack = ({
                   <Card
                     containerStyle={{
                       elevation: 10,
-                      height: 250,
+                      height: 185,
+                      width: 150,
                       marginBottom: 15,
-                      borderRadius: 20,
-                      borderColor: '#f9ab37',
+                      borderRadius: 10,
+                      borderColor: '#82644A',
                       borderWidth: 0,
                     }}>
                     <Image
@@ -448,31 +459,29 @@ const AppStack = ({
                       <Text
                         style={{
                           marginTop: 0,
-                          fontSize: 20,
+                          fontSize: 15,
                           fontWeight: 'bold',
-                          marginLeft: 0,
+                          marginTop: 7,
+
                           textAlign: 'center',
                         }}>
                         {img.title}
                       </Text>
-                      <Text
-                        style={{
-                          marginTop: 5,
-                          fontSize: 15,
-
-                          color: 'gray',
-
-                          textAlign: 'center',
-                        }}></Text>
                     </View>
                     <View
                       style={{
                         marginRight: 8,
-                        marginTop: 10,
-                        marginLeft: 10,
+                        marginTop: 20,
+
                         width: 120,
                       }}>
-                      <Button color="rgb(27,25,110)" title="أضف إلى السلة" />
+                      <Button
+                        onPress={() => {
+                          addItemToBasket();
+                        }}
+                        color="#82644A"
+                        title="أضف إلى السلة"
+                      />
                     </View>
                   </Card>
                 </TouchableOpacity>
@@ -487,20 +496,22 @@ const AppStack = ({
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.recomended1}>مشروبات </Text>
-        <View
-          style={{
-            marginRight: 10,
-            marginTop: 0,
-            width: 110,
-          }}>
-          <Button
+        <Text style={styles.recomended}>مشروبات </Text>
+        <View style={styles.moreButton}>
+          {/* <Button
             title=" مزيد"
-            color="#f9ab37"
+            color="#82644A"
             onPress={() => {
               navigation.navigate('all_drink');
             }}
-          />
+          /> */}
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('allChocolate');
+            }}>
+            <Text style={styles.text}> مزيد</Text>
+          </Pressable>
         </View>
       </View>
       <View>
@@ -519,10 +530,11 @@ const AppStack = ({
                   <Card
                     containerStyle={{
                       elevation: 10,
-                      height: 250,
+                      height: 185,
+                      width: 150,
                       marginBottom: 15,
-                      borderRadius: 20,
-                      borderColor: '#f9ab37',
+                      borderRadius: 10,
+                      borderColor: '#82644A',
                       borderWidth: 0,
                     }}>
                     <Image
@@ -533,39 +545,28 @@ const AppStack = ({
                       <Text
                         style={{
                           marginTop: 0,
-                          fontSize: 20,
+                          fontSize: 15,
                           fontWeight: 'bold',
-                          marginLeft: 0,
+                          marginTop: 7,
+
                           textAlign: 'center',
                         }}>
                         {img.title}
                       </Text>
-                      <Text
-                        style={{
-                          marginTop: 5,
-                          fontSize: 15,
-
-                          color: 'gray',
-
-                          textAlign: 'center',
-                        }}></Text>
                     </View>
                     <View
                       style={{
                         marginRight: 8,
-                        marginTop: 10,
-                        marginLeft: 10,
+                        marginTop: 20,
+
                         width: 120,
                       }}>
                       <Button
-                        color="rgb(27,25,110)"
+                        onPress={() => {
+                          addItemToBasket();
+                        }}
+                        color="#82644A"
                         title="أضف إلى السلة"
-                        // onPress={() => {
-                        //   navigation.navigate('product', {
-                        //     category: category,
-                        //     otherCategory: otherCategory,
-                        //   });
-                        // }}
                       />
                     </View>
                   </Card>
@@ -575,7 +576,7 @@ const AppStack = ({
         </ScrollView>
         {/* <Button
           title=" test"
-          color="#f9ab37"
+          color="#82644A"
           onPress={() => RootNavigation.navigate('product', {userName: 'Lucy'})}
         /> */}
       </View>
@@ -586,20 +587,22 @@ const AppStack = ({
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <Text style={styles.recomended1}>حلويات مشكلة </Text>
-        <View
-          style={{
-            marginRight: 10,
-            marginTop: 0,
-            width: 110,
-          }}>
-          <Button
+        <Text style={styles.recomended}>حلويات مشكلة </Text>
+        <View style={styles.moreButton}>
+          {/* <Button
             title=" مزيد"
-            color="#f9ab37"
+            color="#82644A"
             onPress={() => {
               navigation.navigate('all_kandy');
             }}
-          />
+          /> */}
+          <Pressable
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('allChocolate');
+            }}>
+            <Text style={styles.text}> مزيد</Text>
+          </Pressable>
         </View>
       </View>
       <View>
@@ -618,10 +621,11 @@ const AppStack = ({
                   <Card
                     containerStyle={{
                       elevation: 10,
-                      height: 250,
+                      height: 185,
+                      width: 150,
                       marginBottom: 15,
-                      borderRadius: 20,
-                      borderColor: '#f9ab37',
+                      borderRadius: 10,
+                      borderColor: '#82644A',
                       borderWidth: 0,
                     }}>
                     <Image
@@ -631,40 +635,28 @@ const AppStack = ({
                     <View style={{marginBottom: 10}}>
                       <Text
                         style={{
-                          marginTop: 2,
-                          fontSize: 20,
+                          marginTop: 0,
+                          fontSize: 15,
                           fontWeight: 'bold',
-                          marginLeft: 0,
+                          marginTop: 7,
                           textAlign: 'center',
                         }}>
                         {kandys.title}
                       </Text>
-                      <Text
-                        style={{
-                          marginTop: 5,
-                          fontSize: 15,
-
-                          color: 'gray',
-
-                          textAlign: 'center',
-                        }}></Text>
                     </View>
                     <View
                       style={{
                         marginRight: 8,
-                        marginTop: 10,
-                        marginLeft: 10,
+                        marginTop: 20,
+
                         width: 120,
                       }}>
                       <Button
-                        color="rgb(27,25,110)"
+                        onPress={() => {
+                          addItemToBasket();
+                        }}
+                        color="#82644A"
                         title="أضف إلى السلة"
-                        // onPress={() => {
-                        //   navigation.navigate('product', {
-                        //     category: category,
-                        //     otherCategory: otherCategory,
-                        //   });
-                        // }}
                       />
                     </View>
                   </Card>
@@ -674,7 +666,7 @@ const AppStack = ({
         </ScrollView>
         {/* <Button
           title=" test"
-          color="#f9ab37"
+          color="#82644A"
           onPress={() => RootNavigation.navigate('product', {userName: 'Lucy'})}
         /> */}
       </View>
@@ -688,14 +680,14 @@ const styles = StyleSheet.create({
     marginLeft: 270,
     marginBottom: 40,
     fontSize: 17,
-    color: '#f9ab37',
+    color: '#82644A',
     fontWeight: 'bold',
     width: 100,
   },
   categoriesPhoto: {
-    width: 120,
-    height: 120,
-    marginLeft: 12,
+    width: 70,
+    height: 70,
+    marginLeft: 25,
     borderRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
@@ -707,20 +699,15 @@ const styles = StyleSheet.create({
 
     marginTop: 5,
   },
-  recomended: {
-    width: 350,
-    fontSize: 23,
-    marginTop: 0,
-    marginLeft: -225,
-    color: '#f9ab37',
-    fontWeight: 'bold',
+  moreButton: {
+    marginRight: 15,
+    width: 120,
   },
-  recomended1: {
-    width: 350,
-    fontSize: 23,
-    marginTop: 0,
-    marginLeft: -180,
-    color: '#f9ab37',
+  recomended: {
+    fontSize: 18,
+    marginLeft: 5,
+    textAlign: 'left',
+    color: 'black',
     fontWeight: 'bold',
   },
   tinyLogo: {
@@ -728,6 +715,41 @@ const styles = StyleSheet.create({
     height: 120,
     marginTop: 10,
     marginLeft: 75,
+  },
+  advertisement: {
+    backgroundColor: '#af8d78',
+    height: 130,
+    marginBottom: 60,
+    marginTop: -15,
+  },
+  advertisementText: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: 50,
+    fontFamily: 'arial',
+  },
+  instagramIcon: {
+    alignItems: 'center',
+    marginTop: 15,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'white',
+    borderColor: '#82644A',
+    borderWidth: 1,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'black',
   },
   buttons: {
     width: 100,

@@ -24,7 +24,7 @@ import LoginScreen from './LoginScreen';
 import Carousel from '../components/Carousel';
 import {dummyData} from '../data/Data';
 import {SearchBar, Card} from 'react-native-elements';
-
+ import FooterScreen from './FooterScreen';
 const ChocolateShow = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -33,7 +33,6 @@ const ChocolateShow = () => {
   const description = route.params.chocolate['description'];
   const price = route.params.chocolate['price'];
   const title = route.params.chocolate['title'];
-  //console.log(description);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <View>
@@ -62,8 +61,9 @@ const ChocolateShow = () => {
             }}>
             <View
               style={{
-                marginTop: -10,marginLeft: 10,
-                marginBottom:10,
+                marginTop: -10,
+                marginLeft: 10,
+                marginBottom: 10,
                 width: 100,
               }}>
               <Button
@@ -95,6 +95,8 @@ const ChocolateShow = () => {
           <Text>{description}</Text>
         </View>
       </Card>
+     
+      <FooterScreen />
     </ScrollView>
   );
 };

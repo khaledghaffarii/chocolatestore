@@ -24,7 +24,7 @@ import LoginScreen from './LoginScreen';
 import Carousel from '../components/Carousel';
 import {dummyData} from '../data/Data';
 import {SearchBar, Card} from 'react-native-elements';
-
+  import FooterScreen from './FooterScreen';
 const CakeShow = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -96,6 +96,8 @@ const CakeShow = () => {
           <Text>{description}</Text>
         </View>
       </Card>
+    
+      <FooterScreen />
     </ScrollView>
   );
 };

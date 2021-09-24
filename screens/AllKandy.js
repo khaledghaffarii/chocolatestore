@@ -49,12 +49,7 @@ const AllKandy = () => {
                 key={i}>
                 <Card
                   containerStyle={{
-                    elevation: 10,
                     height: 190,
-                    marginBottom: 15,
-                    borderRadius: 20,
-                    borderColor: '#0000',
-                    borderWidth: 9,
                   }}>
                   <View
                     style={{
@@ -66,12 +61,7 @@ const AllKandy = () => {
                       style={styles.categoriesPhoto}
                       source={{uri: allKandys.imageUrl}}
                     />
-                    <View
-                      style={{
-                        flex: 1,
-                        marginLeft: 30,
-                        padding: 10,
-                      }}>
+                    <View style={{}}>
                       <Text
                         style={{
                           width: 100,
@@ -82,9 +72,6 @@ const AllKandy = () => {
                       </Text>
                       <Card.Divider />
                       <Text style={{}}> SAR {allKandys.price}</Text>
-                      <Text style={{marginBottom: 12}}>
-                        KAL {allKandys.calories}
-                      </Text>
                     </View>
                   </View>
                   <View
@@ -94,7 +81,7 @@ const AllKandy = () => {
                       marginLeft: 220,
                       width: 100,
                     }}>
-                    <Button title="أضف إلى السلة" />
+                    <Button title="أضف إلى السلة" color="#af8d78" />
                   </View>
                 </Card>
               </TouchableOpacity>
@@ -118,11 +105,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   categoriesPhoto: {
-    width: 200,
+    width: 140,
     height: 140,
-    borderRadius: 15,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    borderRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
     resizeMode: 'cover',
   },
   container: {

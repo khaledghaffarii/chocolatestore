@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {
   View,
@@ -23,7 +24,7 @@ import LoginScreen from './LoginScreen';
 import Carousel from '../components/Carousel';
 import {dummyData} from '../data/Data';
 import {SearchBar, Card} from 'react-native-elements';
-  import FooterScreen from './FooterScreen';
+import FooterScreen from './FooterScreen';
 const Product = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -59,12 +60,7 @@ const Product = () => {
                 key={i}>
                 <Card
                   containerStyle={{
-                    elevation: 10,
                     height: 190,
-                    marginBottom: 15,
-                    borderRadius: 20,
-                    borderColor: '#0000',
-                    borderWidth: 9,
                   }}>
                   <View
                     style={{
@@ -76,18 +72,10 @@ const Product = () => {
                       style={styles.categoriesPhoto}
                       source={{uri: allCakes.imageUrl}}
                     />
-                    <View
-                      style={{
-                        flex: 1,
-                        marginLeft: 100,
-                        padding: 0,
-                      }}>
+                    <View style={{}}>
                       <Card.Title>{allCakes.title}</Card.Title>
                       <Card.Divider />
-                      <Text style={{}}> SAR {allCakes.price}</Text>
-                      <Text style={{marginBottom: 9}}>
-                        KAL {allCakes.Calories}
-                      </Text>
+                      <Text style={{}}> رس {allCakes.price}</Text>
                     </View>
                   </View>
                   <View
@@ -97,15 +85,7 @@ const Product = () => {
                       marginLeft: 220,
                       width: 100,
                     }}>
-                    <Button
-                      title="أضف إلى السلة"
-                      // onPress={() => {
-                      //   navigation.navigate('product', {
-                      //     category: category,
-                      //     otherCategory: otherCategory,
-                      //   });
-                      // }}
-                    />
+                    <Button title="أضف إلى السلة" color="#af8d78" />
                   </View>
                 </Card>
               </TouchableOpacity>
@@ -113,7 +93,7 @@ const Product = () => {
           })}
         </View>
       </View>
-    
+
       <FooterScreen />
     </ScrollView>
   );
@@ -131,9 +111,9 @@ const styles = StyleSheet.create({
   categoriesPhoto: {
     width: 140,
     height: 140,
-    borderRadius: 15,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    borderRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
     resizeMode: 'cover',
   },
   container: {

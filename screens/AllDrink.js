@@ -50,12 +50,7 @@ const AllDrink = () => {
                 key={i}>
                 <Card
                   containerStyle={{
-                    elevation: 10,
                     height: 190,
-                    marginBottom: 15,
-                    borderRadius: 20,
-                    borderColor: '#0000',
-                    borderWidth: 9,
                   }}>
                   <View
                     style={{
@@ -67,18 +62,10 @@ const AllDrink = () => {
                       style={styles.categoriesPhoto}
                       source={{uri: allDrinks.imageUrl}}
                     />
-                    <View
-                      style={{
-                        flex: 1,
-                        marginLeft: 30,
-                        padding: 10,
-                      }}>
+                    <View style={{}}>
                       <Card.Title>{allDrinks.title}</Card.Title>
                       <Card.Divider />
-                      <Text style={{}}> SAR {allDrinks.price}</Text>
-                      <Text style={{marginBottom: 9}}>
-                        KAL {allDrinks.calories}
-                      </Text>
+                      <Text style={{}}> رس {allDrinks.price}</Text>
                     </View>
                   </View>
                   <View
@@ -88,7 +75,7 @@ const AllDrink = () => {
                       marginLeft: 220,
                       width: 100,
                     }}>
-                    <Button title="أضف إلى السلة" />
+                    <Button title="أضف إلى السلة" color="#af8d78" />
                   </View>
                 </Card>
               </TouchableOpacity>
@@ -111,11 +98,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   categoriesPhoto: {
-    width: 200,
+    width: 140,
     height: 140,
-    borderRadius: 15,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    borderRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
     resizeMode: 'cover',
   },
   container: {

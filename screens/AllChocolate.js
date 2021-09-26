@@ -16,6 +16,8 @@ import firestore from '@react-native-firebase/firestore';
 import {Card} from 'react-native-elements';
 import FooterScreen from './FooterScreen';
 const Product = ({navigation}) => {
+  const route = useRoute();
+  console.log(route.params.chocolate);
   const [allChocolate, setAllChocolate] = useState('');
   const getAllChocolate = async () => {
     try {
@@ -36,7 +38,8 @@ const Product = ({navigation}) => {
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <View style={{marginLeft: 15}}>
         <View style={{marginLeft: -12}}>
-          {Object.values(allChocolate).map((allChocolates, i) => {
+          {Object.values(route.params.chocolate).map((allChocolates, i) => {
+            //console.log(JSON.stringify(allChocolate.Calories));
             return (
               <TouchableOpacity
                 onPress={() =>

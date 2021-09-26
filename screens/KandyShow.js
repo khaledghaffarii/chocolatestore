@@ -33,27 +33,32 @@ const KandyShow = () => {
   const description = route.params.kandy['description'];
   const price = route.params.kandy['price'];
   const title = route.params.kandy['title'];
+    const weight = route.params.kandy['weight'];
+    const code = route.params.kandy['code'];
   console.log(route.params.kandy);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <View>
         <Image style={styles.categoriesPhoto} source={{uri: image}} />
       </View>
-      <Card
-        containerStyle={{
-          elevation: 5,
-          marginTop: 1,
-        }}>
-        <Card.Title>{title}</Card.Title>
-        <Text
-          style={{
-            textAlign: 'right',
-            fontWeight: 'bold',
-            fontSize: 20,
-          }}>
-          {price} ر.س
-        </Text>
+      <View>
+        <View style={styles.header}>
+          <Text style={styles.title}>{title}</Text>
+          <Text
+            style={{
+              textAlign: 'center',
 
+              fontSize: 20,
+            }}>
+            {price} ر.س
+          </Text>
+        </View>
+        <View style={styles.other}>
+          <Text style={styles.code}>رمز المنتج: {code}</Text>
+          <Text style={styles.weight}>الوزن :g {weight}</Text>
+          <Text style={styles.calory}> سعرة حرارية : {calories} kal</Text>
+          <Text style={styles.description}>{description}</Text>
+        </View>
         <View>
           <View
             style={{
@@ -62,46 +67,39 @@ const KandyShow = () => {
             }}>
             <View
               style={{
-                marginTop: -10,
-                marginLeft: 10,
-                marginBottom: 10,
-                width: 100,
+                marginLeft: 120,
+                width: 150,
+                marginBottom: 20,
               }}>
-              <Button
-                title="أضف إلى السلة"
-                // onPress={() => {
-                //   navigation.navigate('product', {
-                //     category: category,
-                //     otherCategory: otherCategory,
-                //   });
-                // }}
-              />
+              <Button title="أضف إلى السلة" color="#af8d78" />
             </View>
-            <Text
-              style={{
-                textAlign: 'right',
-                fontWeight: '200',
-                fontSize: 15,
-              }}>
-              {calories} سعرة حرارية
-            </Text>
           </View>
-          <View
-            style={{
-              borderBottomWidth: 1,
-              borderColor: 'black',
-              marginTop: 10,
-              marginBottom: 30,
-            }}></View>
-          <Text>{description}</Text>
         </View>
-      </Card>
-    
+      </View>
+
       <FooterScreen />
     </ScrollView>
   );
 };
 const styles = StyleSheet.create({
+  description: {color: '#565f64', marginTop: 30, width: 350},
+  calory: {color: '#565f64', marginTop: 5, marginRight: 40},
+  other: {
+    alignItems: 'center',
+    marginBottom: 55,
+  },
+  code: {
+    color: '#565f64',
+  },
+  weight: {color: '#565f64', marginTop: 30},
+  header: {
+    flexDirection: 'column',
+    marginBottom: 55,
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 30,
+  },
   login: {
     marginTop: 1,
     marginLeft: 330,
@@ -111,16 +109,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   categoriesPhoto: {
-    width: 400,
-    height: 350,
-    marginTop: -5,
-    resizeMode: 'cover',
+    width: 200,
+    height: 200,
+    marginLeft: 100,
   },
   container: {
     backgroundColor: '#fff',
-    flex: 1,
-    marginHorizontal: 0,
-    marginVertical: -10,
+    width: 390,
+    marginTop: 10,
   },
   recomended: {
     width: 350,
@@ -161,5 +157,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+
 
 export default KandyShow;

@@ -37,11 +37,12 @@ const Checkout = ({navigation}) => {
                   key={i}
                   id={item.id}
                   title={item.title}
-                  imageUrl={item.imageUrl}
-                  Calories={item.calories}
-                  decription={item.decription}
+                  image={item.image}
+                  calories={item.calories}
+                  description={item.description}
                   price={item.price}
                   Products={item.products}
+               
                 />
               ))}
             </ScrollView>
@@ -92,15 +93,15 @@ const Checkout = ({navigation}) => {
           <FooterScreen />
         </ScrollView>
       ) : (
-          <ScrollView  style={styles.container}>
-        <Card
-          // eslint-disable-next-line react-native/no-inline-styles
-          containerStyle={{
-            elevation: 10,
-            height: 200,
-            borderWidth: 0,
-            marginTop: 100,
-          }}>
+        <ScrollView style={styles.container}>
+          <Card
+            // eslint-disable-next-line react-native/no-inline-styles
+            containerStyle={{
+              elevation: 10,
+              height: 200,
+              borderWidth: 0,
+              marginTop: 100,
+            }}>
             <View>
               <View style={{marginLeft: 250}}>
                 <Card.Title> المجموع : </Card.Title>
@@ -129,10 +130,9 @@ const Checkout = ({navigation}) => {
                 </View>
               </View>
             </View>
-
-        </Card>
+          </Card>
           <FooterScreen />
-          </ScrollView>
+        </ScrollView>
       )}
     </View>
   );

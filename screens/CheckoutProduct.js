@@ -16,16 +16,18 @@ import {selectItems} from '../slice/BasketSlice';
 const CheckoutProduct = ({
   id,
   title,
-  imageUrl,
+  image,
   Calories,
-  decription,
+  description,
   price,
   Products,
+  kandy,
 }) => {
+  console.log(price);
   return (
     <View>
       <Text>{id}</Text>
-      <Image source={{uri: imageUrl}} />
+      <Image source={{uri: image}} />
     </View>
   );
 };

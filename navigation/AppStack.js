@@ -226,46 +226,16 @@ import {
   AccordionList,
 } from 'accordion-collapse-react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-const AppStack = ({
-  navigation,
-  title,
-  imageUrl,
-  Calories,
-  decription,
-  price,
-}) => {
+import ChocolateProduct from '../screens/ChocolateProduct';
+const AppStack = ({navigation}) => {
   const Stack = createStackNavigator();
   const [active, setActive] = useState('');
   const [category, setCategory] = useState('');
   const [LessCake, setLessCake] = useState('');
   const [LessDrink, setLessDrink] = useState('');
   const [kandy, setKandy] = useState('');
-  const dispatch = useDispatch();
-  const addItemToBasket = () => {
-    const product = {
-      kandy,
-      title,
-      imageUrl,
-      Calories,
-      decription,
-      price,
-    };
-    dispatch(addToBasket(product));
-  };
-  useEffect(() => {
-    const getCategory = async () => {
-      try {
-        await firestore()
-          .collection('allCategogry')
-          .onSnapshot(snapshot => {
-            setCategory(snapshot.docs.map(doc => doc.data()));
-            console.log(snapshot.docs);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
 
+  useEffect(() => {
     const getLessCakes = async () => {
       try {
         await firestore()
@@ -301,7 +271,7 @@ const AppStack = ({
     };
     getLessKandy();
     getLessDrink();
-    getCategory();
+
     getLessCakes();
   }, []);
   return (
@@ -322,87 +292,7 @@ const AppStack = ({
       </View>
 
       {/*///////////////////////////////////////////////////// chocolate category   /////////////////////////////////////////////////*/}
-      <View
-        style={{
-          marginTop: 15,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={styles.recomended}>شوكولا</Text>
-        <View style={styles.moreButton}>
-          <Pressable
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('allChocolate', {
-                chocolate: category,
-              });
-            }}>
-            <Text style={styles.text}> مزيد</Text>
-          </Pressable>
-        </View>
-      </View>
-      <View>
-        <ScrollView horizontal={true} style={styles.grid}>
-          {Object.values(category)
-            .slice(0, 4)
-            .map((img, i) => {
-
-              return (
-                <TouchableOpacity
-                  key={i}
-                  onPress={() =>
-                    navigation.navigate('chocolateShow', {
-                      chocolate: category[0],
-                    })
-                  }>
-                  <Card
-                    containerStyle={{
-                      elevation: 10,
-                      height: 185,
-                      width: 150,
-                      marginBottom: 15,
-                      borderRadius: 10,
-                      borderColor: '#82644A',
-                      borderWidth: 0,
-                    }}>
-                    <Image
-                      style={styles.categoriesPhoto}
-                      source={{uri: img.imageUrl}}
-                    />
-                    <View style={{marginBottom: 10}}>
-                      <Text
-                        style={{
-                          fontSize: 15,
-                          fontWeight: 'bold',
-                          marginTop: 7,
-                          height: 25,
-                          textAlign: 'center',
-                        }}>
-                        {img.title}
-                      </Text>
-                      <Text style={{textAlign: 'center'}}> رس {img.price}</Text>
-                    </View>
-                    <View
-                      style={{
-                        marginRight: 8,
-                        marginTop: 0,
-
-                        width: 120,
-                      }}>
-                      <Button
-                        onPress={() => {
-                          addItemToBasket();
-                        }}
-                        color="#82644A"
-                        title="أضف إلى السلة"
-                      />
-                    </View>
-                  </Card>
-                </TouchableOpacity>
-              );
-            })}
-        </ScrollView>
-      </View>
+      <ChocolateProduct />
       <Collapse>
         <CollapseHeader>
           <View

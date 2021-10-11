@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Button,
+  Pressable,
 } from 'react-native';
 import {Card} from 'react-native-elements';
 import {useSelector} from 'react-redux';
@@ -19,81 +20,94 @@ const Checkout = ({navigation}) => {
   const items = useSelector(selectItems);
 
   return (
-    <View>
+    <ScrollView style={styles.container} vertical={true}>
       {items.length ? (
-        <ScrollView style={{}}>
-          <Card
-            // eslint-disable-next-line react-native/no-inline-styles
-            containerStyle={{
-              elevation: 10,
-              height: 400,
+        <View style={{}}>
+          <ScrollView vertical={true} style={{}}>
+            {items.map((item, i) => (
+              <CheckoutProduct key={i} chocolate={item} />
+            ))}
+          </ScrollView>
 
-              borderColor: '#f9ab37',
-              borderWidth: 0,
-            }}>
-            <ScrollView horizontal={true} style={styles.container}>
-              {items.map((item, i) => (
-                <CheckoutProduct
-                  key={i}
-                  id={item.id}
-                  title={item.title}
-                  image={item.image}
-                  calories={item.calories}
-                  description={item.description}
-                  price={item.price}
-                  Products={item.products}
-               
-                />
-              ))}
-            </ScrollView>
-          </Card>
+          <View style={{marginTop: 60}}>
+            <Text
+              style={{
+                margin: 20,
+                fontSize: 20,
+                color: '#484848',
+                fontWeight: 'bold',
+                textAlign: 'right',
+              }}>
+              المجموع :
+            </Text>
 
-          <Card
-            // eslint-disable-next-line react-native/no-inline-styles
-            containerStyle={{
-              elevation: 10,
-              height: 220,
-              borderWidth: 0,
-            }}>
-            <ScrollView style={styles.container}>
-              <View>
-                <View style={{marginLeft: 250}}>
-                  <Card.Title> المجموع : </Card.Title>
-                </View>
-                <View>
-                  <Text>All payments list</Text>
-                </View>
-                <View
+            <View>
+              <Text>All payments list</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                margin: 30,
+              }}>
+              <View
+                style={{
+                  marginTop: 65,
+                  width: 150,
+                }}>
+             
+                <Pressable
+                  onPress={() => navigation.navigate('Home')}
                   style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    marginTop: 30,
+                    backgroundColor: '#8b704e',
+                    color: 'white',
+                    height: 47,
+                    width: 160,
+                    borderBottomLeftRadius: 10,
+                    borderBottomRightRadius: 10,
+                    borderTopRightRadius: 10,
+                    borderTopLeftRadius: 10,
                   }}>
-                  <View
-                    style={{
-                      marginTop: 65,
-                      width: 150,
-                    }}>
-                    <Button title="اتمام عملية الشراء" color="#333333" />
-                  </View>
-                  <View
-                    style={{
-                      marginTop: 65,
-                      width: 150,
-                    }}>
-                    <Button
-                      title="مواصلة التسويق"
-                      onPress={() => navigation.navigate('Home')}
-                    />
-                  </View>
-                </View>
+                  <Text
+                    style={{color: '#ffffff', textAlign: 'center', margin: 10}}>
+                    اتمام عملية الشراء
+                  </Text>
+                </Pressable>
               </View>
-            </ScrollView>
-          </Card>
+              <View
+                style={{
+                  marginTop: 65,
+                  width: 150,
+                }}>
+                <Pressable
+                  onPress={() => navigation.navigate('Home')}
+                  style={{
+                    backgroundColor: '#cccccc',
+                    color: 'white',
+                    height: 47,
+                    width: 160,
+                    borderBottomLeftRadius: 10,
+                    borderBottomRightRadius: 10,
+                    borderTopRightRadius: 10,
+                    borderTopLeftRadius: 10,
+                  }}>
+                  <Text
+                    style={{color: 'black', textAlign: 'center', margin: 10}}>
+                    مواصلة التسويق
+                  </Text>
+                </Pressable>
+                {/* <Button
+                  title="مواصلة التسويق"
+                  onPress={() => navigation.navigate('Home')}
+                /> */}
+              </View>
+            </View>
+          </View>
+
           <FooterScreen />
-        </ScrollView>
+        </View>
       ) : (
-        <ScrollView style={styles.container}>
+        <ScrollView>
           <Card
             // eslint-disable-next-line react-native/no-inline-styles
             containerStyle={{
@@ -134,7 +148,7 @@ const Checkout = ({navigation}) => {
           <FooterScreen />
         </ScrollView>
       )}
-    </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({

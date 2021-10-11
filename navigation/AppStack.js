@@ -234,7 +234,7 @@ const AppStack = ({navigation}) => {
   const [LessCake, setLessCake] = useState('');
   const [LessDrink, setLessDrink] = useState('');
   const [kandy, setKandy] = useState('');
-
+  const [chocolate, setChocolate] = useState(0);
   useEffect(() => {
     const getLessCakes = async () => {
       try {
@@ -269,9 +269,20 @@ const AppStack = ({navigation}) => {
         console.log(error);
       }
     };
+    const getChocolate = async () => {
+      try {
+        await firestore()
+          .collection('allCategogry')
+          .onSnapshot(snapshot => {
+            setChocolate(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getLessKandy();
     getLessDrink();
-
+    getChocolate();
     getLessCakes();
   }, []);
   return (
@@ -292,7 +303,7 @@ const AppStack = ({navigation}) => {
       </View>
 
       {/*///////////////////////////////////////////////////// chocolate category   /////////////////////////////////////////////////*/}
-      <ChocolateProduct />
+      <ChocolateProduct productChocolate={chocolate} />
       <Collapse>
         <CollapseHeader>
           <View

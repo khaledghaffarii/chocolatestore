@@ -1,3 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-shadow */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable dot-notation */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/self-closing-comp */
 import React, {useState, useEffect} from 'react';
@@ -31,21 +36,23 @@ import {
 } from 'accordion-collapse-react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
-
-const ChocolateProduct = ({title, imageUrl, Calories, description, price}) => {
+import {selectItems} from '../slice/BasketSlice';
+import {useSelector} from 'react-redux';
+import Chocolate from './Choclate';
+const ChocolateProduct = ({productChocolate}) => {
   const navigation = useNavigation();
-  const [chocolate, setChocolate] = useState('');
+  const items = useSelector(selectItems);
+
+  const [chocolate, setChocolate] = useState(0);
+
   const dispatch = useDispatch();
-  const addItemToBasket = () => {
-    const product = {
-      title,
-      imageUrl,
-      Calories,
-      description,
-      price,
-    };
-    dispatch(addToBasket(product));
+
+  const addItemToBasket = chocolate => {
+    // const product = {chocolate};
+    console.log(chocolate);
+    dispatch(addToBasket(chocolate));
   };
+
   useEffect(() => {
     const getChocolate = async () => {
       try {
@@ -61,208 +68,12 @@ const ChocolateProduct = ({title, imageUrl, Calories, description, price}) => {
 
     getChocolate();
   }, []);
-  console.log(chocolate[0]);
+
   return (
     <View>
-      <View
-        style={{
-          marginTop: 15,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={styles.recomended}>شوكولا</Text>
-        <View style={styles.moreButton}>
-          <Pressable
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('allChocolate', {
-                chocolate: chocolate,
-              });
-            }}>
-            <Text style={styles.text}> مزيد</Text>
-          </Pressable>
-        </View>
-      </View>
-      <View>
-        <ScrollView horizontal={true} style={styles.grid}>
-          {Object.values(chocolate)
-            .slice(0, 4)
-            .map((chocolates, i) => {
-              return (
-                <TouchableOpacity
-                  key={i}
-                  onPress={() =>
-                    navigation.navigate('chocolateShow', {
-                      chocolate: chocolate[0],
-                    })
-                  }>
-                  <Card
-                    containerStyle={{
-                      elevation: 10,
-                      height: 185,
-                      width: 150,
-                      marginBottom: 15,
-                      borderRadius: 10,
-                      borderColor: '#82644A',
-                      borderWidth: 0,
-                    }}>
-                    <Image
-                      style={styles.categoriesPhoto}
-                      source={{uri: chocolates.imageUrl}}
-                    />
-                    <View style={{marginBottom: 10}}>
-                      <Text
-                        style={{
-                          fontSize: 15,
-                          fontWeight: 'bold',
-                          marginTop: 7,
-                          height: 25,
-                          textAlign: 'center',
-                        }}>
-                        {chocolates.title}
-                      </Text>
-                      <Text style={{textAlign: 'center'}}>
-                        {' '}
-                        رس {chocolates.price}
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        marginRight: 8,
-                        marginTop: 0,
-
-                        width: 120,
-                      }}>
-                      <Button
-                        onPress={() => {
-                          addItemToBasket();
-                        }}
-                        color="#82644A"
-                        title="أضف إلى السلة"
-                      />
-                    </View>
-                  </Card>
-                </TouchableOpacity>
-              );
-            })}
-        </ScrollView>
-      </View>
+      <Chocolate chocolate={chocolate} onPress={addItemToBasket} />
     </View>
   );
 };
-const styles = StyleSheet.create({
-  moreCategory: {
-    textAlign: 'center',
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
-  login: {
-    marginTop: 5,
-    marginLeft: 270,
-    marginBottom: 40,
-    fontSize: 17,
-    color: '#82644A',
-    fontWeight: 'bold',
-    width: 100,
-  },
-  categoriesPhoto: {
-    width: 70,
-    height: 70,
-    marginLeft: 25,
-    borderRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  container: {
-    backgroundColor: '#ffff',
-    flex: 1,
-    marginHorizontal: 0,
 
-    marginTop: 5,
-  },
-  moreButton: {
-    marginRight: 15,
-    width: 120,
-  },
-  recomended: {
-    fontSize: 18,
-    marginLeft: 10,
-    textAlign: 'left',
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  tinyLogo: {
-    width: 280,
-    height: 120,
-    marginTop: 10,
-    marginLeft: 75,
-  },
-  advertisement: {
-    backgroundColor: '#af8d78',
-    height: 130,
-    marginBottom: 60,
-    marginTop: -15,
-  },
-  advertisementText: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
-    marginTop: 50,
-  },
-  instagramIcon: {
-    alignItems: 'center',
-    marginTop: 15,
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: 'white',
-    borderColor: '#82644A',
-    borderWidth: 1,
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: 'black',
-  },
-  buttons: {
-    width: 100,
-    height: 12,
-    marginLeft: 75,
-  },
-  grid: {
-    margin: 0,
-    marginTop: 20,
-    flexDirection: 'row',
-    marginBottom: 10,
-  },
-  grid2: {
-    margin: 0,
-    marginTop: 20,
-    flexDirection: 'row',
-    marginBottom: 30,
-  },
-
-  headline_text: {
-    color: 'white',
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginTop: 50,
-    marginLeft: 20,
-  },
-  explore_text: {
-    marginTop: 5,
-    marginBottom: 10,
-    color: 'white',
-    marginLeft: 20,
-    fontSize: 12,
-    fontWeight: '600',
-  },
-});
 export default ChocolateProduct;

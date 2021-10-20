@@ -38,28 +38,29 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import {selectItems} from '../slice/BasketSlice';
 import {useSelector} from 'react-redux';
-import Chocolate from './Choclate';
+import Product from './Product';
+import {where} from 'firebase/firestore';
 const ChocolateProduct = ({productChocolate}) => {
   const navigation = useNavigation();
   const items = useSelector(selectItems);
 
-  const [chocolate, setChocolate] = useState(0);
+  const [product, setProduct] = useState(0);
 
   const dispatch = useDispatch();
 
-  const addItemToBasket = chocolate => {
+  const addItemToBasket = product => {
     // const product = {chocolate};
-    console.log(chocolate);
-    dispatch(addToBasket(chocolate));
+    console.log(product);
+    dispatch(addToBasket(product));
   };
 
   useEffect(() => {
     const getChocolate = async () => {
       try {
         await firestore()
-          .collection('allCategogry')
+          .collection('allProduct')
           .onSnapshot(snapshot => {
-            setChocolate(snapshot.docs.map(doc => doc.data()));
+            setProduct(snapshot.docs.map(doc => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -71,7 +72,7 @@ const ChocolateProduct = ({productChocolate}) => {
 
   return (
     <View>
-      <Chocolate chocolate={chocolate} onPress={addItemToBasket} />
+      <Product product={product} onPress={addItemToBasket} />
     </View>
   );
 };

@@ -17,7 +17,7 @@ import {Card} from 'react-native-elements';
 import FooterScreen from './FooterScreen';
 const Product = ({navigation}) => {
   const route = useRoute();
-  console.log(route.params.chocolate);
+  console.log(route.params.salty);
   const [allChocolate, setAllChocolate] = useState('');
   const getAllChocolate = async () => {
     try {
@@ -43,7 +43,7 @@ const Product = ({navigation}) => {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate('chocolateShow', {
+                  navigation.navigate('productShow', {
                     chocolate: allChocolates,
                   })
                 }

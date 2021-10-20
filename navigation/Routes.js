@@ -79,7 +79,7 @@ import {
 } from 'react-native';
 import {navigationRef} from './RootNavigation';
 import AllCake from '../screens/AllCake';
-import ChocolateShow from '../screens/ChocolateShow';
+import ProductShow from '../screens/productShow';
 import CakeShow from '../screens/CakeShow';
 import SplashScreen from '../screens/SplashScreen';
 import LessChocolateShow from '../screens/LessChocolateShow';
@@ -90,6 +90,7 @@ import AllKandy from '../screens/AllKandy';
 import KandyShow from '../screens/KandyShow';
 import Checkout from '../screens/Checkout';
 import {useNavigation} from '@react-navigation/native';
+import AllProduct from '../screens/AllProduct';
 const Routes = navigation => {
   //const navigation = useNavigation();
   const {user, setUser} = useContext(AuthContext);
@@ -126,10 +127,10 @@ const Routes = navigation => {
           name="Home"
           options={{
             title: (
-              <View style={{width: 100, height: 50}}>
+              <View>
                 <Image
                   style={styles.tinyLogo}
-                  source={require('../assets/logo2.png')}
+                  source={require('../assets/logo.png')}
                 />
               </View>
             ),
@@ -138,7 +139,6 @@ const Routes = navigation => {
             headerLeft: () => <ShoppingCartIcon />,
             headerStyle: {
               backgroundColor: '#ffff',
-              height: 65,
               shadowColor: '#000',
               elevation: 20,
             },
@@ -152,7 +152,7 @@ const Routes = navigation => {
               height: 80,
             },
             backgroundColor: '#2e64e515',
-            margin: 0,
+
             headerBackTitleVisible: false,
           }}
           component={AppStack}
@@ -332,7 +332,7 @@ const Routes = navigation => {
           component={KandyShow}
         />
         <Stack.Screen
-          name="chocolateShow"
+          name="productShow"
           options={{
             title: '',
             headerRight: () => (
@@ -356,7 +356,7 @@ const Routes = navigation => {
             margin: 0,
             headerBackTitleVisible: false,
           }}
-          component={ChocolateShow}
+          component={ProductShow}
         />
         <Stack.Screen
           name="drink_show"
@@ -412,33 +412,7 @@ const Routes = navigation => {
           }}
           component={CakeShow}
         />
-        <Stack.Screen
-          name="chocolate"
-          options={{
-            title: '',
-            headerRight: () => (
-              <View style={{marginRight: 15}}>
-                <ShoppingCartIcon />
-              </View>
-            ),
-            headerStyle: {
-              backgroundColor: '#ffff',
-              height: 50,
-              shadowColor: '#000',
-              elevation: 50,
-            },
-            headerTitleAlign: 'center',
 
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              fontSize: 21,
-            },
-            backgroundColor: '#2e64e515',
-            margin: 0,
-            headerBackTitleVisible: false,
-          }}
-          component={ChocolateShow}
-        />
         <Stack.Screen
           name="cake"
           options={{
@@ -465,6 +439,33 @@ const Routes = navigation => {
             headerBackTitleVisible: false,
           }}
           component={CakeShow}
+        />
+        <Stack.Screen
+          name="all_product"
+          options={{
+            title: '',
+            headerRight: () => (
+              <View style={{marginRight: 15}}>
+                <ShoppingCartIcon />
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: '#ffff',
+              height: 50,
+              shadowColor: '#000',
+              elevation: 50,
+            },
+            headerTitleAlign: 'center',
+
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontSize: 21,
+            },
+            backgroundColor: '#2e64e515',
+            margin: 0,
+            headerBackTitleVisible: false,
+          }}
+          component={AllProduct}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -496,11 +497,10 @@ const styles = StyleSheet.create({
   },
 
   tinyLogo: {
-    borderRadius: 80,
     marginBottom: 15,
     marginTop: 10,
-    marginLeft: 20,
-    width: 100,
+    marginLeft: 10,
+    width: 110,
     height: 50,
   },
   navButton: {

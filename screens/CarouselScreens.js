@@ -7,49 +7,38 @@ const CarouselScreens = () => {
   const navigation = useNavigation();
   return (
     <Slick
-      showsButtons={true}
+      showsButtons={false}
       style={styles.wrapper}
       autoplay={true}
       autoplayDirection={true}
       autoplayTimeout={5}>
       <View style={styles.slide1}>
-        <TouchableOpacity onPress={() => navigation.navigate('all_drink')}>
-          <Image
-            style={styles.tinyLogo}
-            source={require('../assets/coffexp.jpeg')}
-          />
-        </TouchableOpacity>
+        <Image
+          style={styles.tinyLogo}
+          source={require('../assets/drink.jpg')}
+        />
       </View>
       <View style={styles.slide2}>
-        <TouchableOpacity onPress={() => navigation.navigate('allChocolate')}>
-          <Image
-            style={styles.tinyLogo}
-            source={require('../assets/choco.png')}
-          />
-        </TouchableOpacity>
+        <Image
+          style={styles.tinyLogo}
+          source={require('../assets/choco.jpg')}
+        />
       </View>
       <View style={styles.slide2}>
-        <TouchableOpacity onPress={() => navigation.navigate('allCake')}>
-          <Image
-            style={styles.tinyLogo}
-            source={require('../assets/Gâteau.jpg')}
-          />
-        </TouchableOpacity>
+        <Image style={styles.tinyLogo} source={require('../assets/cake.jpg')} />
       </View>
       <View style={styles.slide2}>
-        <TouchableOpacity onPress={() => navigation.navigate('all_kandy')}>
-          <Image
-            style={styles.tinyLogo}
-            source={require('../assets/kandy.jpg')}
-          />
-        </TouchableOpacity>
+        <Image
+          style={styles.tinyLogo}
+          source={require('../assets/hotdrink.jpg')}
+        />
       </View>
     </Slick>
   );
 };
 
 var styles = StyleSheet.create({
-  wrapper: {height: 130},
+  wrapper: {height: 400},
   slide1: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -59,9 +48,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   tinyLogo: {
-    width: 395,
-    height: 175,
-    marginLeft: 0
+    width: 410,
+    height: 400,
+    marginLeft: 0,
+    justifyContent: 'center',
   },
   slide3: {
     flex: 1,

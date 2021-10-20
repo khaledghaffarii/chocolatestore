@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable no-shadow */
 /* eslint-disable no-dupe-keys */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
@@ -30,20 +33,23 @@ import FooterScreen from './FooterScreen';
 import {useDispatch} from 'react-redux';
 import {addToBasket} from '../slice/BasketSlice';
 
-const ChocolateShow = () => {
+const ProductShow = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const image = route.params.chocolate.imageUrl;
-  const calories = route.params.chocolate.Calories;
-  const description = route.params.chocolate.description;
-  const price = route.params.chocolate.price;
-  const title = route.params.chocolate.title;
-  const weight = route.params.chocolate.weight;
-  const code = route.params.chocolate.code;
+  const image = route.params.product.imageUrl;
+  const calories = route.params.product.Calories;
+  const arabicDescription = route.params.product.arabicDescription;
+  const price = route.params.product.price;
+  const arabicTitle = route.params.product.arabicTitle;
+  const weight = route.params.product.weight;
+  const code = route.params.product.code;
+  const arabicCategory = route.params.product.arabicCategory;
+  const englishCategory = route.params.product.englishCategory;
+  const [product, setProduct] = useState('');
   const dispatch = useDispatch();
   const addItemToBasket = () => {
     const product = {
-      title,
+      arabicTitle,
       image,
       calories,
       description,
@@ -51,6 +57,22 @@ const ChocolateShow = () => {
     };
     dispatch(addToBasket(product));
   };
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .where('englishCategory', '==', englishCategory)
+          .onSnapshot(snapshot => {
+            setProduct(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getProduct();
+  }, []);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <View>
@@ -58,21 +80,37 @@ const ChocolateShow = () => {
       </View>
       <View>
         <View style={styles.header}>
-          <Text style={styles.title}>{title}</Text>
+          <View style={{flexDirection: 'row', marginLeft: 270}}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('all_product', {
+                  kandy: product,
+                })
+              }>
+              <Text style={styles.subTitle}> {arabicCategory}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+              <Text style={styles.subTitle}>الرئيسية / </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.title}>{arabicTitle}</Text>
           <Text
             style={{
-              textAlign: 'center',
-
+              textAlign: 'right',
               fontSize: 20,
+              margin: 8,
+              color: '#cab19f',
             }}>
             {price} ر.س
           </Text>
         </View>
+        <View style={styles.ourProduct}></View>
         <View style={styles.other}>
           <Text style={styles.code}>رمز المنتج: {code}</Text>
           <Text style={styles.weight}>الوزن :g {weight}</Text>
           <Text style={styles.calory}> سعرة حرارية : {calories} kal</Text>
-          <Text style={styles.description}>{description}</Text>
+          <Text style={styles.description}>{arabicDescription}</Text>
         </View>
         <View>
           <View
@@ -103,23 +141,38 @@ const ChocolateShow = () => {
   );
 };
 const styles = StyleSheet.create({
-  description: {color: '#565f64', marginTop: 30, width: 350},
-  calory: {color: '#565f64', marginTop: 5, marginRight: 40},
-  other: {
+  ourProduct: {
     alignItems: 'center',
-    marginBottom: 55,
+    borderTopWidth: 2,
+    borderTopColor: '#e5e5e5',
+    height: 20,
+    width: 300,
+    marginLeft: 60,
+  },
+  subTitle: {
+    fontSize: 14,
+    color: 'grey',
+    margin: 8,
+  },
+  description: {color: '#565f64', marginTop: 20, width: 370, marginBottom: 20},
+  calory: {color: '#565f64', marginTop: 5},
+  other: {
+    margin: 20,
   },
   code: {
     color: '#565f64',
   },
-  weight: {color: '#565f64', marginTop: 30},
+  weight: {color: '#565f64', marginTop: 10},
   header: {
     flexDirection: 'column',
     marginBottom: 55,
   },
   title: {
-    textAlign: 'center',
-    fontSize: 30,
+    textAlign: 'right',
+    fontSize: 25,
+    color: '#cab19f',
+    margin: 10,
+    fontWeight: 'bold',
   },
   login: {
     marginTop: 1,
@@ -130,13 +183,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   categoriesPhoto: {
-    width: 200,
-    height: 200,
-    marginLeft: 100,
+    width: 400,
+    height: 500,
+    margin: 5,
   },
   container: {
     backgroundColor: '#fff',
-    width: 390,
+
     marginTop: 10,
   },
   recomended: {
@@ -179,4 +232,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChocolateShow;
+export default ProductShow;

@@ -1,3 +1,5 @@
+/* eslint-disable no-dupe-keys */
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable eslint-comments/no-unused-disable */
 /* eslint-disable eslint-comments/no-unused-disable */
 /* eslint-disable no-shadow */
@@ -209,6 +211,7 @@ import {
   Button,
   Pressable,
   Linking,
+  ImageBackground,
 } from 'react-native';
 import {Link} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
@@ -229,50 +232,22 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ChocolateProduct from '../screens/ChocolateProduct';
 const AppStack = ({navigation}) => {
   const Stack = createStackNavigator();
-  const [active, setActive] = useState('');
-  const [category, setCategory] = useState('');
-  const [LessCake, setLessCake] = useState('');
-  const [LessDrink, setLessDrink] = useState('');
+
+  const [salty, setSalty] = useState('');
+  const [hotDrink, setHotDrink] = useState('');
+  const [coldDrink, setColdDrink] = useState('');
+  const [sandwich, setSandwich] = useState('');
+  const [croissant, setCroissant] = useState('');
   const [kandy, setKandy] = useState('');
-  const [chocolate, setChocolate] = useState(0);
+  const [cake, setCake] = useState('');
+  const [chocolate, setChocolate] = useState('');
+
   useEffect(() => {
-    const getLessCakes = async () => {
-      try {
-        await firestore()
-          .collection('MoreCake')
-          .onSnapshot(snapshot => {
-            setLessCake(snapshot.docs.map(doc => doc.data()));
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const getLessDrink = async () => {
-      try {
-        await firestore()
-          .collection('drink')
-          .onSnapshot(snapshot => {
-            setLessDrink(snapshot.docs.map(doc => doc.data()));
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const getLessKandy = async () => {
-      try {
-        await firestore()
-          .collection('candies')
-          .onSnapshot(snapshot => {
-            setKandy(snapshot.docs.map(doc => doc.data()));
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
     const getChocolate = async () => {
       try {
         await firestore()
-          .collection('allCategogry')
+          .collection('allProduct')
+          .where('englishCategory', '==', 'chocolate')
           .onSnapshot(snapshot => {
             setChocolate(snapshot.docs.map(doc => doc.data()));
           });
@@ -280,15 +255,105 @@ const AppStack = ({navigation}) => {
         console.log(error);
       }
     };
-    getLessKandy();
-    getLessDrink();
+    const getKandy = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .where('englishCategory', '==', 'Oriental Sweets')
+          .onSnapshot(snapshot => {
+            setKandy(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getCake = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .where('englishCategory', '==', 'cake')
+          .onSnapshot(snapshot => {
+            setCake(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getHotDrink = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .where('englishCategory', '==', 'Hot Drinks')
+          .onSnapshot(snapshot => {
+            setHotDrink(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getColdDrink = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .where('englishCategory', '==', 'Cold Drinks')
+          .onSnapshot(snapshot => {
+            setColdDrink(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getCroissant = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .where('englishCategory', '==', 'croissant')
+          .onSnapshot(snapshot => {
+            setCroissant(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getSandwich = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .where('englishCategory', '==', 'Bakery')
+          .onSnapshot(snapshot => {
+            setSandwich(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getSalty = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .where('englishCategory', '==', 'Salty Snacks')
+          .onSnapshot(snapshot => {
+            setSalty(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCake();
+    getKandy();
     getChocolate();
-    getLessCakes();
+    getHotDrink();
+    getSandwich();
+    getCroissant();
+    getColdDrink();
+    getSalty();
   }, []);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <CarouselScreens />
-      <View style={styles.advertisement}>
+      <View style={styles.ourProduct}></View>
+      <Text style={styles.ourTextProduct}>منتوجاتنا </Text>
+      {/* <View style={styles.advertisement}>
         <Text style={styles.advertisementText}>
           متخصصين بالحلا المميز ،مـعـكـم بـكـل حـب
         </Text>
@@ -300,11 +365,14 @@ const AppStack = ({navigation}) => {
             <Ionicons name="ios-logo-instagram" size={20} color="#fff" />
           </Pressable>
         </View>
-      </View>
+      </View> */}
 
       {/*///////////////////////////////////////////////////// chocolate category   /////////////////////////////////////////////////*/}
-      <ChocolateProduct productChocolate={chocolate} />
-      <Collapse>
+
+      <ChocolateProduct />
+      <View style={styles.ourProduct}></View>
+      <Text style={styles.ourTextProduct}>تصنيفاتنا </Text>
+      {/* <Collapse>
         <CollapseHeader>
           <View
             style={{
@@ -318,7 +386,7 @@ const AppStack = ({navigation}) => {
           </View>
         </CollapseHeader>
         <CollapseBody>
-          <View
+         <View
             style={{
               marginTop: 50,
               flexDirection: 'row',
@@ -332,7 +400,7 @@ const AppStack = ({navigation}) => {
             onPress={() => {
               navigation.navigate('allCake');
             }}
-          /> */}
+          />
               <Pressable
                 style={styles.button}
                 onPress={() => {
@@ -402,7 +470,7 @@ const AppStack = ({navigation}) => {
                 })}
             </ScrollView>
           </View>
-          {/* /////////////////////////////////////////////////////  drink category /////////////////////////////////////////////*/}
+         
           <View
             style={{
               marginTop: 50,
@@ -417,7 +485,7 @@ const AppStack = ({navigation}) => {
             onPress={() => {
               navigation.navigate('all_drink');
             }}
-          /> */}
+          /> 
               <Pressable
                 style={styles.button}
                 onPress={() => {
@@ -491,9 +559,9 @@ const AppStack = ({navigation}) => {
           title=" test"
           color="#82644A"
           onPress={() => RootNavigation.navigate('product', {userName: 'Lucy'})}
-        /> */}
+        /> 
           </View>
-          {/* /////////////////////////////////////////////////////  kandy category /////////////////////////////////////////////*/}
+         
           <View
             style={{
               marginTop: 50,
@@ -508,7 +576,7 @@ const AppStack = ({navigation}) => {
             onPress={() => {
               navigation.navigate('all_kandy');
             }}
-          /> */}
+          /> 
               <Pressable
                 style={styles.button}
                 onPress={() => {
@@ -581,18 +649,164 @@ const AppStack = ({navigation}) => {
           title=" test"
           color="#82644A"
           onPress={() => RootNavigation.navigate('product', {userName: 'Lucy'})}
-        /> */}
-          </View>
+        /> 
+          </View> 
         </CollapseBody>
       </Collapse>
-      {/* /////////////////////////////////////////////////////  cakes category ///////////////////////////////////////////////////////////////////////////////////////// */}
+*/}
+      <ScrollView
+        horizontal={true}
+        style={styles.grid}
+        showsHorizontalScrollIndicator={false}>
+        <View style={styles.categotyView}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('all_product', {chocolate: chocolate})
+            }>
+            <View style={styles.categotyElement}>
+              <Image
+                blurRadius={2}
+                style={styles.image}
+                source={require('../assets/chocolat.jpg')}
+              />
+              <Text style={styles.textCtegory}>الشوكولا</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('all_product', {cake: cake})}>
+            <View style={styles.categotyElement}>
+              <Image
+                blurRadius={2}
+                style={styles.image}
+                source={require('../assets/caky.jpg')}
+              />
+              <Text style={styles.textCtegory}>الكيك</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('all_product', {kandy: kandy})}>
+            <View style={styles.categotyElement}>
+              <Image
+                blurRadius={2}
+                style={styles.image}
+                source={require('../assets/baklawa.jpg')}
+              />
+              <Text style={styles.textCtegory}>الحلويات الشرقيه</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('all_product', {salty: salty})}>
+            <View style={styles.categotyElement}>
+              <Image
+                blurRadius={2}
+                style={styles.image}
+                source={require('../assets/sale.jpg')}
+              />
+              <Text style={styles.textCtegory}>موالح</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('all_product', {croissant: croissant})
+            }>
+            <View style={styles.categotyElement}>
+              <Image
+                blurRadius={2}
+                style={styles.image}
+                source={require('../assets/croissant.jpg')}
+              />
+              <Text style={styles.textCtegory}> كرواسون</Text>
+            </View>
+          </TouchableOpacity>
 
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('all_product', {sandwich: sandwich})
+            }>
+            <View style={styles.categotyElement}>
+              <Image
+                blurRadius={2}
+                blurType="dark"
+                style={styles.image}
+                source={require('../assets/club.jpg')}
+              />
+              <Text style={styles.textCtegory}>المخبوزات</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('all_product', {hotDrink: hotDrink})
+            }>
+            <View style={styles.categotyElement}>
+              <Image
+                blurRadius={2}
+                style={styles.image}
+                source={require('../assets/hotDrink.jpg')}
+              />
+              <Text style={styles.textCtegory}> المشروبات الساخنة</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('all_product', {coldDrink: coldDrink})
+            }>
+            <View style={styles.categotyElement}>
+              <Image
+                blurRadius={2}
+                style={styles.image}
+                source={require('../assets/coldDrink.jpg')}
+              />
+              <Text style={styles.textCtegory}> المشروبات الباردة</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
       <FooterScreen />
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  ourProduct: {
+    marginLeft: 195,
+    marginTop: 30,
+    borderTopWidth: 5,
+    borderTopColor: '#e5e5e5',
+    height: 20,
+    width: 30,
+  },
+  ourTextProduct: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#CAB19F',
+  },
+  textCtegory: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: -90,
+    marginBottom: 100,
+    marginLeft: -30,
+    opacity: 1,
+  },
+  categotyElement: {},
+  categotyView: {
+    flexDirection: 'row',
+    marginBottom: 40,
+    marginLeft: 40,
+  },
+  image: {
+    width: 155,
+    height: 155,
+    marginTop: 30,
+    marginRight: 30,
+    borderRadius: 80,
+    borderBottomLeftRadius: 80,
+    borderBottomRightRadius: 80,
+    opacity: 1,
+  },
   moreCategory: {
     textAlign: 'center',
     fontSize: 15,
@@ -618,7 +832,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffff',
     flex: 1,
-    marginHorizontal: 0,
+    marginHorizontal: 1,
 
     marginTop: 5,
   },

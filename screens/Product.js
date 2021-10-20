@@ -21,11 +21,11 @@ import {Link} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import {Card} from 'react-native-elements';
 import {useDispatch} from 'react-redux';
-import CarouselScreens from '../screens/CarouselScreens';
+import CarouselScreens from './CarouselScreens';
 import {addToBasket} from '../slice/BasketSlice';
 import * as Animatable from 'react-native-animatable';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FooterScreen from '../screens/FooterScreen';
+import FooterScreen from './FooterScreen';
 import {
   Collapse,
   CollapseHeader,
@@ -37,13 +37,12 @@ import {useNavigation} from '@react-navigation/native';
 import {selectItems} from '../slice/BasketSlice';
 import {useSelector} from 'react-redux';
 
-function Choclate({onPress, chocolate}) {
+function Choclate({onPress, product}) {
   const navigation = useNavigation();
-  
 
   return (
     <View>
-      <View
+      {/* <View
         style={{
           marginTop: 15,
           flexDirection: 'row',
@@ -61,32 +60,35 @@ function Choclate({onPress, chocolate}) {
             <Text style={styles.text}> مزيد</Text>
           </Pressable>
         </View>
-      </View>
+      </View> */}
       <View>
-        <ScrollView horizontal={true} style={styles.grid}>
-          {Object.values(chocolate).map((chocolates, i) => {
+        <ScrollView
+          horizontal={true}
+          style={styles.grid}
+          showsHorizontalScrollIndicator={false}>
+          {Object.values(product).map((products, i) => {
             //console.log(chocolates.title);
             return (
               <TouchableOpacity
                 key={i}
                 onPress={() =>
-                  navigation.navigate('chocolateShow', {
-                    chocolate: chocolates,
+                  navigation.navigate('productShow', {
+                    product: products,
                   })
                 }>
                 <Card
                   containerStyle={{
                     elevation: 10,
-                    height: 185,
-                    width: 150,
+                    height: 270,
+                    width: 170,
                     marginBottom: 15,
-                    borderRadius: 10,
+
                     borderColor: '#82644A',
                     borderWidth: 0,
                   }}>
                   <Image
                     style={styles.categoriesPhoto}
-                    source={{uri: chocolates.imageUrl}}
+                    source={{uri: products.imageUrl}}
                   />
                   <View style={{marginBottom: 10}}>
                     <Text
@@ -97,24 +99,18 @@ function Choclate({onPress, chocolate}) {
                         height: 25,
                         textAlign: 'center',
                       }}>
-                      {chocolates.title}
+                      {products.arabicTitle}
                     </Text>
                     <Text style={{textAlign: 'center'}}>
-                      رس {chocolates.price}
+                      رس {products.price}
                     </Text>
                   </View>
-                  <View
-                    style={{
-                      marginRight: 8,
-                      marginTop: 0,
-
-                      width: 120,
-                    }}>
+                  <View>
                     <Button
                       onPress={() => {
-                        onPress(chocolates);
+                        onPress(products);
                       }}
-                      color="#82644A"
+                      color="#af8d78"
                       title="أضف إلى السلة"
                     />
                   </View>
@@ -143,12 +139,13 @@ const styles = StyleSheet.create({
     width: 100,
   },
   categoriesPhoto: {
-    width: 70,
-    height: 70,
-    marginLeft: 25,
-    borderRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    width: 120,
+    height: 120,
+    alignItems: 'center',
+    margin: 10,
+    borderRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
   },
   container: {
     backgroundColor: '#ffff',

@@ -38,13 +38,14 @@ import {selectItems} from '../slice/BasketSlice';
 import {useSelector} from 'react-redux';
 
 const CheckoutProduct = ({chocolate}) => {
+  console.log(chocolate);
   return (
     <View style={styles.container}>
       <ScrollView vertical={true} style={{}}>
         <View style={styles.product}>
           <View style={{flexDirection: 'column', marginRight: 25}}>
             <Text style={{margin: 30, fontSize: 20, width: 150}}>
-              {chocolate.title}
+              {chocolate.arabicTitle}
             </Text>
             <View style={styles.incrimentation}>
               <Pressable

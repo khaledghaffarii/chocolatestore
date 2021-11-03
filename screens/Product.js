@@ -37,30 +37,11 @@ import {useNavigation} from '@react-navigation/native';
 import {selectItems} from '../slice/BasketSlice';
 import {useSelector} from 'react-redux';
 
-function Choclate({onPress, product}) {
+function Product({onPress, product}) {
   const navigation = useNavigation();
 
   return (
     <View>
-      {/* <View
-        style={{
-          marginTop: 15,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={styles.recomended}>شوكولا</Text>
-        <View style={styles.moreButton}>
-          <Pressable
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('allChocolate', {
-                chocolate: chocolate,
-              });
-            }}>
-            <Text style={styles.text}> مزيد</Text>
-          </Pressable>
-        </View>
-      </View> */}
       <View>
         <ScrollView
           horizontal={true}
@@ -239,4 +220,4 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-export default Choclate;
+export default Product;

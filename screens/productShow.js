@@ -33,10 +33,10 @@ import FooterScreen from './FooterScreen';
 import {useDispatch} from 'react-redux';
 import {addToBasket} from '../slice/BasketSlice';
 
-const ProductShow = () => {
+const ProductShow = ({onPress}) => {
   const navigation = useNavigation();
   const route = useRoute();
-  const image = route.params.product.imageUrl;
+  const imageUrl = route.params.product.imageUrl;
   const calories = route.params.product.Calories;
   const arabicDescription = route.params.product.arabicDescription;
   const price = route.params.product.price;
@@ -50,13 +50,14 @@ const ProductShow = () => {
   const addItemToBasket = () => {
     const product = {
       arabicTitle,
-      image,
+      imageUrl,
       calories,
-      description,
+      arabicDescription,
       price,
     };
     dispatch(addToBasket(product));
   };
+
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -76,7 +77,7 @@ const ProductShow = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <View>
-        <Image style={styles.categoriesPhoto} source={{uri: image}} />
+        <Image style={styles.categoriesPhoto} source={{uri: imageUrl}} />
       </View>
       <View>
         <View style={styles.header}>

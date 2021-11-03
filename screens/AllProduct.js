@@ -10,15 +10,25 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 
 import firestore from '@react-native-firebase/firestore';
 
 import {Card} from 'react-native-elements';
 import FooterScreen from './FooterScreen';
 
-const AllProduct = ({navigation}) => {
+const AllProduct = () => {
+  const navigation = useNavigation();
   const route = useRoute();
+  // const imageUrl = route.params.product.imageUrl;
+  // const calories = route.params.product.Calories;
+  // const arabicDescription = route.params.product.arabicDescription;
+  // const price = route.params.product.price;
+  // const arabicTitle = route.params.product.arabicTitle;
+  // const weight = route.params.product.weight;
+  // const code = route.params.product.code;
+  // const arabicCategory = route.params.product.arabicCategory;
+  // const englishCategory = route.params.product.englishCategory;
   const salty = route.params.salty;
   const hotDrink = route.params.hotDrink;
   const coldDrink = route.params.coldDrink;
@@ -27,7 +37,7 @@ const AllProduct = ({navigation}) => {
   const kandy = route.params.kandy;
   const cake = route.params.cake;
   const chocolate = route.params.chocolate;
-
+  console.log(route.params.product);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <View style={{margin: 15}}>

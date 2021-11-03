@@ -91,8 +91,13 @@ import KandyShow from '../screens/KandyShow';
 import Checkout from '../screens/Checkout';
 import {useNavigation} from '@react-navigation/native';
 import AllProduct from '../screens/AllProduct';
-const Routes = navigation => {
+import DrawerContent from '../screens/DrawerContent';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {useWindowDimensions} from 'react-native';
+const Routes = props => {
+  const dimensions = useWindowDimensions();
   //const navigation = useNavigation();
+  const DrawerNav = createDrawerNavigator();
   const {user, setUser} = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
   const Stack = createStackNavigator();
@@ -112,13 +117,21 @@ const Routes = navigation => {
   if (initializing) {
     return null;
   }
-
   return (
-    <NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Drawer />
+      </NavigationContainer>
+    </>
+  );
+  function App() {
+    return (
       <Stack.Navigator initialRouteName="splashScreen">
         <Stack.Screen
           options={{
             headerShown: false,
+            drawerContent: false,
+            DrawerNav: false,
           }}
           name="spashScreen"
           component={SplashScreen}
@@ -126,34 +139,7 @@ const Routes = navigation => {
         <Stack.Screen
           name="Home"
           options={{
-            title: (
-              <View>
-                <Image
-                  style={styles.tinyLogo}
-                  source={require('../assets/logo.png')}
-                />
-              </View>
-            ),
-
-            headerRight: () => <LoginButton />,
-            headerLeft: () => <ShoppingCartIcon />,
-            headerStyle: {
-              backgroundColor: '#ffff',
-              shadowColor: '#000',
-              elevation: 20,
-            },
-            headerTitleAlign: 'center',
-            headerTitleStyle: {
-              width: 150,
-              borderRadius: 80,
-              marginBottom: 25,
-              marginTop: 45,
-              marginLeft: 10,
-              height: 80,
-            },
-            backgroundColor: '#2e64e515',
-
-            headerBackTitleVisible: false,
+            headerShown: false,
           }}
           component={AppStack}
         />
@@ -412,7 +398,6 @@ const Routes = navigation => {
           }}
           component={CakeShow}
         />
-
         <Stack.Screen
           name="cake"
           options={{
@@ -467,9 +452,52 @@ const Routes = navigation => {
           }}
           component={AllProduct}
         />
+        <Stack.Screen name="Login" component={LoginButton} />
       </Stack.Navigator>
-    </NavigationContainer>
-  );
+    );
+  }
+  function Drawer() {
+    return (
+      <DrawerNav.Navigator
+        drawerContent={props => <DrawerContent {...props} />}
+        screenOptions={{
+          drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
+        }}>
+        <DrawerNav.Screen
+          options={{
+            headerRight: () => (
+              <View style={{marginRight: 15}}>
+                <ShoppingCartIcon />
+              </View>
+            ),
+            title: (
+              <View>
+                <Image
+                  style={styles.tinyLogo}
+                  source={require('../assets/logo.png')}
+                />
+              </View>
+            ),
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              width: 150,
+              borderRadius: 80,
+              marginBottom: 25,
+              marginTop: 45,
+              marginLeft: 10,
+              height: 80,
+            },
+            backgroundColor: '#2e64e515',
+
+            headerBackTitleVisible: false,
+          }}
+          name="  "
+          component={App}
+        />
+        <DrawerNav.Screen name=" " component={LoginScreen} />
+      </DrawerNav.Navigator>
+    );
+  }
 };
 const styles = StyleSheet.create({
   container: {

@@ -10,7 +10,7 @@ import {
   Button,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-function loginButton() {
+function LoginButton() {
   const navigation = useNavigation();
   return (
     <View style={{marginRight:5}}>
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-export default loginButton;
+export default LoginButton;

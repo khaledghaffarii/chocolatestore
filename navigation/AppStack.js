@@ -241,8 +241,20 @@ const AppStack = ({navigation}) => {
   const [kandy, setKandy] = useState('');
   const [cake, setCake] = useState('');
   const [chocolate, setChocolate] = useState('');
-
+  const [product, setProduct] = useState(0);
   useEffect(() => {
+    const getProduct = async () => {
+      try {
+        await firestore()
+          .collection('allProduct')
+          .onSnapshot(snapshot => {
+            setProduct(snapshot.docs.map(doc => doc.data()));
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     const getChocolate = async () => {
       try {
         await firestore()
@@ -339,6 +351,7 @@ const AppStack = ({navigation}) => {
         console.log(error);
       }
     };
+    getProduct();
     getCake();
     getKandy();
     getChocolate();
@@ -348,312 +361,15 @@ const AppStack = ({navigation}) => {
     getColdDrink();
     getSalty();
   }, []);
+  console.log(product['0']);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <CarouselScreens />
       <View style={styles.ourProduct}></View>
       <Text style={styles.ourTextProduct}>منتوجاتنا </Text>
-      {/* <View style={styles.advertisement}>
-        <Text style={styles.advertisementText}>
-          متخصصين بالحلا المميز ،مـعـكـم بـكـل حـب
-        </Text>
-        <View style={styles.instagramIcon}>
-          <Pressable
-            onPress={() => {
-              Linking.openURL('https://www.instagram.com/dallah_hala/');
-            }}>
-            <Ionicons name="ios-logo-instagram" size={20} color="#fff" />
-          </Pressable>
-        </View>
-      </View> */}
-
-      {/*///////////////////////////////////////////////////// chocolate category   /////////////////////////////////////////////////*/}
-
       <ChocolateProduct />
       <View style={styles.ourProduct}></View>
       <Text style={styles.ourTextProduct}>تصنيفاتنا </Text>
-      {/* <Collapse>
-        <CollapseHeader>
-          <View
-            style={{
-              flexDirection: 'row',
-              margin: 20,
-              marginLeft: 250,
-              display: 'flex',
-            }}>
-            <Icon name="chevron-down" size={10} style={{marginTop: 5}} />
-            <Text style={styles.moreCategory}>مزيد من المصنفات </Text>
-          </View>
-        </CollapseHeader>
-        <CollapseBody>
-         <View
-            style={{
-              marginTop: 50,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={styles.recomended}>كيك و مخبوزات </Text>
-            <View style={styles.moreButton}>
-              {/* <Button
-            title=" مزيد"
-            color="#82644A"
-            onPress={() => {
-              navigation.navigate('allCake');
-            }}
-          />
-              <Pressable
-                style={styles.button}
-                onPress={() => {
-                  navigation.navigate('allCake');
-                }}>
-                <Text style={styles.text}> مزيد</Text>
-              </Pressable>
-            </View>
-          </View>
-          <View>
-            <ScrollView horizontal={true} style={styles.grid2}>
-              {Object.values(LessCake)
-                .slice(0, 4)
-                .map((img, i) => {
-                  return (
-                    <TouchableOpacity
-                      key={i}
-                      onPress={() =>
-                        navigation.navigate('cakeShow', {
-                          cake: img,
-                        })
-                      }>
-                      <Card
-                        containerStyle={{
-                          elevation: 10,
-                          height: 185,
-                          width: 150,
-                          marginBottom: 15,
-                          borderRadius: 10,
-                          borderColor: '#82644A',
-                          borderWidth: 0,
-                        }}>
-                        <Image
-                          style={styles.categoriesPhoto}
-                          source={{uri: img.imageUrl}}
-                        />
-                        <View style={{marginBottom: 10}}>
-                          <Text
-                            style={{
-                              fontSize: 15,
-                              fontWeight: 'bold',
-                              marginTop: 7,
-
-                              textAlign: 'center',
-                            }}>
-                            {img.title}
-                          </Text>
-                        </View>
-                        <View
-                          style={{
-                            marginRight: 8,
-                            marginTop: 20,
-
-                            width: 120,
-                          }}>
-                          <Button
-                            onPress={() => {
-                              addItemToBasket();
-                            }}
-                            color="#82644A"
-                            title="أضف إلى السلة"
-                          />
-                        </View>
-                      </Card>
-                    </TouchableOpacity>
-                  );
-                })}
-            </ScrollView>
-          </View>
-         
-          <View
-            style={{
-              marginTop: 50,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={styles.recomended}>مشروبات </Text>
-            <View style={styles.moreButton}>
-              {/* <Button
-            title=" مزيد"
-            color="#82644A"
-            onPress={() => {
-              navigation.navigate('all_drink');
-            }}
-          /> 
-              <Pressable
-                style={styles.button}
-                onPress={() => {
-                  navigation.navigate('all_drink');
-                }}>
-                <Text style={styles.text}> مزيد</Text>
-              </Pressable>
-            </View>
-          </View>
-          <View>
-            <ScrollView horizontal={true} style={styles.grid2}>
-              {Object.values(LessDrink)
-                .slice(0, 4)
-                .map((img, i) => {
-                  return (
-                    <TouchableOpacity
-                      key={i}
-                      onPress={() =>
-                        navigation.navigate('drink_show', {
-                          drink: img,
-                        })
-                      }>
-                      <Card
-                        containerStyle={{
-                          elevation: 10,
-                          height: 185,
-                          width: 150,
-                          marginBottom: 15,
-                          borderRadius: 10,
-                          borderColor: '#82644A',
-                          borderWidth: 0,
-                        }}>
-                        <Image
-                          style={styles.categoriesPhoto}
-                          source={{uri: img.imageUrl}}
-                        />
-                        <View style={{marginBottom: 10}}>
-                          <Text
-                            style={{
-                              marginTop: 0,
-                              fontSize: 15,
-                              fontWeight: 'bold',
-                              marginTop: 7,
-
-                              textAlign: 'center',
-                            }}>
-                            {img.title}
-                          </Text>
-                        </View>
-                        <View
-                          style={{
-                            marginRight: 8,
-                            marginTop: 20,
-
-                            width: 120,
-                          }}>
-                          <Button
-                            onPress={() => {
-                              addItemToBasket();
-                            }}
-                            color="#82644A"
-                            title="أضف إلى السلة"
-                          />
-                        </View>
-                      </Card>
-                    </TouchableOpacity>
-                  );
-                })}
-            </ScrollView>
-            {/* <Button
-          title=" test"
-          color="#82644A"
-          onPress={() => RootNavigation.navigate('product', {userName: 'Lucy'})}
-        /> 
-          </View>
-         
-          <View
-            style={{
-              marginTop: 50,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={styles.recomended}>حلويات مشكلة </Text>
-            <View style={styles.moreButton}>
-              {/* <Button
-            title=" مزيد"
-            color="#82644A"
-            onPress={() => {
-              navigation.navigate('all_kandy');
-            }}
-          /> 
-              <Pressable
-                style={styles.button}
-                onPress={() => {
-                  navigation.navigate('all_kandy');
-                }}>
-                <Text style={styles.text}> مزيد</Text>
-              </Pressable>
-            </View>
-          </View>
-          <View>
-            <ScrollView horizontal={true} style={styles.grid2}>
-              {Object.values(kandy)
-                .slice(0, 4)
-                .map((kandys, i) => {
-                  return (
-                    <TouchableOpacity
-                      key={i}
-                      onPress={() =>
-                        navigation.navigate('Kandy_show', {
-                          kandy: kandys,
-                        })
-                      }>
-                      <Card
-                        containerStyle={{
-                          elevation: 10,
-                          height: 185,
-                          width: 150,
-                          marginBottom: 15,
-                          borderRadius: 10,
-                          borderColor: '#82644A',
-                          borderWidth: 0,
-                        }}>
-                        <Image
-                          style={styles.categoriesPhoto}
-                          source={{uri: kandys.imageUrl}}
-                        />
-                        <View style={{marginBottom: 10}}>
-                          <Text
-                            style={{
-                              marginTop: 0,
-                              fontSize: 15,
-                              fontWeight: 'bold',
-                              marginTop: 7,
-                              textAlign: 'center',
-                            }}>
-                            {kandys.title}
-                          </Text>
-                        </View>
-                        <View
-                          style={{
-                            marginRight: 8,
-                            marginTop: 20,
-
-                            width: 120,
-                          }}>
-                          <Button
-                            onPress={() => {
-                              addItemToBasket();
-                            }}
-                            color="#82644A"
-                            title="أضف إلى السلة"
-                          />
-                        </View>
-                      </Card>
-                    </TouchableOpacity>
-                  );
-                })}
-            </ScrollView>
-            {/* <Button
-          title=" test"
-          color="#82644A"
-          onPress={() => RootNavigation.navigate('product', {userName: 'Lucy'})}
-        /> 
-          </View> 
-        </CollapseBody>
-      </Collapse>
-*/}
       <ScrollView
         horizontal={true}
         style={styles.grid}
@@ -661,7 +377,10 @@ const AppStack = ({navigation}) => {
         <View style={styles.categotyView}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('all_product', {chocolate: chocolate})
+              navigation.navigate('all_product', {
+                chocolate: chocolate,
+                product: product[0],
+              })
             }>
             <View style={styles.categotyElement}>
               <Image

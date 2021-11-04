@@ -16,7 +16,7 @@ import firestore from '@react-native-firebase/firestore';
 
 import {Card} from 'react-native-elements';
 
-      import FooterScreen from './FooterScreen';
+import FooterScreen from './FooterScreen';
 const AllDrink = () => {
   const navigation = useNavigation();
   const [allDrink, setAllDrink] = useState('');
@@ -54,7 +54,7 @@ const AllDrink = () => {
                   }}>
                   <View
                     style={{
-                      marginBottom: 10,
+                      marginBottom: 15,
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                     }}>

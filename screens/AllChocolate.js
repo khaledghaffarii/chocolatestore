@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -8,23 +8,23 @@ import {
   ScrollView,
   TouchableOpacity,
   Button,
-} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+} from "react-native";
+import { useRoute } from "@react-navigation/native";
 
-import firestore from '@react-native-firebase/firestore';
+import firestore from "@react-native-firebase/firestore";
 
-import {Card} from 'react-native-elements';
-import FooterScreen from './FooterScreen';
-const Product = ({navigation}) => {
+import { Card } from "react-native-elements";
+import FooterScreen from "./FooterScreen";
+const Product = ({ navigation }) => {
   const route = useRoute();
   console.log(route.params.salty);
-  const [allChocolate, setAllChocolate] = useState('');
+  const [allChocolate, setAllChocolate] = useState("");
   const getAllChocolate = async () => {
     try {
       await firestore()
-        .collection('allCategogry')
-        .onSnapshot(snapshot => {
-          setAllChocolate(snapshot.docs.map(doc => doc.data()));
+        .collection("allCategogry")
+        .onSnapshot((snapshot) => {
+          setAllChocolate(snapshot.docs.map((doc) => doc.data()));
         });
     } catch (error) {
       console.log(error);
@@ -36,31 +36,34 @@ const Product = ({navigation}) => {
   }, []);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
-      <View style={{marginLeft: 15}}>
-        <View style={{marginLeft: -12}}>
+      {/* <View style={{ marginLeft: 15 }}>
+        <View style={{ marginLeft: -12 }}>
           {Object.values(route.params.chocolate).map((allChocolates, i) => {
             //console.log(JSON.stringify(allChocolate.Calories));
             return (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate('productShow', {
+                  navigation.navigate("productShow", {
                     chocolate: allChocolates,
                   })
                 }
-                key={i}>
+                key={i}
+              >
                 <Card
                   containerStyle={{
                     height: 190,
-                  }}>
+                  }}
+                >
                   <View
                     style={{
                       marginBottom: 10,
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <Image
                       style={styles.categoriesPhoto}
-                      source={{uri: allChocolates.imageUrl}}
+                      source={{ uri: allChocolates.imageUrl }}
                     />
                     <View style={{}}>
                       <Card.Title>{allChocolates.title}</Card.Title>
@@ -74,7 +77,8 @@ const Product = ({navigation}) => {
                       marginTop: -32,
                       marginLeft: 220,
                       width: 100,
-                    }}>
+                    }}
+                  >
                     <Button title="أضف إلى السلة" color="#af8d78" />
                   </View>
                 </Card>
@@ -83,7 +87,7 @@ const Product = ({navigation}) => {
           })}
         </View>
       </View>
-      <FooterScreen />
+      <FooterScreen /> */}
     </ScrollView>
   );
 };
@@ -94,8 +98,8 @@ const styles = StyleSheet.create({
     marginLeft: 330,
     marginBottom: 40,
     fontSize: 17,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   categoriesPhoto: {
     width: 140,
@@ -103,10 +107,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     flex: 1,
     marginHorizontal: 0,
     marginVertical: 10,
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     marginTop: 10,
     marginLeft: 20,
-    color: 'white',
+    color: "white",
   },
   tinyLogo: {
     width: 280,
@@ -131,23 +135,23 @@ const styles = StyleSheet.create({
   grid: {
     margin: 40,
     marginTop: 20,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 
   headline_text: {
-    color: 'white',
+    color: "white",
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 50,
     marginLeft: 20,
   },
   explore_text: {
     marginTop: 5,
     marginBottom: 10,
-    color: 'white',
+    color: "white",
     marginLeft: 20,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 

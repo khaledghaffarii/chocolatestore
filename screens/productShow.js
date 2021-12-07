@@ -4,7 +4,7 @@
 /* eslint-disable no-dupe-keys */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -14,26 +14,26 @@ import {
   TouchableOpacity,
   Dimensions,
   Button,
-} from 'react-native';
+} from "react-native";
 import {
   useNavigation,
   useRoute,
   useFocusEffect,
   useNavigationState,
-} from '@react-navigation/native';
-import GridImageView from 'react-native-grid-image-viewer';
-import firestore from '@react-native-firebase/firestore';
-import LoginScreen from './LoginScreen';
+} from "@react-navigation/native";
+import GridImageView from "react-native-grid-image-viewer";
+import firestore from "@react-native-firebase/firestore";
+import LoginScreen from "./LoginScreen";
 
 // import Carousel from 'react-native-snap-carousel';
-import Carousel from '../components/Carousel';
-import {dummyData} from '../data/Data';
-import {SearchBar, Card} from 'react-native-elements';
-import FooterScreen from './FooterScreen';
-import {useDispatch} from 'react-redux';
-import {addToBasket} from '../slice/BasketSlice';
+import Carousel from "../components/Carousel";
+import { dummyData } from "../data/Data";
+import { SearchBar, Card } from "react-native-elements";
+import FooterScreen from "./FooterScreen";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../slice/BasketSlice";
 
-const ProductShow = ({onPress}) => {
+const ProductShow = ({ onPress }) => {
   const navigation = useNavigation();
   const route = useRoute();
   const imageUrl = route.params.product.imageUrl;
@@ -45,7 +45,7 @@ const ProductShow = ({onPress}) => {
   const code = route.params.product.code;
   const arabicCategory = route.params.product.arabicCategory;
   const englishCategory = route.params.product.englishCategory;
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState("");
   const dispatch = useDispatch();
   const addItemToBasket = () => {
     const product = {
@@ -62,10 +62,10 @@ const ProductShow = ({onPress}) => {
     const getProduct = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', englishCategory)
-          .onSnapshot(snapshot => {
-            setProduct(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", englishCategory)
+          .onSnapshot((snapshot) => {
+            setProduct(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -77,20 +77,21 @@ const ProductShow = ({onPress}) => {
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <View>
-        <Image style={styles.categoriesPhoto} source={{uri: imageUrl}} />
+        <Image style={styles.categoriesPhoto} source={{ uri: imageUrl }} />
       </View>
       <View>
         <View style={styles.header}>
-          <View style={{flexDirection: 'row', marginLeft: 270}}>
+          <View style={{ flexDirection: "row", marginLeft: 270 }}>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate('all_product', {
+                navigation.navigate("all_product", {
                   kandy: product,
                 })
-              }>
+              }
+            >
               <Text style={styles.subTitle}> {arabicCategory}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
               <Text style={styles.subTitle}>الرئيسية / </Text>
             </TouchableOpacity>
           </View>
@@ -98,11 +99,12 @@ const ProductShow = ({onPress}) => {
           <Text style={styles.title}>{arabicTitle}</Text>
           <Text
             style={{
-              textAlign: 'right',
+              textAlign: "right",
               fontSize: 20,
               margin: 8,
-              color: '#cab19f',
-            }}>
+              color: "#cab19f",
+            }}
+          >
             {price} ر.س
           </Text>
         </View>
@@ -116,15 +118,17 @@ const ProductShow = ({onPress}) => {
         <View>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
             <View
               style={{
                 marginLeft: 120,
                 width: 150,
                 marginBottom: 20,
-              }}>
+              }}
+            >
               <Button
                 onPress={() => {
                   addItemToBasket();
@@ -143,45 +147,50 @@ const ProductShow = ({onPress}) => {
 };
 const styles = StyleSheet.create({
   ourProduct: {
-    alignItems: 'center',
+    alignItems: "center",
     borderTopWidth: 2,
-    borderTopColor: '#e5e5e5',
+    borderTopColor: "#e5e5e5",
     height: 20,
     width: 300,
     marginLeft: 60,
   },
   subTitle: {
     fontSize: 14,
-    color: 'grey',
+    color: "grey",
     margin: 8,
   },
-  description: {color: '#565f64', marginTop: 20, width: 370, marginBottom: 20},
-  calory: {color: '#565f64', marginTop: 5},
+  description: {
+    color: "#565f64",
+    marginTop: 20,
+    width: 370,
+    marginBottom: 20,
+  },
+  calory: { color: "#565f64", marginTop: 5 },
   other: {
     margin: 20,
   },
   code: {
-    color: '#565f64',
+    color: "#565f64",
   },
-  weight: {color: '#565f64', marginTop: 10},
+  weight: { color: "#565f64", marginTop: 10 },
   header: {
-    flexDirection: 'column',
+    flexDirection: "column",
     marginBottom: 55,
   },
   title: {
-    textAlign: 'right',
+    textAlign: "right",
     fontSize: 25,
-    color: '#cab19f',
+    color: "#cab19f",
     margin: 10,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   login: {
     marginTop: 1,
     marginLeft: 330,
     marginBottom: 40,
     fontSize: 17,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   categoriesPhoto: {
     width: 400,
@@ -189,7 +198,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
 
     marginTop: 10,
   },
@@ -198,7 +207,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     marginTop: 10,
     marginLeft: 20,
-    color: 'white',
+    color: "white",
   },
   tinyLogo: {
     width: 280,
@@ -213,23 +222,23 @@ const styles = StyleSheet.create({
   grid: {
     margin: 40,
     marginTop: 20,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 
   headline_text: {
-    color: 'white',
+    color: "white",
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 50,
     marginLeft: 20,
   },
   explore_text: {
     marginTop: 5,
     marginBottom: 10,
-    color: 'white',
+    color: "white",
     marginLeft: 20,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 

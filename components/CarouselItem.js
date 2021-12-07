@@ -6,15 +6,10 @@ const {width, height} = Dimensions.get('window');
 const CarouselItem = ({item}) => {
   return (
     <View style={styles.cardView}>
-      <Image style={styles.image} source={require('../assets/coldDrink.jpg')} />
+      <Image style={styles.image} source={{uri: item.url}} />
       <View style={styles.textView}>
-        <Text style={styles.itemTitle}> test</Text>
-        <Text style={styles.itemDescription}>test 2</Text>
-      </View>
-      <Image style={styles.image} source={require('../assets/coldDrink.jpg')} />
-      <View style={styles.textView}>
-        <Text style={styles.itemTitle}> test</Text>
-        <Text style={styles.itemDescription}>test 2</Text>
+        <Text style={styles.itemTitle}> {item.title}</Text>
+        <Text style={styles.itemDescription}>{item.description}</Text>
       </View>
     </View>
   );

@@ -198,8 +198,8 @@
 // };
 
 // export default AppStack;
-import React, {useState, useEffect} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, { useState, useEffect } from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 import {
   View,
   StyleSheet,
@@ -212,43 +212,44 @@ import {
   Pressable,
   Linking,
   ImageBackground,
-} from 'react-native';
-import {Link} from '@react-navigation/native';
-import firestore from '@react-native-firebase/firestore';
-import {Card} from 'react-native-elements';
-import {useDispatch} from 'react-redux';
-import CarouselScreens from '../screens/CarouselScreens';
-import {addToBasket} from '../slice/BasketSlice';
-import * as Animatable from 'react-native-animatable';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FooterScreen from '../screens/FooterScreen';
+} from "react-native";
+import { Link } from "@react-navigation/native";
+import firestore from "@react-native-firebase/firestore";
+import { Card } from "react-native-elements";
+import { useDispatch } from "react-redux";
+import CarouselScreens from "../screens/CarouselScreens";
+import { addToBasket } from "../slice/BasketSlice";
+import * as Animatable from "react-native-animatable";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import FooterScreen from "../screens/FooterScreen";
 import {
   Collapse,
   CollapseHeader,
   CollapseBody,
   AccordionList,
-} from 'accordion-collapse-react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ChocolateProduct from '../screens/ChocolateProduct';
-const AppStack = ({navigation}) => {
+} from "accordion-collapse-react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import ChocolateProduct from "../screens/ChocolateProduct";
+const AppStack = ({ navigation }) => {
   const Stack = createStackNavigator();
 
-  const [salty, setSalty] = useState('');
-  const [hotDrink, setHotDrink] = useState('');
-  const [coldDrink, setColdDrink] = useState('');
-  const [sandwich, setSandwich] = useState('');
-  const [croissant, setCroissant] = useState('');
-  const [kandy, setKandy] = useState('');
-  const [cake, setCake] = useState('');
-  const [chocolate, setChocolate] = useState('');
+  const [salty, setSalty] = useState("");
+  const [hotDrink, setHotDrink] = useState("");
+  const [coldDrink, setColdDrink] = useState("");
+  const [sandwich, setSandwich] = useState("");
+  const [croissant, setCroissant] = useState("");
+  const [kandy, setKandy] = useState("");
+  const [cake, setCake] = useState("");
+  const [chocolate, setChocolate] = useState("");
+  const [chocolateId, setChocolateId] = useState([]);
   const [product, setProduct] = useState(0);
   useEffect(() => {
     const getProduct = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .onSnapshot(snapshot => {
-            setProduct(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .onSnapshot((snapshot) => {
+            setProduct(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -258,10 +259,11 @@ const AppStack = ({navigation}) => {
     const getChocolate = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', 'chocolate')
-          .onSnapshot(snapshot => {
-            setChocolate(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", "chocolate")
+          .onSnapshot((snapshot) => {
+            setChocolate(snapshot.docs.map((doc) => doc.data()));
+            setChocolateId(snapshot.docs.map((doc) => doc.id));
           });
       } catch (error) {
         console.log(error);
@@ -270,10 +272,10 @@ const AppStack = ({navigation}) => {
     const getKandy = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', 'Oriental Sweets')
-          .onSnapshot(snapshot => {
-            setKandy(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", "Oriental Sweets")
+          .onSnapshot((snapshot) => {
+            setKandy(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -282,10 +284,10 @@ const AppStack = ({navigation}) => {
     const getCake = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', 'cake')
-          .onSnapshot(snapshot => {
-            setCake(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", "cake")
+          .onSnapshot((snapshot) => {
+            setCake(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -294,10 +296,10 @@ const AppStack = ({navigation}) => {
     const getHotDrink = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', 'Hot Drinks')
-          .onSnapshot(snapshot => {
-            setHotDrink(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", "Hot Drinks")
+          .onSnapshot((snapshot) => {
+            setHotDrink(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -306,10 +308,10 @@ const AppStack = ({navigation}) => {
     const getColdDrink = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', 'Cold Drinks')
-          .onSnapshot(snapshot => {
-            setColdDrink(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", "Cold Drinks")
+          .onSnapshot((snapshot) => {
+            setColdDrink(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -318,10 +320,10 @@ const AppStack = ({navigation}) => {
     const getCroissant = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', 'croissant')
-          .onSnapshot(snapshot => {
-            setCroissant(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", "croissant")
+          .onSnapshot((snapshot) => {
+            setCroissant(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -330,10 +332,10 @@ const AppStack = ({navigation}) => {
     const getSandwich = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', 'Bakery')
-          .onSnapshot(snapshot => {
-            setSandwich(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", "Bakery")
+          .onSnapshot((snapshot) => {
+            setSandwich(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -342,10 +344,10 @@ const AppStack = ({navigation}) => {
     const getSalty = async () => {
       try {
         await firestore()
-          .collection('allProduct')
-          .where('englishCategory', '==', 'Salty Snacks')
-          .onSnapshot(snapshot => {
-            setSalty(snapshot.docs.map(doc => doc.data()));
+          .collection("allProduct")
+          .where("englishCategory", "==", "Salty Snacks")
+          .onSnapshot((snapshot) => {
+            setSalty(snapshot.docs.map((doc) => doc.data()));
           });
       } catch (error) {
         console.log(error);
@@ -361,7 +363,7 @@ const AppStack = ({navigation}) => {
     getColdDrink();
     getSalty();
   }, []);
-  console.log(product['0']);
+  console.log(chocolateId);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <CarouselScreens />
@@ -373,66 +375,73 @@ const AppStack = ({navigation}) => {
       <ScrollView
         horizontal={true}
         style={styles.grid}
-        showsHorizontalScrollIndicator={false}>
+        showsHorizontalScrollIndicator={false}
+      >
         <View style={styles.categotyView}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('all_product', {
+              navigation.navigate("all_product", {
                 chocolate: chocolate,
+                chocolateId: chocolateId,
                 product: product[0],
               })
-            }>
+            }
+          >
             <View style={styles.categotyElement}>
               <Image
                 blurRadius={2}
                 style={styles.image}
-                source={require('../assets/chocolat.jpg')}
+                source={require("../assets/chocolat.jpg")}
               />
               <Text style={styles.textCtegory}>الشوكولا</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('all_product', {cake: cake})}>
+            onPress={() => navigation.navigate("all_product", { cake: cake })}
+          >
             <View style={styles.categotyElement}>
               <Image
                 blurRadius={2}
                 style={styles.image}
-                source={require('../assets/caky.jpg')}
+                source={require("../assets/caky.jpg")}
               />
               <Text style={styles.textCtegory}>الكيك</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('all_product', {kandy: kandy})}>
+            onPress={() => navigation.navigate("all_product", { kandy: kandy })}
+          >
             <View style={styles.categotyElement}>
               <Image
                 blurRadius={2}
                 style={styles.image}
-                source={require('../assets/baklawa.jpg')}
+                source={require("../assets/baklawa.jpg")}
               />
               <Text style={styles.textCtegory}>الحلويات الشرقيه</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('all_product', {salty: salty})}>
+            onPress={() => navigation.navigate("all_product", { salty: salty })}
+          >
             <View style={styles.categotyElement}>
               <Image
                 blurRadius={2}
                 style={styles.image}
-                source={require('../assets/sale.jpg')}
+                source={require("../assets/sale.jpg")}
               />
               <Text style={styles.textCtegory}>موالح</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('all_product', {croissant: croissant})
-            }>
+              navigation.navigate("all_product", { croissant: croissant })
+            }
+          >
             <View style={styles.categotyElement}>
               <Image
                 blurRadius={2}
                 style={styles.image}
-                source={require('../assets/croissant.jpg')}
+                source={require("../assets/croissant.jpg")}
               />
               <Text style={styles.textCtegory}> كرواسون</Text>
             </View>
@@ -440,40 +449,43 @@ const AppStack = ({navigation}) => {
 
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('all_product', {sandwich: sandwich})
-            }>
+              navigation.navigate("all_product", { sandwich: sandwich })
+            }
+          >
             <View style={styles.categotyElement}>
               <Image
                 blurRadius={2}
                 blurType="dark"
                 style={styles.image}
-                source={require('../assets/club.jpg')}
+                source={require("../assets/club.jpg")}
               />
               <Text style={styles.textCtegory}>المخبوزات</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('all_product', {hotDrink: hotDrink})
-            }>
+              navigation.navigate("all_product", { hotDrink: hotDrink })
+            }
+          >
             <View style={styles.categotyElement}>
               <Image
                 blurRadius={2}
                 style={styles.image}
-                source={require('../assets/hotDrink.jpg')}
+                source={require("../assets/hotDrink.jpg")}
               />
               <Text style={styles.textCtegory}> المشروبات الساخنة</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('all_product', {coldDrink: coldDrink})
-            }>
+              navigation.navigate("all_product", { coldDrink: coldDrink })
+            }
+          >
             <View style={styles.categotyElement}>
               <Image
                 blurRadius={2}
                 style={styles.image}
-                source={require('../assets/coldDrink.jpg')}
+                source={require("../assets/coldDrink.jpg")}
               />
               <Text style={styles.textCtegory}> المشروبات الباردة</Text>
             </View>
@@ -490,21 +502,21 @@ const styles = StyleSheet.create({
     marginLeft: 195,
     marginTop: 30,
     borderTopWidth: 5,
-    borderTopColor: '#e5e5e5',
+    borderTopColor: "#e5e5e5",
     height: 20,
     width: 30,
   },
   ourTextProduct: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#CAB19F',
+    fontWeight: "bold",
+    color: "#CAB19F",
   },
   textCtegory: {
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: -90,
     marginBottom: 100,
     marginLeft: -30,
@@ -512,7 +524,7 @@ const styles = StyleSheet.create({
   },
   categotyElement: {},
   categotyView: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 40,
     marginLeft: 40,
   },
@@ -527,17 +539,17 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
   moreCategory: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   login: {
     marginTop: 5,
     marginLeft: 270,
     marginBottom: 40,
     fontSize: 17,
-    color: '#82644A',
-    fontWeight: 'bold',
+    color: "#82644A",
+    fontWeight: "bold",
     width: 100,
   },
   categoriesPhoto: {
@@ -549,7 +561,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
   },
   container: {
-    backgroundColor: '#ffff',
+    backgroundColor: "#ffff",
     flex: 1,
     marginHorizontal: 1,
 
@@ -562,9 +574,9 @@ const styles = StyleSheet.create({
   recomended: {
     fontSize: 18,
     marginLeft: 10,
-    textAlign: 'left',
-    color: 'black',
-    fontWeight: 'bold',
+    textAlign: "left",
+    color: "black",
+    fontWeight: "bold",
   },
   tinyLogo: {
     width: 280,
@@ -573,38 +585,38 @@ const styles = StyleSheet.create({
     marginLeft: 75,
   },
   advertisement: {
-    backgroundColor: '#af8d78',
+    backgroundColor: "#af8d78",
     height: 130,
     marginBottom: 60,
     marginTop: -15,
   },
   advertisementText: {
-    color: 'white',
+    color: "white",
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 50,
   },
   instagramIcon: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 15,
   },
   button: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 5,
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: 'white',
-    borderColor: '#82644A',
+    backgroundColor: "white",
+    borderColor: "#82644A",
     borderWidth: 1,
   },
   text: {
     fontSize: 16,
     lineHeight: 21,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 0.25,
-    color: 'black',
+    color: "black",
   },
   buttons: {
     width: 100,
@@ -614,30 +626,30 @@ const styles = StyleSheet.create({
   grid: {
     margin: 0,
     marginTop: 20,
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 10,
   },
   grid2: {
     margin: 0,
     marginTop: 20,
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 30,
   },
 
   headline_text: {
-    color: 'white',
+    color: "white",
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 50,
     marginLeft: 20,
   },
   explore_text: {
     marginTop: 5,
     marginBottom: 10,
-    color: 'white',
+    color: "white",
     marginLeft: 20,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 

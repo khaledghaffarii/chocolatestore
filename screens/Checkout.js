@@ -55,7 +55,6 @@ const Checkout = ({navigation}) => {
                   marginTop: 65,
                   width: 150,
                 }}>
-             
                 <Pressable
                   onPress={() => navigation.navigate('Home')}
                   style={{
@@ -96,10 +95,6 @@ const Checkout = ({navigation}) => {
                     مواصلة التسويق
                   </Text>
                 </Pressable>
-                {/* <Button
-                  title="مواصلة التسويق"
-                  onPress={() => navigation.navigate('Home')}
-                /> */}
               </View>
             </View>
           </View>

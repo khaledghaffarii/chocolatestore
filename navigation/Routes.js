@@ -55,18 +55,18 @@
 //   );
 // };
 // export default Routes;
-import React, {useContext, useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
-import {AuthContext} from './AuthProvider';
-import {createStackNavigator} from '@react-navigation/stack';
-import AuthStack from './AuthStack';
-import AppStack from './AppStack';
-import LoginScreen from '../screens/LoginScreen';
-import AllChocolate from '../screens/AllChocolate';
+import React, { useContext, useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import auth from "@react-native-firebase/auth";
+import { AuthContext } from "./AuthProvider";
+import { createStackNavigator } from "@react-navigation/stack";
+import AuthStack from "./AuthStack";
+import AppStack from "./AppStack";
+import LoginScreen from "../screens/LoginScreen";
+import AllChocolate from "../screens/AllChocolate";
 
-import LoginButton from '../screens/LoginButton';
-import ShoppingCartIcon from '../screens/ShoppingCartIcon';
+import LoginButton from "../screens/LoginButton";
+import ShoppingCartIcon from "../screens/ShoppingCartIcon";
 import {
   View,
   StyleSheet,
@@ -76,33 +76,28 @@ import {
   TouchableOpacity,
   Dimensions,
   Button,
-} from 'react-native';
-import {navigationRef} from './RootNavigation';
-import AllCake from '../screens/AllCake';
-import ProductShow from '../screens/productShow';
-import CakeShow from '../screens/CakeShow';
-import SplashScreen from '../screens/SplashScreen';
-import LessChocolateShow from '../screens/LessChocolateShow';
-import LessCakeShow from '../screens/LessCakeShow';
-import AllDrink from '../screens/AllDrink';
-import DrinkShow from '../screens/DrinkShow';
-import AllKandy from '../screens/AllKandy';
-import KandyShow from '../screens/KandyShow';
-import Checkout from '../screens/Checkout';
-import {useNavigation} from '@react-navigation/native';
-import AllProduct from '../screens/AllProduct';
-import DrawerContent from '../screens/DrawerContent';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {useWindowDimensions} from 'react-native';
-const Routes = props => {
-  const dimensions = useWindowDimensions();
+} from "react-native";
+import { navigationRef } from "./RootNavigation";
+import AllCake from "../screens/AllCake";
+import ProductShow from "../screens/productShow";
+import CakeShow from "../screens/CakeShow";
+import SplashScreen from "../screens/SplashScreen";
+import LessChocolateShow from "../screens/LessChocolateShow";
+import LessCakeShow from "../screens/LessCakeShow";
+import AllDrink from "../screens/AllDrink";
+import DrinkShow from "../screens/DrinkShow";
+import AllKandy from "../screens/AllKandy";
+import KandyShow from "../screens/KandyShow";
+import Checkout from "../screens/Checkout";
+import { useNavigation } from "@react-navigation/native";
+import AllProduct from "../screens/AllProduct";
+const Routes = (navigation) => {
   //const navigation = useNavigation();
-  const DrawerNav = createDrawerNavigator();
-  const {user, setUser} = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
   const Stack = createStackNavigator();
 
-  const onAuthStateChanged = user => {
+  const onAuthStateChanged = (user) => {
     setUser(user);
     if (initializing) {
       setInitializing(false);
@@ -117,21 +112,13 @@ const Routes = props => {
   if (initializing) {
     return null;
   }
+
   return (
-    <>
-      <NavigationContainer>
-        <Drawer />
-      </NavigationContainer>
-    </>
-  );
-  function App() {
-    return (
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="splashScreen">
         <Stack.Screen
           options={{
             headerShown: false,
-            drawerContent: false,
-            DrawerNav: false,
           }}
           name="spashScreen"
           component={SplashScreen}
@@ -139,16 +126,43 @@ const Routes = props => {
         <Stack.Screen
           name="Home"
           options={{
-            headerShown: false,
+            title: (
+              <View>
+                <Image
+                  style={styles.tinyLogo}
+                  source={require("../assets/logo.png")}
+                />
+              </View>
+            ),
+
+            headerRight: () => <LoginButton />,
+            headerLeft: () => <ShoppingCartIcon />,
+            headerStyle: {
+              backgroundColor: "#ffff",
+              shadowColor: "#000",
+              elevation: 20,
+            },
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              width: 150,
+              borderRadius: 80,
+              marginBottom: 25,
+              marginTop: 45,
+              marginLeft: 10,
+              height: 80,
+            },
+            backgroundColor: "#2e64e515",
+
+            headerBackTitleVisible: false,
           }}
           component={AppStack}
         />
         <Stack.Screen
           name="login"
           options={{
-            title: '',
+            title: "",
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 40,
             },
             headerBackTitleVisible: false,
@@ -158,79 +172,79 @@ const Routes = props => {
         <Stack.Screen
           name="checkout"
           options={{
-            title: 'سلة  المشتريات  ',
+            title: "سلة  المشتريات  ",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
           component={Checkout}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="allChocolate"
           options={{
-            title: 'جميع الشكولاطات ',
+            title: "جميع الشكولاطات ",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
           component={AllChocolate}
-        />
+        /> */}
         <Stack.Screen
           name="allCake"
           options={{
-            title: 'جميع الكيك ',
+            title: "جميع الكيك ",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
@@ -239,25 +253,25 @@ const Routes = props => {
         <Stack.Screen
           name="all_drink"
           options={{
-            title: 'مشروبات ',
+            title: "مشروبات ",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
@@ -266,25 +280,25 @@ const Routes = props => {
         <Stack.Screen
           name="all_kandy"
           options={{
-            title: 'حلويات مشكلة ',
+            title: "حلويات مشكلة ",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
@@ -293,25 +307,25 @@ const Routes = props => {
         <Stack.Screen
           name="Kandy_show"
           options={{
-            title: 'حلويات مشكلة ',
+            title: "حلويات مشكلة ",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
@@ -320,25 +334,25 @@ const Routes = props => {
         <Stack.Screen
           name="productShow"
           options={{
-            title: '',
+            title: "",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
@@ -347,25 +361,25 @@ const Routes = props => {
         <Stack.Screen
           name="drink_show"
           options={{
-            title: 'جميع الكيك ',
+            title: "جميع الكيك ",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
@@ -374,52 +388,53 @@ const Routes = props => {
         <Stack.Screen
           name="cakeShow"
           options={{
-            title: '',
+            title: "",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
           component={CakeShow}
         />
+
         <Stack.Screen
           name="cake"
           options={{
-            title: '',
+            title: "",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
@@ -428,100 +443,57 @@ const Routes = props => {
         <Stack.Screen
           name="all_product"
           options={{
-            title: '',
+            title: "",
             headerRight: () => (
-              <View style={{marginRight: 15}}>
+              <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
             headerStyle: {
-              backgroundColor: '#ffff',
+              backgroundColor: "#ffff",
               height: 50,
-              shadowColor: '#000',
+              shadowColor: "#000",
               elevation: 50,
             },
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
 
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontWeight: "bold",
               fontSize: 21,
             },
-            backgroundColor: '#2e64e515',
+            backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
           component={AllProduct}
         />
-        <Stack.Screen name="Login" component={LoginButton} />
       </Stack.Navigator>
-    );
-  }
-  function Drawer() {
-    return (
-      <DrawerNav.Navigator
-        drawerContent={props => <DrawerContent {...props} />}
-        screenOptions={{
-          drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
-        }}>
-        <DrawerNav.Screen
-          options={{
-            headerRight: () => (
-              <View style={{marginRight: 15}}>
-                <ShoppingCartIcon />
-              </View>
-            ),
-            title: (
-              <View>
-                <Image
-                  style={styles.tinyLogo}
-                  source={require('../assets/logo.png')}
-                />
-              </View>
-            ),
-            headerTitleAlign: 'center',
-            headerTitleStyle: {
-              width: 150,
-              borderRadius: 80,
-              marginBottom: 25,
-              marginTop: 45,
-              marginLeft: 10,
-              height: 80,
-            },
-            backgroundColor: '#2e64e515',
-
-            headerBackTitleVisible: false,
-          }}
-          name="  "
-          component={App}
-        />
-        <DrawerNav.Screen name=" " component={LoginScreen} />
-      </DrawerNav.Navigator>
-    );
-  }
+    </NavigationContainer>
+  );
 };
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
     paddingTop: 80,
   },
   logo: {
     height: 150,
     width: 150,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   image: {
     flex: 1,
 
-    backgroundColor: '#ffffff',
-    justifyContent: 'center',
+    backgroundColor: "#ffffff",
+    justifyContent: "center",
   },
   text: {
-    fontFamily: 'Kufam-SemiBoldItalic',
+    fontFamily: "Kufam-SemiBoldItalic",
     fontSize: 28,
     marginBottom: 10,
-    color: '#2b2a29',
+    color: "#2b2a29",
   },
 
   tinyLogo: {
@@ -539,18 +511,18 @@ const styles = StyleSheet.create({
   },
   navButtonText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     margin: -30,
-    color: '#f9ab37',
-    fontFamily: 'Lato-Regular',
+    color: "#f9ab37",
+    fontFamily: "Lato-Regular",
   },
   navButtonText1: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     margin: -45,
     paddingLeft: 220,
-    color: '#f9ab37',
-    fontFamily: 'Lato-Regular',
+    color: "#f9ab37",
+    fontFamily: "Lato-Regular",
   },
 });
 export default Routes;

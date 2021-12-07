@@ -24,7 +24,7 @@ export default function DrawerContent() {
 
   return (
     <View style={{flex: 1}}>
-      <DrawerContentScrollView drawerPosition="right">
+      <DrawerContentScrollView >
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View style={{flexDirection: 'row', marginTop: 15}}>

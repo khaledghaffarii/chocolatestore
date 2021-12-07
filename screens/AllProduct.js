@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -9,13 +9,14 @@ import {
   ScrollView,
   TouchableOpacity,
   Button,
-} from 'react-native';
-import {useRoute, useNavigation} from '@react-navigation/native';
+  FlatList,
+} from "react-native";
+import { useRoute, useNavigation } from "@react-navigation/native";
+import tw from "tailwind-react-native-classnames";
+import firestore from "@react-native-firebase/firestore";
 
-import firestore from '@react-native-firebase/firestore';
-
-import {Card} from 'react-native-elements';
-import FooterScreen from './FooterScreen';
+import { Card } from "react-native-elements";
+import FooterScreen from "./FooterScreen";
 
 const AllProduct = () => {
   const navigation = useNavigation();
@@ -37,381 +38,350 @@ const AllProduct = () => {
   const kandy = route.params.kandy;
   const cake = route.params.cake;
   const chocolate = route.params.chocolate;
-  console.log(route.params.product);
+  const product = route.params.product;
+
   return (
-    <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
-      <View style={{margin: 15}}>
+    <View showsVerticalScrollIndicator={true} style={styles.container}>
+      <View style={{ margin: 15 }}>
         {salty ? (
-          <View style={{marginLeft: -12}}>
-            {Object.values(salty).map((saltys, i) => {
-              return (
+          <View style={{ marginLeft: -12 }}>
+            <FlatList
+              data={salty}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
                 <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
                   onPress={() =>
-                    navigation.navigate('productShow', {
-                      product: saltys,
+                    navigation.navigate("productShow", {
+                      product: item,
                     })
                   }
-                  key={i}>
-                  <Card
-                    containerStyle={{
-                      height: 190,
-                    }}>
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Image
-                        style={styles.categoriesPhoto}
-                        source={{uri: saltys.imageUrl}}
-                      />
-                      <View style={{width: 180}}>
-                        <Card.Title>{saltys.arabicTitle}</Card.Title>
-                        <Card.Divider />
-                        <Text style={{}}> رس {saltys.price}</Text>
-                      </View>
+                >
+                  <View
+                    style={{
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 150, height: 150, resizeMode: "cover" }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-black text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
                     </View>
-                    <View
-                      style={{
-                        marginRight: 50,
-                        marginTop: -32,
-                        marginLeft: 220,
-                        width: 100,
-                      }}>
-                      <Button title="أضف إلى السلة" color="#af8d78" />
-                    </View>
-                  </Card>
+                  </View>
                 </TouchableOpacity>
-              );
-            })}
+              )}
+            />
           </View>
         ) : null}
         {chocolate ? (
-          <View style={{marginLeft: -12}}>
-            {Object.values(chocolate).map((chocolates, i) => {
-              return (
+          <View style={{ marginLeft: -12 }}>
+            <FlatList
+              data={chocolate}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
                 <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
                   onPress={() =>
-                    navigation.navigate('productShow', {
-                      product: chocolates,
+                    navigation.navigate("productShow", {
+                      product: item,
                     })
                   }
-                  key={i}>
-                  <Card
-                    containerStyle={{
-                      height: 190,
-                    }}>
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Image
-                        style={styles.categoriesPhoto}
-                        source={{uri: chocolates.imageUrl}}
-                      />
-                      <View style={{width: 180}}>
-                        <Card.Title>{chocolates.arabicTitle}</Card.Title>
-                        <Card.Divider />
-                        <Text style={{}}> رس {chocolates.price}</Text>
-                      </View>
+                >
+                  <View
+                    style={{
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 150, height: 150, resizeMode: "cover" }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-black text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
                     </View>
-                    <View
-                      style={{
-                        marginRight: 50,
-                        marginTop: -32,
-                        marginLeft: 220,
-                        width: 100,
-                      }}>
-                      <Button title="أضف إلى السلة" color="#af8d78" />
-                    </View>
-                  </Card>
+                  </View>
                 </TouchableOpacity>
-              );
-            })}
+              )}
+            />
           </View>
         ) : null}
         {cake ? (
-          <View style={{marginLeft: -12}}>
-            {Object.values(cake).map((cakes, i) => {
-              return (
+          <View style={{ marginLeft: -12 }}>
+            <FlatList
+              data={cake}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
                 <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
                   onPress={() =>
-                    navigation.navigate('productShow', {
-                      product: cakes,
+                    navigation.navigate("productShow", {
+                      product: item,
                     })
                   }
-                  key={i}>
-                  <Card
-                    containerStyle={{
-                      height: 190,
-                    }}>
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Image
-                        style={styles.categoriesPhoto}
-                        source={{uri: cakes.imageUrl}}
-                      />
-                      <View style={{width: 180}}>
-                        <Card.Title>{cakes.arabicTitle}</Card.Title>
-                        <Card.Divider />
-                        <Text style={{}}> رس {cakes.price}</Text>
-                      </View>
+                >
+                  <View
+                    style={{
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 150, height: 150, resizeMode: "cover" }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-black text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
                     </View>
-                    <View
-                      style={{
-                        marginRight: 50,
-                        marginTop: -32,
-                        marginLeft: 220,
-                        width: 100,
-                      }}>
-                      <Button title="أضف إلى السلة" color="#af8d78" />
-                    </View>
-                  </Card>
+                  </View>
                 </TouchableOpacity>
-              );
-            })}
+              )}
+            />
           </View>
         ) : null}
         {kandy ? (
-          <View style={{marginLeft: -12}}>
-            {Object.values(kandy).map((kandys, i) => {
-              return (
+          <View style={{ marginLeft: -12 }}>
+            <FlatList
+              data={kandy}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
                 <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
                   onPress={() =>
-                    navigation.navigate('productShow', {
-                      product: kandys,
+                    navigation.navigate("productShow", {
+                      product: item,
                     })
                   }
-                  key={i}>
-                  <Card
-                    containerStyle={{
-                      height: 190,
-                    }}>
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Image
-                        style={styles.categoriesPhoto}
-                        source={{uri: kandys.imageUrl}}
-                      />
-                      <View style={{width: 180}}>
-                        <Card.Title>{kandys.arabicTitle}</Card.Title>
-                        <Card.Divider />
-                        <Text style={{}}> رس {kandys.price}</Text>
-                      </View>
+                >
+                  <View
+                    style={{
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 150, height: 150, resizeMode: "cover" }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-black text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
                     </View>
-                    <View
-                      style={{
-                        marginRight: 50,
-                        marginTop: -32,
-                        marginLeft: 220,
-                        width: 100,
-                      }}>
-                      <Button title="أضف إلى السلة" color="#af8d78" />
-                    </View>
-                  </Card>
+                  </View>
                 </TouchableOpacity>
-              );
-            })}
+              )}
+            />
           </View>
         ) : null}
         {sandwich ? (
-          <View style={{marginLeft: -12}}>
-            {Object.values(sandwich).map((sandwichs, i) => {
-              return (
+          <View style={{ marginLeft: -12 }}>
+            <FlatList
+              data={sandwich}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
                 <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
                   onPress={() =>
-                    navigation.navigate('productShow', {
-                      product: sandwichs,
+                    navigation.navigate("productShow", {
+                      product: item,
                     })
                   }
-                  key={i}>
-                  <Card
-                    containerStyle={{
-                      height: 190,
-                    }}>
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Image
-                        style={styles.categoriesPhoto}
-                        source={{uri: sandwichs.imageUrl}}
-                      />
-                      <View style={{width: 180}}>
-                        <Card.Title>{sandwichs.arabicTitle}</Card.Title>
-                        <Card.Divider />
-                        <Text style={{}}> رس {sandwichs.price}</Text>
-                      </View>
+                >
+                  <View
+                    style={{
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 150, height: 150, resizeMode: "cover" }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-black text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
                     </View>
-                    <View
-                      style={{
-                        marginRight: 50,
-                        marginTop: -32,
-                        marginLeft: 220,
-                        width: 100,
-                      }}>
-                      <Button title="أضف إلى السلة" color="#af8d78" />
-                    </View>
-                  </Card>
+                  </View>
                 </TouchableOpacity>
-              );
-            })}
+              )}
+            />
           </View>
         ) : null}
         {croissant ? (
-          <View style={{marginLeft: -12}}>
-            {Object.values(croissant).map((croissants, i) => {
-              return (
+          <View style={{ marginLeft: -12 }}>
+            <FlatList
+              data={croissant}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
                 <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
                   onPress={() =>
-                    navigation.navigate('productShow', {
-                      product: croissants,
+                    navigation.navigate("productShow", {
+                      product: item,
                     })
                   }
-                  key={i}>
-                  <Card
-                    containerStyle={{
-                      height: 190,
-                    }}>
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Image
-                        style={styles.categoriesPhoto}
-                        source={{uri: croissants.imageUrl}}
-                      />
-                      <View style={{width: 180}}>
-                        <Card.Title>{croissants.arabicTitle}</Card.Title>
-                        <Card.Divider />
-                        <Text style={{}}> رس {croissants.price}</Text>
-                      </View>
+                >
+                  <View
+                    style={{
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 150, height: 150, resizeMode: "cover" }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-black text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
                     </View>
-                    <View
-                      style={{
-                        marginRight: 50,
-                        marginTop: -32,
-                        marginLeft: 220,
-                        width: 100,
-                      }}>
-                      <Button title="أضف إلى السلة" color="#af8d78" />
-                    </View>
-                  </Card>
+                  </View>
                 </TouchableOpacity>
-              );
-            })}
+              )}
+            />
           </View>
         ) : null}
         {hotDrink ? (
-          <View style={{marginLeft: -12}}>
-            {Object.values(hotDrink).map((hotDrinks, i) => {
-              return (
+          <View style={{ marginLeft: -12 }}>
+            <FlatList
+              data={hotDrink}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
                 <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
                   onPress={() =>
-                    navigation.navigate('productShow', {
-                      product: hotDrinks,
+                    navigation.navigate("productShow", {
+                      product: item,
                     })
                   }
-                  key={i}>
-                  <Card
-                    containerStyle={{
-                      height: 190,
-                    }}>
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Image
-                        style={styles.categoriesPhoto}
-                        source={{uri: hotDrinks.imageUrl}}
-                      />
-                      <View style={{width: 180}}>
-                        <Card.Title>{hotDrinks.arabicTitle}</Card.Title>
-                        <Card.Divider />
-                        <Text style={{}}> رس {hotDrinks.price}</Text>
-                      </View>
+                >
+                  <View
+                    style={{
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 150, height: 150, resizeMode: "cover" }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-black text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
                     </View>
-                    <View
-                      style={{
-                        marginRight: 50,
-                        marginTop: -32,
-                        marginLeft: 220,
-                        width: 100,
-                      }}>
-                      <Button title="أضف إلى السلة" color="#af8d78" />
-                    </View>
-                  </Card>
+                  </View>
                 </TouchableOpacity>
-              );
-            })}
+              )}
+            />
           </View>
         ) : null}
         {coldDrink ? (
-          <View style={{marginLeft: -12}}>
-            {Object.values(coldDrink).map((coldDrinks, i) => {
-              return (
+          <View style={{ marginLeft: -12 }}>
+            <FlatList
+              data={coldDrink}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
                 <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
                   onPress={() =>
-                    navigation.navigate('productShow', {
-                      product: coldDrinks,
+                    navigation.navigate("productShow", {
+                      product: item,
                     })
                   }
-                  key={i}>
-                  <Card
-                    containerStyle={{
-                      height: 190,
-                    }}>
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Image
-                        style={styles.categoriesPhoto}
-                        source={{uri: coldDrinks.imageUrl}}
-                      />
-                      <View style={{width: 180}}>
-                        <Card.Title>{coldDrinks.arabicTitle}</Card.Title>
-                        <Card.Divider />
-                        <Text style={{}}> رس {coldDrinks.price}</Text>
-                      </View>
+                >
+                  <View
+                    style={{
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 150, height: 150, resizeMode: "cover" }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-black text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
                     </View>
-                    <View
-                      style={{
-                        marginRight: 50,
-                        marginTop: -32,
-                        marginLeft: 220,
-                        width: 100,
-                      }}>
-                      <Button title="أضف إلى السلة" color="#af8d78" />
-                    </View>
-                  </Card>
+                  </View>
                 </TouchableOpacity>
-              );
-            })}
+              )}
+            />
           </View>
         ) : null}
       </View>
       <FooterScreen />
-    </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -420,8 +390,8 @@ const styles = StyleSheet.create({
     marginLeft: 330,
     marginBottom: 40,
     fontSize: 17,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   categoriesPhoto: {
     width: 140,
@@ -429,10 +399,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     flex: 1,
     marginHorizontal: 1,
     marginVertical: 10,
@@ -442,7 +412,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     marginTop: 10,
     marginLeft: 20,
-    color: 'white',
+    color: "white",
   },
   tinyLogo: {
     width: 280,
@@ -457,23 +427,23 @@ const styles = StyleSheet.create({
   grid: {
     margin: 40,
     marginTop: 20,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 
   headline_text: {
-    color: 'white',
+    color: "white",
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 50,
     marginLeft: 20,
   },
   explore_text: {
     marginTop: 5,
     marginBottom: 10,
-    color: 'white',
+    color: "white",
     marginLeft: 20,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 export default AllProduct;

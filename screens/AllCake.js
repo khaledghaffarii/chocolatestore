@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -9,34 +9,34 @@ import {
   TouchableOpacity,
   Dimensions,
   Button,
-} from 'react-native';
+} from "react-native";
 import {
   useNavigation,
   useRoute,
   useFocusEffect,
   useNavigationState,
-} from '@react-navigation/native';
-import GridImageView from 'react-native-grid-image-viewer';
-import firestore from '@react-native-firebase/firestore';
-import LoginScreen from './LoginScreen';
+} from "@react-navigation/native";
+import GridImageView from "react-native-grid-image-viewer";
+import firestore from "@react-native-firebase/firestore";
+import LoginScreen from "./LoginScreen";
 
 // import Carousel from 'react-native-snap-carousel';
-import Carousel from '../components/Carousel';
-import {dummyData} from '../data/Data';
-import {SearchBar, Card} from 'react-native-elements';
-import FooterScreen from './FooterScreen';
+import Carousel from "../components/Carousel";
+import { dummyData } from "../data/Data";
+import { SearchBar, Card } from "react-native-elements";
+import FooterScreen from "./FooterScreen";
 const Product = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const [allCake, setAllCake] = useState('');
+  const [allCake, setAllCake] = useState("");
 
   const getAllCake = async () => {
     try {
       await firestore()
-        .collection('MoreCake')
-        .onSnapshot(snapshot => {
-          setAllCake(snapshot.docs.map(doc => doc.data()));
+        .collection("MoreCake")
+        .onSnapshot((snapshot) => {
+          setAllCake(snapshot.docs.map((doc) => doc.data()));
         });
     } catch (error) {
       console.log(error);
@@ -47,35 +47,38 @@ const Product = () => {
   }, []);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
-      <View style={{marginLeft: 15}}>
-        <View style={{marginLeft: -12}}>
+      <View style={{ marginLeft: 15 }}>
+        <View style={{ marginLeft: -12 }}>
           {Object.values(allCake).map((allCakes, i) => {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate('cakeShow', {
+                  navigation.navigate("cakeShow", {
                     cake: allCakes,
                   })
                 }
-                key={i}>
+                key={i}
+              >
                 <Card
                   containerStyle={{
                     height: 190,
-                  }}>
+                  }}
+                >
                   <View
                     style={{
                       marginBottom: 10,
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <Image
                       style={styles.categoriesPhoto}
-                      source={{uri: allCakes.imageUrl}}
+                      source={{ uri: allCakes.imageUrl }}
                     />
                     <View style={{}}>
                       <Card.Title>{allCakes.title}</Card.Title>
                       <Card.Divider />
-                      <Text style={{}}> رس {allCakes.price}</Text>
+                      <Text style={{}}> رس s{allCakes.price}</Text>
                     </View>
                   </View>
                   <View
@@ -84,7 +87,8 @@ const Product = () => {
                       marginTop: -35,
                       marginLeft: 220,
                       width: 100,
-                    }}>
+                    }}
+                  >
                     <Button title="أضف إلى السلة" color="#af8d78" />
                   </View>
                 </Card>
@@ -105,8 +109,8 @@ const styles = StyleSheet.create({
     marginLeft: 330,
     marginBottom: 40,
     fontSize: 17,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   categoriesPhoto: {
     width: 140,
@@ -114,10 +118,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     flex: 1,
     marginHorizontal: 0,
     marginVertical: 10,
@@ -127,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
     marginTop: 10,
     marginLeft: 20,
-    color: 'white',
+    color: "white",
   },
   tinyLogo: {
     width: 280,
@@ -142,23 +146,23 @@ const styles = StyleSheet.create({
   grid: {
     margin: 40,
     marginTop: 20,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 
   headline_text: {
-    color: 'white',
+    color: "white",
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 50,
     marginLeft: 20,
   },
   explore_text: {
     marginTop: 5,
     marginBottom: 10,
-    color: 'white',
+    color: "white",
     marginLeft: 20,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 

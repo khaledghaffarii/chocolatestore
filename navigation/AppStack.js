@@ -382,7 +382,7 @@ const AppStack = ({ navigation }) => {
             onPress={() =>
               navigation.navigate("all_product", {
                 chocolate: chocolate,
-                chocolateId: chocolateId,
+
                 product: product[0],
               })
             }

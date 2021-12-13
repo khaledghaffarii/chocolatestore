@@ -380,7 +380,7 @@ const AllProduct = () => {
           </View>
         ) : null}
       </View>
-      <FooterScreen />
+  
     </View>
   );
 };

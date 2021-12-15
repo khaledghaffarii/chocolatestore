@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable no-dupe-keys */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable eslint-comments/no-unused-disable */
@@ -228,6 +229,7 @@ import {
   CollapseBody,
   AccordionList,
 } from "accordion-collapse-react-native";
+import tw from "tailwind-react-native-classnames";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ChocolateProduct from "../screens/ChocolateProduct";
 const AppStack = ({ navigation }) => {
@@ -368,7 +370,13 @@ const AppStack = ({ navigation }) => {
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <CarouselScreens />
       <View style={styles.ourProduct}></View>
-      <Text style={styles.ourTextProduct}>منتوجاتنا </Text>
+      <Animatable.Text
+        animation="bounceInLeft"
+        style={tw`text-center w-full text-lg font-serif font-bold mt-5 text-gray-900 `}
+      >
+        <Text style={styles.ourTextProduct}>منتوجاتنا </Text>
+      </Animatable.Text>
+
       <ChocolateProduct />
       <View style={styles.ourProduct}></View>
       <Text style={styles.ourTextProduct}>تصنيفاتنا </Text>
@@ -388,12 +396,14 @@ const AppStack = ({ navigation }) => {
             }
           >
             <View style={styles.categotyElement}>
-              <Image
-                blurRadius={2}
-                style={styles.image}
-                source={require("../assets/chocolat.jpg")}
-              />
-              <Text style={styles.textCtegory}>الشوكولا</Text>
+           
+                <Image
+                  blurRadius={2}
+                  style={styles.image}
+                  source={require("../assets/chocolat.jpg")}
+                />
+                <Text style={styles.textCtegory}>الشوكولا</Text>
+   
             </View>
           </TouchableOpacity>
           <TouchableOpacity

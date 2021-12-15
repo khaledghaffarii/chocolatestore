@@ -36,6 +36,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import { selectItems } from "../slice/BasketSlice";
 import { useSelector } from "react-redux";
+import tw from "tailwind-react-native-classnames";
 
 function Product({ onPress, product }) {
   const navigation = useNavigation();
@@ -43,67 +44,72 @@ function Product({ onPress, product }) {
   return (
     <View>
       <View>
-        <ScrollView
-          horizontal={true}
-          style={styles.grid}
-          showsHorizontalScrollIndicator={false}
+        <Animatable.View
+          animation="bounceInUp"
+          style={tw`text-center w-full text-lg font-serif font-bold mt-5 text-gray-900 `}
         >
-          {Object.values(product).map((products, i) => {
-            //console.log(chocolates.title);
-            return (
-              <TouchableOpacity
-                key={i}
-                onPress={() =>
-                  navigation.navigate("productShow", {
-                    product: products,
-                  })
-                }
-              >
-                <Card
-                  containerStyle={{
-                    elevation: 10,
-                    height: 270,
-                    width: 170,
-                    marginBottom: 15,
-
-                    borderColor: "#82644A",
-                    borderWidth: 0,
-                  }}
+          <ScrollView
+            horizontal={true}
+            style={styles.grid}
+            showsHorizontalScrollIndicator={false}
+          >
+            {Object.values(product).map((products, i) => {
+              //console.log(chocolates.title);
+              return (
+                <TouchableOpacity
+                  key={i}
+                  onPress={() =>
+                    navigation.navigate("productShow", {
+                      product: products,
+                    })
+                  }
                 >
-                  <Image
-                    style={styles.categoriesPhoto}
-                    source={{ uri: products.imageUrl }}
-                  />
-                  <View style={{ marginBottom: 10 }}>
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        fontWeight: "bold",
-                        marginTop: 7,
-                        height: 25,
-                        textAlign: "center",
-                      }}
-                    >
-                      {products.arabicTitle}
-                    </Text>
-                    <Text style={{ textAlign: "center" }}>
-                      رس {products.price}
-                    </Text>
-                  </View>
-                  <View>
-                    <Button
-                      onPress={() => {
-                        onPress(products);
-                      }}
-                      color="#af8d78"
-                      title="أضف إلى السلة"
+                  <Card
+                    containerStyle={{
+                      elevation: 10,
+                      height: 270,
+                      width: 170,
+                      marginBottom: 15,
+
+                      borderColor: "#82644A",
+                      borderWidth: 0,
+                    }}
+                  >
+                    <Image
+                      style={styles.categoriesPhoto}
+                      source={{ uri: products.imageUrl }}
                     />
-                  </View>
-                </Card>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
+                    <View style={{ marginBottom: 10 }}>
+                      <Text
+                        style={{
+                          fontSize: 15,
+                          fontWeight: "bold",
+                          marginTop: 7,
+                          height: 25,
+                          textAlign: "center",
+                        }}
+                      >
+                        {products.arabicTitle}
+                      </Text>
+                      <Text style={{ textAlign: "center" }}>
+                        رس {products.price}
+                      </Text>
+                    </View>
+                    <View>
+                      <Button
+                        onPress={() => {
+                          onPress(products);
+                        }}
+                        color="#af8d78"
+                        title="أضف إلى السلة"
+                      />
+                    </View>
+                  </Card>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+        </Animatable.View>
       </View>
     </View>
   );

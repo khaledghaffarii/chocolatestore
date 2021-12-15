@@ -18,6 +18,7 @@ import { selectItems } from "../slice/BasketSlice";
 import CheckoutProduct from "./CheckoutProduct";
 import FooterScreen from "./FooterScreen";
 import tw from "tailwind-react-native-classnames";
+import * as Animatable from "react-native-animatable";
 const Checkout = ({ navigation, chocolate }) => {
   const items = useSelector(selectItems);
 
@@ -228,13 +229,19 @@ const Checkout = ({ navigation, chocolate }) => {
           >
             <View>
               <View>
-                <Text
+                <Animatable.Text
+                  animation="fadeInDown"
+                  easing="ease-out"
+                
                   style={tw`text-center w-full text-lg font-serif font-bold mt-5 text-gray-900 `}
                 >
-                  السلة فارغة
-                </Text>
+                  <Text
+                    style={tw`text-center w-full text-lg font-serif font-bold mt-5 text-gray-900 `}
+                  >
+                    السلة فارغة
+                  </Text>
+                </Animatable.Text>
               </View>
-
               <View style={{}}>
                 <View style={tw`w-full mt-11 `}>
                   <Pressable
@@ -249,17 +256,24 @@ const Checkout = ({ navigation, chocolate }) => {
                       borderTopLeftRadius: 5,
                     }}
                   >
-                    <Text
-                      style={{
-                        color: "black",
-                        textAlign: "center",
-                        margin: 10,
-                        fontWeight: "bold",
-                        fontSize: 17,
-                      }}
+                    <Animatable.Text
+                      animation="pulse"
+                      easing="ease-out"
+                      iterationCount="infinite"
+                      style={tw`text-center w-full text-lg font-serif font-bold mt-2 mb-2 text-gray-900 `}
                     >
-                      مواصلة التسويق
-                    </Text>
+                      <Text
+                        style={{
+                          color: "black",
+                          textAlign: "center",
+                          margin: 10,
+                          fontWeight: "bold",
+                          fontSize: 17,
+                        }}
+                      >
+                        مواصلة التسويق
+                      </Text>
+                    </Animatable.Text>
                   </Pressable>
                 </View>
               </View>

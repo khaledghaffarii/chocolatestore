@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable no-shadow */
@@ -81,7 +82,7 @@ const ProductShow = ({ onPress }) => {
       </View>
       <View>
         <View style={styles.header}>
-          <View style={{ flexDirection: "row", marginLeft: 270 }}>
+          <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("all_product", {
@@ -161,13 +162,13 @@ const styles = StyleSheet.create({
   },
   description: {
     color: "#565f64",
-    marginTop: 20,
-    width: 370,
-    marginBottom: 20,
+    margin: 20,
   },
   calory: { color: "#565f64", marginTop: 5 },
   other: {
     margin: 20,
+    display: "flex",
+    flexDirection: "column",
   },
   code: {
     color: "#565f64",
@@ -195,7 +196,7 @@ const styles = StyleSheet.create({
   categoriesPhoto: {
     width: 400,
     height: 500,
-    margin: 5,
+    margin: 0,
   },
   container: {
     backgroundColor: "#fff",

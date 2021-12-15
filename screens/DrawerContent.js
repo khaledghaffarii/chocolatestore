@@ -1,5 +1,8 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable quotes */
+/* eslint-disable react-native/no-inline-styles */
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import {
   useTheme,
   Avatar,
@@ -10,108 +13,138 @@ import {
   Text,
   TouchableRipple,
   Switch,
-} from 'react-native-paper';
-import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
+} from "react-native-paper";
+import { Image, Pressable, Linking } from "react-native";
+import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import {AuthContext} from '../components/context';
+import { AuthContext } from "../components/context";
 
 export default function DrawerContent() {
   const paperTheme = useTheme();
-
+  const navigation = useNavigation();
   //   const {signOut, toggleTheme} = React.useContext(AuthContext);
 
   return (
-    <View style={{flex: 1}}>
-      <DrawerContentScrollView >
+    <View style={{ flex: 1 }}>
+      <DrawerContentScrollView>
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
-            <View style={{flexDirection: 'row', marginTop: 15}}>
-              <Avatar.Image
-                source={{
-                  uri: 'https://api.adorable.io/avatars/50/abott@adorable.png',
-                }}
-                size={20}
+            <View style={{ flexDirection: "row", marginTop: 15 }}>
+              <Image
+                source={require("../assets/logo.png")}
+                style={styles.tinyLogo}
               />
-              <View style={{marginLeft: 15, flexDirection: 'column'}}>
-                <Title style={styles.title}>John Doe</Title>
-                <Caption style={styles.caption}>@j_doe</Caption>
-              </View>
             </View>
 
-            <View style={styles.row}>
-              <View style={styles.section}>
-                <Paragraph style={[styles.paragraph, styles.caption]}>
-                  80
-                </Paragraph>
-                <Caption style={styles.caption}>Following</Caption>
-              </View>
-              <View style={styles.section}>
-                <Paragraph style={[styles.paragraph, styles.caption]}>
-                  100
-                </Paragraph>
-                <Caption style={styles.caption}>Followers</Caption>
-              </View>
-            </View>
+            <View style={styles.row}></View>
           </View>
-
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              icon={({color, size}) => (
+              icon={({ color, size }) => (
                 <Icon name="home-outline" color={color} size={size} />
               )}
-              label="Home"
+              label={() => <Text style={{ fontSize: 20 }}>الرئيسية</Text>}
               onPress={() => {
-                //navigation.navigate('Home');
+                navigation.navigate("Home");
               }}
             />
             <DrawerItem
-              icon={({color, size}) => (
-                <Icon name="account-outline" color={color} size={size} />
-              )}
-              label="Profile"
+              // icon={({ color, size }) => (
+              //   <Icon name="account-outline" color={color} size={size} />
+              // )}
+              label={() => <Text style={{}}>المنتجات</Text>}
               onPress={() => {
                 //navigation.navigate('Profile');
               }}
             />
             <DrawerItem
-              icon={({color, size}) => (
-                <Icon name="bookmark-outline" color={color} size={size} />
-              )}
-              label="Bookmarks"
+              // icon={({ color, size }) => (
+              //   <Icon name="bookmark-outline" color={color} size={size} />
+              // )}
+              label={() => <Text style={{}}>من نحن</Text>}
               onPress={() => {
                 //navigation.navigate('BookmarkScreen');
               }}
             />
+
             <DrawerItem
-              icon={({color, size}) => (
-                <Icon name="settings-outline" color={color} size={size} />
-              )}
-              label="Settings"
+              // icon={({ color, size }) => (
+              //   <Icon name="account-check-outline" color={color} size={size} />
+              // )}
+              label={() => <Text style={{}}>فروعنا</Text>}
               onPress={() => {
-                //navigation.navigate('SettingsScreen');
+                //navigation.navigate('SupportScreen');
               }}
             />
             <DrawerItem
-              icon={({color, size}) => (
-                <Icon name="account-check-outline" color={color} size={size} />
-              )}
-              label="Support"
+              // icon={({ color, size }) => (
+              //   <Icon name="account-check-outline" color={color} size={size} />
+              // )}
+              label={() => <Text style={{}}>طلب FRANCHISE الدولي</Text>}
               onPress={() => {
                 //navigation.navigate('SupportScreen');
               }}
             />
           </Drawer.Section>
-          <Drawer.Section title="Preferences">
-            <TouchableRipple>
+          <Drawer.Section title=" " style={{ marginBottom: 30 }}>
+            <View style={styles.Icon}>
+              <Pressable
+                style={{ marginRight: 9 }}
+                onPress={() => {
+                  Linking.openURL("https://www.instagram.com/dallah_hala/");
+                }}
+              >
+                <Icon name="instagram" size={20} color="#8f6f64" />
+              </Pressable>
+              <Pressable style={{ marginRight: 9 }} onPress={() => {}}>
+                <Icon name="whatsapp" size={20} color="#8f6f64" />
+              </Pressable>
+              <Pressable style={{ marginRight: 9 }} onPress={() => {}}>
+                <Icon name="twitter" size={20} color="#8f6f64" />
+              </Pressable>
+              <Pressable style={{ marginRight: 9 }} onPress={() => {}}>
+                <Icon name="facebook" size={20} color="#8f6f64" />
+              </Pressable>
+              <Pressable style={{ marginRight: 9 }} onPress={() => {}}>
+                <Icon name="phone" size={20} color="#8f6f64" />
+              </Pressable>
+              <Pressable style={{ marginRight: 9 }} onPress={() => {}}>
+                <Icon name="email-outline" size={20} color="#8f6f64" />
+              </Pressable>
+            </View>
+            {/* <TouchableRipple>
               <View style={styles.preference}>
                 <Text>Dark Theme</Text>
                 <View pointerEvents="none">
                   <Switch value={paperTheme.dark} />
                 </View>
               </View>
-            </TouchableRipple>
+            </TouchableRipple> */}
+          </Drawer.Section>
+          <Drawer.Section title=" إتصل بنا">
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                padding: 10,
+              }}
+            >
+              <Pressable style={{ marginRight: 9, marginLeft: 9 }}>
+                <Icon name="clock-outline" size={20} color="#8f6f64" />
+              </Pressable>
+              <Text>08:00 - 17:00</Text>
+            </View>
+
+            <View
+              style={{ display: "flex", flexDirection: "row", padding: 10 }}
+            >
+              <Pressable style={{ marginRight: 9, marginLeft: 9 }}>
+                <Icon name="phone" size={20} color="#8f6f64" />
+              </Pressable>
+              <Text>+ 966 59 338 8003</Text>
+            </View>
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>
@@ -140,7 +173,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 10,
     marginTop: 3,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   caption: {
     fontSize: 14,
@@ -148,16 +181,16 @@ const styles = StyleSheet.create({
   },
   row: {
     marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   section: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginRight: 15,
   },
   paragraph: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginRight: 3,
   },
   drawerSection: {
@@ -165,13 +198,27 @@ const styles = StyleSheet.create({
   },
   bottomDrawerSection: {
     marginBottom: 15,
-    borderTopColor: '#f4f4f4',
+    borderTopColor: "#f4f4f4",
     borderTopWidth: 1,
   },
   preference: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingVertical: 12,
     paddingHorizontal: 16,
+  },
+  tinyLogo: {
+    marginBottom: 15,
+    marginTop: 10,
+    marginLeft: 60,
+    width: 110,
+    height: 50,
+  },
+  Icon: {
+    alignItems: "center",
+    flexDirection: "row",
+    marginLeft: 30,
+    marginBottom: 7,
+    marginTop: -25,
   },
 });

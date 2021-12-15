@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
@@ -91,6 +92,9 @@ import KandyShow from "../screens/KandyShow";
 import Checkout from "../screens/Checkout";
 import { useNavigation } from "@react-navigation/native";
 import AllProduct from "../screens/AllProduct";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { DrawerItems, SafeAreaView } from "react-navigation";
+import DrawerContent from "../screens/DrawerContent";
 const Routes = (navigation) => {
   //const navigation = useNavigation();
   const { user, setUser } = useContext(AuthContext);
@@ -112,31 +116,28 @@ const Routes = (navigation) => {
   if (initializing) {
     return null;
   }
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="splashScreen">
-        <Stack.Screen
+  const Drawer = createDrawerNavigator();
+  function Root() {
+    return (
+      <Drawer.Navigator
+        drawerContent={(props) => <DrawerContent {...props} />}
+        initialRouteName="Home"
+      >
+        <Drawer.Screen
           options={{
-            headerShown: false,
-          }}
-          name="spashScreen"
-          component={SplashScreen}
-        />
-        <Stack.Screen
-          name="Home"
-          options={{
-            title: (
-              <View>
-                <Image
-                  style={styles.tinyLogo}
-                  source={require("../assets/logo.png")}
-                />
-              </View>
+            headerRight: () => (
+              <SafeAreaView style={{ paddingRight: 10 }}>
+                <ShoppingCartIcon />
+              </SafeAreaView>
             ),
-
-            headerRight: () => <LoginButton />,
-            headerLeft: () => <ShoppingCartIcon />,
+            headerTitle: (props) => (
+              <SafeAreaView {...props} style={{ flex: 1 }}>
+                <Image
+                  source={require("../assets/logo.png")}
+                  style={styles.tinyLogo}
+                />
+              </SafeAreaView>
+            ),
             headerStyle: {
               backgroundColor: "#ffff",
               shadowColor: "#000",
@@ -151,11 +152,32 @@ const Routes = (navigation) => {
               marginLeft: 10,
               height: 80,
             },
-            backgroundColor: "#2e64e515",
 
+            backgroundColor: "#2e64e515",
             headerBackTitleVisible: false,
           }}
+          name="Root"
           component={AppStack}
+        />
+      </Drawer.Navigator>
+    );
+  }
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="splashScreen">
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="spashScreen"
+          component={SplashScreen}
+        />
+        <Stack.Screen
+          name="Home"
+          options={{
+            headerShown: false,
+          }}
+          component={Root}
         />
         <Stack.Screen
           name="login"
@@ -171,43 +193,27 @@ const Routes = (navigation) => {
         />
         <Stack.Screen
           name="checkout"
-          options={{
+          options={({ navigation }) => ({
             title: "سلة  المشتريات  ",
             headerRight: () => (
               <View style={{ marginRight: 15 }}>
                 <ShoppingCartIcon />
               </View>
             ),
-            headerStyle: {
-              backgroundColor: "#ffff",
-              height: 50,
-              shadowColor: "#000",
-              elevation: 50,
-            },
-            headerTitleAlign: "center",
-
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 21,
-            },
-            backgroundColor: "#2e64e515",
-            margin: 0,
-            headerBackTitleVisible: false,
-          }}
-          component={Checkout}
-        />
-        {/* <Stack.Screen
-          name="allChocolate"
-          options={{
-            title: "جميع الشكولاطات ",
-            headerRight: () => (
-              <View style={{ marginRight: 15 }}>
-                <ShoppingCartIcon />
+            headerTitle: (props) => (
+              <View {...props} style={{ flex: 1 }}>
+                <Image
+                  source={require("../assets/logo.png")}
+                  style={styles.tinyLogo}
+                  onPress={() => {
+                    navigation.navigate("Home");
+                  }}
+                />
               </View>
             ),
             headerStyle: {
               backgroundColor: "#ffff",
-              height: 50,
+              height: 60,
               shadowColor: "#000",
               elevation: 50,
             },
@@ -215,14 +221,15 @@ const Routes = (navigation) => {
 
             headerTitleStyle: {
               fontWeight: "bold",
-              fontSize: 21,
+              fontSize: 25,
             },
             backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
-          }}
-          component={AllChocolate}
-        /> */}
+          })}
+          component={Checkout}
+        />
+
         <Stack.Screen
           name="allCake"
           options={{

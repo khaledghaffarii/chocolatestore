@@ -134,9 +134,9 @@ const styles = StyleSheet.create({
     height: 120,
     alignItems: "center",
     margin: 10,
-    borderRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
+    borderRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
   },
   container: {
     backgroundColor: "#ffff",

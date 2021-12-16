@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
   categoriesPhoto: {
     width: 400,
-    height: 500,
+    height: 250,
     margin: 0,
   },
   container: {

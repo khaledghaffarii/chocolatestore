@@ -379,7 +379,13 @@ const AppStack = ({ navigation }) => {
 
       <ChocolateProduct />
       <View style={styles.ourProduct}></View>
-      <Text style={styles.ourTextProduct}>تصنيفاتنا </Text>
+      <Animatable.Text
+        animation="bounceInLeft"
+        style={tw`text-center w-full text-lg font-serif font-bold mt-5 text-gray-900 `}
+      >
+        <Text style={styles.ourTextProduct}>تصنيفاتنا </Text>
+      </Animatable.Text>
+
       <ScrollView
         horizontal={true}
         style={styles.grid}
@@ -396,14 +402,12 @@ const AppStack = ({ navigation }) => {
             }
           >
             <View style={styles.categotyElement}>
-           
-                <Image
-                  blurRadius={2}
-                  style={styles.image}
-                  source={require("../assets/chocolat.jpg")}
-                />
-                <Text style={styles.textCtegory}>الشوكولا</Text>
-   
+              <Image
+                blurRadius={2}
+                style={styles.image}
+                source={require("../assets/chocolat.jpg")}
+              />
+              <Text style={styles.textCtegory}>الشوكولا</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -509,7 +513,7 @@ const AppStack = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   ourProduct: {
-    marginLeft: 195,
+    marginLeft: 185,
     marginTop: 30,
     borderTopWidth: 5,
     borderTopColor: "#e5e5e5",

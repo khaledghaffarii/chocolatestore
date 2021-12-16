@@ -22,7 +22,7 @@ import firestore from "@react-native-firebase/firestore";
 import { Card } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import CarouselScreens from "../screens/CarouselScreens";
-import { addToBasket } from "../slice/BasketSlice";
+
 import * as Animatable from "react-native-animatable";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FooterScreen from "../screens/FooterScreen";
@@ -36,11 +36,13 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import { selectItems } from "../slice/BasketSlice";
 import { useSelector } from "react-redux";
-
+import { removeFromBasket } from "../slice/BasketSlice";
 const CheckoutProduct = ({ chocolate, props }) => {
   const items = useSelector(selectItems);
   const [count, setCount] = useState(1);
+  const dispatch = useDispatch();
   const totalPrice = count * chocolate.price;
+  const id = chocolate.id;
   function AdditionCount() {
     const add = count + 1;
     return setCount(add);
@@ -49,6 +51,11 @@ const CheckoutProduct = ({ chocolate, props }) => {
     const add = count - 1;
     return setCount(add);
   }
+  console.log(chocolate.id);
+  const removeItemFromBasket = (chocolate) => {
+    dispatch(removeFromBasket({id}));
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView vertical={true} style={{}}>
@@ -163,7 +170,9 @@ const CheckoutProduct = ({ chocolate, props }) => {
           />
           <Pressable
             style={{ marginLeft: 25, marginTop: 20 }}
-            onPress={() => {}}
+            onPress={() => {
+              removeItemFromBasket();
+            }}
           >
             <Ionicons name="close-circle-outline" size={40} color="#4A4A4A9A" />
           </Pressable>

@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from "react";
 import {
@@ -17,7 +18,7 @@ import { Card } from "react-native-elements";
 import FooterScreen from "./FooterScreen";
 const Product = ({ navigation }) => {
   const route = useRoute();
-  console.log(route.params.salty);
+
   const [allChocolate, setAllChocolate] = useState("");
   const getAllChocolate = async () => {
     try {

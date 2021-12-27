@@ -65,7 +65,7 @@ export default function DrawerContent() {
               // )}
               label={() => <Text style={{}}>من نحن</Text>}
               onPress={() => {
-                //navigation.navigate('BookmarkScreen');
+                navigation.navigate("About");
               }}
             />
 

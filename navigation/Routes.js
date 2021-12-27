@@ -95,6 +95,7 @@ import AllProduct from "../screens/AllProduct";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerItems, SafeAreaView } from "react-navigation";
 import DrawerContent from "../screens/DrawerContent";
+import AboutScreen from "../screens/AboutScreen";
 const Routes = (navigation) => {
   //const navigation = useNavigation();
   const { user, setUser } = useContext(AuthContext);
@@ -178,6 +179,13 @@ const Routes = (navigation) => {
             headerShown: false,
           }}
           component={Root}
+        />
+        <Stack.Screen
+          name="About"
+          options={{
+            headerShown: false,
+          }}
+          component={AboutScreen}
         />
         <Stack.Screen
           name="login"

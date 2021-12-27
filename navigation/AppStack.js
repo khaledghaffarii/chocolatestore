@@ -365,7 +365,7 @@ const AppStack = ({ navigation }) => {
     getColdDrink();
     getSalty();
   }, []);
-  console.log(chocolateId);
+
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
       <CarouselScreens />
@@ -378,6 +378,12 @@ const AppStack = ({ navigation }) => {
       </Animatable.Text>
 
       <ChocolateProduct />
+      <Icon
+        name="arrow-up-circle-outline"
+        size={50}
+    
+        style={{ position:"absolute" }}
+      />
       <View style={styles.ourProduct}></View>
       <Animatable.Text
         animation="bounceInLeft"

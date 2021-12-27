@@ -68,7 +68,6 @@ export default function DrawerContent() {
                 navigation.navigate("About");
               }}
             />
-
             <DrawerItem
               // icon={({ color, size }) => (
               //   <Icon name="account-check-outline" color={color} size={size} />
@@ -78,13 +77,19 @@ export default function DrawerContent() {
                 navigation.navigate("location");
               }}
             />
+            <View style={styles.ourProduct}></View>
             <DrawerItem
               // icon={({ color, size }) => (
               //   <Icon name="account-check-outline" color={color} size={size} />
               // )}
-              label={() => <Text style={{}}>طلب FRANCHISE الدولي</Text>}
+              label={() => (
+                <View style={{ display: "flex", flexDirection: "row" ,justifyContent: "center"}}>
+                  <Icon name="arrow-left" size={20} color="#8f6f64" />
+                  <Text style={{ marginRight: 3 }}>الدخول </Text>
+                </View>
+              )}
               onPress={() => {
-                //navigation.navigate('SupportScreen');
+                navigation.navigate("login");
               }}
             />
           </Drawer.Section>
@@ -164,7 +169,15 @@ export default function DrawerContent() {
 }
 
 const styles = StyleSheet.create({
-  drawerContent: {
+  ourProduct: {
+    marginLeft: 130,
+    marginTop: 25,
+    borderTopWidth: 3,
+    borderTopColor: "#e5e5e5",
+    height: 20,
+    width: 30,
+  },
+  drawerContent: {  
     flex: 1,
   },
   userInfoSection: {

@@ -97,6 +97,7 @@ import { DrawerItems, SafeAreaView } from "react-navigation";
 import DrawerContent from "../screens/DrawerContent";
 import AboutScreen from "../screens/AboutScreen";
 import Location from "../screens/Location";
+import All_Product from '../screens/All_Product';
 const Routes = (navigation) => {
   //const navigation = useNavigation();
   const { user, setUser } = useContext(AuthContext);
@@ -253,10 +254,31 @@ const Routes = (navigation) => {
           name="login"
           options={{
             title: "",
+            headerTitle: (props) => (
+              <View {...props} style={{ flex: 1 }}>
+                <Image
+                  source={require("../assets/logo.png")}
+                  style={styles.tinyLogo}
+                  onPress={() => {
+                    navigation.navigate("Home");
+                  }}
+                />
+              </View>
+            ),
             headerStyle: {
               backgroundColor: "#ffff",
-              height: 40,
+              height: 60,
+              shadowColor: "#000",
+              elevation: 50,
             },
+            headerTitleAlign: "center",
+
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 25,
+            },
+            backgroundColor: "#2e64e515",
+            margin: 0,
             headerBackTitleVisible: false,
           }}
           component={LoginScreen}
@@ -416,9 +438,20 @@ const Routes = (navigation) => {
                 <ShoppingCartIcon />
               </View>
             ),
+            headerTitle: (props) => (
+              <View {...props} style={{ flex: 1 }}>
+                <Image
+                  source={require("../assets/logo.png")}
+                  style={styles.tinyLogo}
+                  onPress={() => {
+                    navigation.navigate("Home");
+                  }}
+                />
+              </View>
+            ),
             headerStyle: {
               backgroundColor: "#ffff",
-              height: 50,
+              height: 60,
               shadowColor: "#000",
               elevation: 50,
             },
@@ -426,7 +459,7 @@ const Routes = (navigation) => {
 
             headerTitleStyle: {
               fontWeight: "bold",
-              fontSize: 21,
+              fontSize: 25,
             },
             backgroundColor: "#2e64e515",
             margin: 0,
@@ -524,9 +557,20 @@ const Routes = (navigation) => {
                 <ShoppingCartIcon />
               </View>
             ),
+            headerTitle: (props) => (
+              <View {...props} style={{ flex: 1 }}>
+                <Image
+                  source={require("../assets/logo.png")}
+                  style={styles.tinyLogo}
+                  onPress={() => {
+                    navigation.navigate("Home");
+                  }}
+                />
+              </View>
+            ),
             headerStyle: {
               backgroundColor: "#ffff",
-              height: 50,
+              height: 60,
               shadowColor: "#000",
               elevation: 50,
             },
@@ -534,13 +578,51 @@ const Routes = (navigation) => {
 
             headerTitleStyle: {
               fontWeight: "bold",
-              fontSize: 21,
+              fontSize: 25,
             },
             backgroundColor: "#2e64e515",
             margin: 0,
             headerBackTitleVisible: false,
           }}
           component={AllProduct}
+        />
+        <Stack.Screen
+          name="all_products"
+          options={{
+            title: "",
+            headerRight: () => (
+              <View style={{ marginRight: 15 }}>
+                <ShoppingCartIcon />
+              </View>
+            ),
+            headerTitle: (props) => (
+              <View {...props} style={{ flex: 1 }}>
+                <Image
+                  source={require("../assets/logo.png")}
+                  style={styles.tinyLogo}
+                  onPress={() => {
+                    navigation.navigate("Home");
+                  }}
+                />
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: "#ffff",
+              height: 60,
+              shadowColor: "#000",
+              elevation: 50,
+            },
+            headerTitleAlign: "center",
+
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 25,
+            },
+            backgroundColor: "#2e64e515",
+            margin: 0,
+            headerBackTitleVisible: false,
+          }}
+          component={All_Product}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -96,6 +96,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerItems, SafeAreaView } from "react-navigation";
 import DrawerContent from "../screens/DrawerContent";
 import AboutScreen from "../screens/AboutScreen";
+import Location from "../screens/Location";
 const Routes = (navigation) => {
   //const navigation = useNavigation();
   const { user, setUser } = useContext(AuthContext);
@@ -184,7 +185,7 @@ const Routes = (navigation) => {
           name="About"
           options={({ navigation }) => ({
             title: "سلة  المشتريات  ",
-           
+
             headerTitle: (props) => (
               <View {...props} style={{ flex: 1 }}>
                 <Image
@@ -213,6 +214,40 @@ const Routes = (navigation) => {
             headerBackTitleVisible: false,
           })}
           component={AboutScreen}
+        />
+        <Stack.Screen
+          name="location"
+          options={({ navigation }) => ({
+            title: "سلة  المشتريات  ",
+
+            headerTitle: (props) => (
+              <View {...props} style={{ flex: 1 }}>
+                <Image
+                  source={require("../assets/logo.png")}
+                  style={styles.tinyLogo}
+                  onPress={() => {
+                    navigation.navigate("Home");
+                  }}
+                />
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: "#ffff",
+              height: 60,
+              shadowColor: "#000",
+              elevation: 50,
+            },
+            headerTitleAlign: "center",
+
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 25,
+            },
+            backgroundColor: "#2e64e515",
+            margin: 0,
+            headerBackTitleVisible: false,
+          })}
+          component={Location}
         />
         <Stack.Screen
           name="login"
@@ -264,7 +299,6 @@ const Routes = (navigation) => {
           })}
           component={Checkout}
         />
-
         <Stack.Screen
           name="allCake"
           options={{
@@ -454,7 +488,6 @@ const Routes = (navigation) => {
           }}
           component={CakeShow}
         />
-
         <Stack.Screen
           name="cake"
           options={{

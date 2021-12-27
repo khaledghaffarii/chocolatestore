@@ -182,9 +182,36 @@ const Routes = (navigation) => {
         />
         <Stack.Screen
           name="About"
-          options={{
-            headerShown: false,
-          }}
+          options={({ navigation }) => ({
+            title: "سلة  المشتريات  ",
+           
+            headerTitle: (props) => (
+              <View {...props} style={{ flex: 1 }}>
+                <Image
+                  source={require("../assets/logo.png")}
+                  style={styles.tinyLogo}
+                  onPress={() => {
+                    navigation.navigate("Home");
+                  }}
+                />
+              </View>
+            ),
+            headerStyle: {
+              backgroundColor: "#ffff",
+              height: 60,
+              shadowColor: "#000",
+              elevation: 50,
+            },
+            headerTitleAlign: "center",
+
+            headerTitleStyle: {
+              fontWeight: "bold",
+              fontSize: 25,
+            },
+            backgroundColor: "#2e64e515",
+            margin: 0,
+            headerBackTitleVisible: false,
+          })}
           component={AboutScreen}
         />
         <Stack.Screen

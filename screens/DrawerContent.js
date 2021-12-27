@@ -56,7 +56,7 @@ export default function DrawerContent() {
               // )}
               label={() => <Text style={{}}>المنتجات</Text>}
               onPress={() => {
-                //navigation.navigate('Profile');
+                navigation.navigate("all_products");
               }}
             />
             <DrawerItem
@@ -83,7 +83,13 @@ export default function DrawerContent() {
               //   <Icon name="account-check-outline" color={color} size={size} />
               // )}
               label={() => (
-                <View style={{ display: "flex", flexDirection: "row" ,justifyContent: "center"}}>
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                  }}
+                >
                   <Icon name="arrow-left" size={20} color="#8f6f64" />
                   <Text style={{ marginRight: 3 }}>الدخول </Text>
                 </View>
@@ -177,7 +183,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 30,
   },
-  drawerContent: {  
+  drawerContent: {
     flex: 1,
   },
   userInfoSection: {

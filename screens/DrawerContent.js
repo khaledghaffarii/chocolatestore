@@ -75,7 +75,7 @@ export default function DrawerContent() {
               // )}
               label={() => <Text style={{}}>فروعنا</Text>}
               onPress={() => {
-                //navigation.navigate('SupportScreen');
+                navigation.navigate("location");
               }}
             />
             <DrawerItem

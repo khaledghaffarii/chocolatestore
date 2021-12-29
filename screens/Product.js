@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   },
   grid: {
     margin: 0,
-    marginTop: 20,
+
     flexDirection: "row",
     marginBottom: 10,
   },

@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
@@ -10,6 +11,7 @@ import {
   TouchableOpacity,
   Button,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import tw from "tailwind-react-native-classnames";
@@ -30,7 +32,13 @@ function VirtualizedView(props) {
     />
   );
 }
+
 const AllProduct = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   const navigation = useNavigation();
   const route = useRoute();
   // const imageUrl = route.params.product.imageUrl;
@@ -51,409 +59,417 @@ const AllProduct = () => {
   const cake = route.params.cake;
   const chocolate = route.params.chocolate;
   const product = route.params.product;
-
+  const [loading, setLoading] = useState(true);
   return (
     <View style={{ backgroundColor: "white" }}>
-      <VirtualizedView
-        showsVerticalScrollIndicator={true}
-        style={styles.container}
-      >
-        <View style={{ margin: 15, backgroundColor: "white" }}>
-          {salty ? (
-            <View style={{ marginLeft: -28 }}>
-              <FlatList
-                data={salty}
-                numColumns={2}
-                keyExtractor={(item) => item.id}
-                style={tw`pl-4`}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                    onPress={() =>
-                      navigation.navigate("productShow", {
-                        product: item,
-                      })
-                    }
-                  >
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
+      {loading ? (
+        <ActivityIndicator
+          style={tw` w-full  mt-72 mb-96`}
+          size="large"
+          color="gray"
+        />
+      ) : (
+        <VirtualizedView
+          showsVerticalScrollIndicator={true}
+          style={styles.container}
+        >
+          <View style={{ margin: 15, backgroundColor: "white" }}>
+            {salty ? (
+              <View style={{ marginLeft: -28 }}>
+                <FlatList
+                  data={salty}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}
+                  style={tw`pl-4`}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                      onPress={() =>
+                        navigation.navigate("productShow", {
+                          product: item,
+                        })
+                      }
                     >
-                      <Image
+                      <View
                         style={{
-                          resizeMode: "cover",
-                          borderRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderBottomRightRadius: 5,
-                          width: 150,
-                          height: 150,
+                          marginBottom: 10,
+                          flexDirection: "column",
+                          justifyContent: "space-between",
                         }}
-                        source={{
-                          uri: item.imageUrl,
-                        }}
-                      />
-                      <View style={{}}>
-                        <Text
-                          style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                        >
-                          {item.arabicTitle}
-                        </Text>
+                      >
+                        <Image
+                          style={{
+                            resizeMode: "cover",
+                            borderRadius: 5,
+                            borderBottomLeftRadius: 5,
+                            borderBottomRightRadius: 5,
+                            width: 150,
+                            height: 150,
+                          }}
+                          source={{
+                            uri: item.imageUrl,
+                          }}
+                        />
+                        <View style={{}}>
+                          <Text
+                            style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                          >
+                            {item.arabicTitle}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-          {chocolate ? (
-            <View style={{ marginLeft: -28 }}>
-              <FlatList
-                data={chocolate}
-                numColumns={2}
-                keyExtractor={(item) => item.id}
-                style={tw`pl-4`}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                    onPress={() =>
-                      navigation.navigate("productShow", {
-                        product: item,
-                      })
-                    }
-                  >
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+            {chocolate ? (
+              <View style={{ marginLeft: -28 }}>
+                <FlatList
+                  data={chocolate}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}
+                  style={tw`pl-4`}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                      onPress={() =>
+                        navigation.navigate("productShow", {
+                          product: item,
+                        })
+                      }
                     >
-                      <Image
+                      <View
                         style={{
-                          width: 150,
-                          height: 150,
-                          resizeMode: "cover",
-                          borderRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderBottomRightRadius: 5,
+                          marginBottom: 10,
+                          flexDirection: "column",
+                          justifyContent: "space-between",
                         }}
-                        source={{
-                          uri: item.imageUrl,
-                        }}
-                      />
-                      <View style={{}}>
-                        <Text
-                          style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                        >
-                          {item.arabicTitle}
-                        </Text>
+                      >
+                        <Image
+                          style={{
+                            width: 150,
+                            height: 150,
+                            resizeMode: "cover",
+                            borderRadius: 5,
+                            borderBottomLeftRadius: 5,
+                            borderBottomRightRadius: 5,
+                          }}
+                          source={{
+                            uri: item.imageUrl,
+                          }}
+                        />
+                        <View style={{}}>
+                          <Text
+                            style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                          >
+                            {item.arabicTitle}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-          {cake ? (
-            <View style={{ marginLeft: -28 }}>
-              <FlatList
-                data={cake}
-                numColumns={2}
-                keyExtractor={(item) => item.id}
-                style={tw`pl-4`}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                    onPress={() =>
-                      navigation.navigate("productShow", {
-                        product: item,
-                      })
-                    }
-                  >
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+            {cake ? (
+              <View style={{ marginLeft: -28 }}>
+                <FlatList
+                  data={cake}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}
+                  style={tw`pl-4`}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                      onPress={() =>
+                        navigation.navigate("productShow", {
+                          product: item,
+                        })
+                      }
                     >
-                      <Image
+                      <View
                         style={{
-                          resizeMode: "cover",
-                          borderRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderBottomRightRadius: 5,
-                          width: 150,
-                          height: 150,
+                          marginBottom: 10,
+                          flexDirection: "column",
+                          justifyContent: "space-between",
                         }}
-                        source={{
-                          uri: item.imageUrl,
-                        }}
-                      />
-                      <View style={{}}>
-                        <Text
-                          style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                        >
-                          {item.arabicTitle}
-                        </Text>
+                      >
+                        <Image
+                          style={{
+                            resizeMode: "cover",
+                            borderRadius: 5,
+                            borderBottomLeftRadius: 5,
+                            borderBottomRightRadius: 5,
+                            width: 150,
+                            height: 150,
+                          }}
+                          source={{
+                            uri: item.imageUrl,
+                          }}
+                        />
+                        <View style={{}}>
+                          <Text
+                            style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                          >
+                            {item.arabicTitle}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-          {kandy ? (
-            <View style={{ marginLeft: -28 }}>
-              <FlatList
-                data={kandy}
-                numColumns={2}
-                keyExtractor={(item) => item.id}
-                style={tw`pl-4`}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                    onPress={() =>
-                      navigation.navigate("productShow", {
-                        product: item,
-                      })
-                    }
-                  >
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+            {kandy ? (
+              <View style={{ marginLeft: -28 }}>
+                <FlatList
+                  data={kandy}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}
+                  style={tw`pl-4`}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                      onPress={() =>
+                        navigation.navigate("productShow", {
+                          product: item,
+                        })
+                      }
                     >
-                      <Image
+                      <View
                         style={{
-                          resizeMode: "cover",
-                          borderRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderBottomRightRadius: 5,
-                          width: 150,
-                          height: 150,
+                          marginBottom: 10,
+                          flexDirection: "column",
+                          justifyContent: "space-between",
                         }}
-                        source={{
-                          uri: item.imageUrl,
-                        }}
-                      />
-                      <View style={{}}>
-                        <Text
-                          style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                        >
-                          {item.arabicTitle}
-                        </Text>
+                      >
+                        <Image
+                          style={{
+                            resizeMode: "cover",
+                            borderRadius: 5,
+                            borderBottomLeftRadius: 5,
+                            borderBottomRightRadius: 5,
+                            width: 150,
+                            height: 150,
+                          }}
+                          source={{
+                            uri: item.imageUrl,
+                          }}
+                        />
+                        <View style={{}}>
+                          <Text
+                            style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                          >
+                            {item.arabicTitle}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-          {sandwich ? (
-            <View style={{ marginLeft: -28 }}>
-              <FlatList
-                data={sandwich}
-                numColumns={2}
-                keyExtractor={(item) => item.id}
-                style={tw`pl-4`}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                    onPress={() =>
-                      navigation.navigate("productShow", {
-                        product: item,
-                      })
-                    }
-                  >
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+            {sandwich ? (
+              <View style={{ marginLeft: -28 }}>
+                <FlatList
+                  data={sandwich}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}
+                  style={tw`pl-4`}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                      onPress={() =>
+                        navigation.navigate("productShow", {
+                          product: item,
+                        })
+                      }
                     >
-                      <Image
+                      <View
                         style={{
-                          resizeMode: "cover",
-                          borderRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderBottomRightRadius: 5,
-                          width: 150,
-                          height: 150,
+                          marginBottom: 10,
+                          flexDirection: "column",
+                          justifyContent: "space-between",
                         }}
-                        source={{
-                          uri: item.imageUrl,
-                        }}
-                      />
-                      <View style={{}}>
-                        <Text
-                          style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                        >
-                          {item.arabicTitle}
-                        </Text>
+                      >
+                        <Image
+                          style={{
+                            resizeMode: "cover",
+                            borderRadius: 5,
+                            borderBottomLeftRadius: 5,
+                            borderBottomRightRadius: 5,
+                            width: 150,
+                            height: 150,
+                          }}
+                          source={{
+                            uri: item.imageUrl,
+                          }}
+                        />
+                        <View style={{}}>
+                          <Text
+                            style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                          >
+                            {item.arabicTitle}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-          {croissant ? (
-            <View style={{ marginLeft: -28 }}>
-              <FlatList
-                data={croissant}
-                numColumns={2}
-                keyExtractor={(item) => item.id}
-                style={tw`pl-4`}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                    onPress={() =>
-                      navigation.navigate("productShow", {
-                        product: item,
-                      })
-                    }
-                  >
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+            {croissant ? (
+              <View style={{ marginLeft: -28 }}>
+                <FlatList
+                  data={croissant}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}
+                  style={tw`pl-4`}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                      onPress={() =>
+                        navigation.navigate("productShow", {
+                          product: item,
+                        })
+                      }
                     >
-                      <Image
+                      <View
                         style={{
-                          resizeMode: "cover",
-                          borderRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderBottomRightRadius: 5,
-                          width: 150,
-                          height: 150,
+                          marginBottom: 10,
+                          flexDirection: "column",
+                          justifyContent: "space-between",
                         }}
-                        source={{
-                          uri: item.imageUrl,
-                        }}
-                      />
-                      <View style={{}}>
-                        <Text
-                          style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                        >
-                          {item.arabicTitle}
-                        </Text>
+                      >
+                        <Image
+                          style={{
+                            resizeMode: "cover",
+                            borderRadius: 5,
+                            borderBottomLeftRadius: 5,
+                            borderBottomRightRadius: 5,
+                            width: 150,
+                            height: 150,
+                          }}
+                          source={{
+                            uri: item.imageUrl,
+                          }}
+                        />
+                        <View style={{}}>
+                          <Text
+                            style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                          >
+                            {item.arabicTitle}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-          {hotDrink ? (
-            <View style={{ marginLeft: -28 }}>
-              <FlatList
-                data={hotDrink}
-                numColumns={2}
-                keyExtractor={(item) => item.id}
-                style={tw`pl-4`}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                    onPress={() =>
-                      navigation.navigate("productShow", {
-                        product: item,
-                      })
-                    }
-                  >
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+            {hotDrink ? (
+              <View style={{ marginLeft: -28 }}>
+                <FlatList
+                  data={hotDrink}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}
+                  style={tw`pl-4`}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                      onPress={() =>
+                        navigation.navigate("productShow", {
+                          product: item,
+                        })
+                      }
                     >
-                      <Image
+                      <View
                         style={{
-                          resizeMode: "cover",
-                          borderRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderBottomRightRadius: 5,
-                          width: 150,
-                          height: 150,
+                          marginBottom: 10,
+                          flexDirection: "column",
+                          justifyContent: "space-between",
                         }}
-                        source={{
-                          uri: item.imageUrl,
-                        }}
-                      />
-                      <View style={{}}>
-                        <Text
-                          style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                        >
-                          {item.arabicTitle}
-                        </Text>
+                      >
+                        <Image
+                          style={{
+                            resizeMode: "cover",
+                            borderRadius: 5,
+                            borderBottomLeftRadius: 5,
+                            borderBottomRightRadius: 5,
+                            width: 150,
+                            height: 150,
+                          }}
+                          source={{
+                            uri: item.imageUrl,
+                          }}
+                        />
+                        <View style={{}}>
+                          <Text
+                            style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                          >
+                            {item.arabicTitle}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-          {coldDrink ? (
-            <View style={{ marginLeft: -28 }}>
-              <FlatList
-                data={coldDrink}
-                numColumns={2}
-                keyExtractor={(item) => item.id}
-                style={tw`pl-4`}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                    onPress={() =>
-                      navigation.navigate("productShow", {
-                        product: item,
-                      })
-                    }
-                  >
-                    <View
-                      style={{
-                        marginBottom: 10,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+            {coldDrink ? (
+              <View style={{ marginLeft: -28 }}>
+                <FlatList
+                  data={coldDrink}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}
+                  style={tw`pl-4`}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                      onPress={() =>
+                        navigation.navigate("productShow", {
+                          product: item,
+                        })
+                      }
                     >
-                      <Image
+                      <View
                         style={{
-                          resizeMode: "cover",
-                          borderRadius: 5,
-                          borderBottomLeftRadius: 5,
-                          borderBottomRightRadius: 5,
-                          width: 150,
-                          height: 150,
+                          marginBottom: 10,
+                          flexDirection: "column",
+                          justifyContent: "space-between",
                         }}
-                        source={{
-                          uri: item.imageUrl,
-                        }}
-                      />
-                      <View style={{}}>
-                        <Text
-                          style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                        >
-                          {item.arabicTitle}
-                        </Text>
+                      >
+                        <Image
+                          style={{
+                            resizeMode: "cover",
+                            borderRadius: 5,
+                            borderBottomLeftRadius: 5,
+                            borderBottomRightRadius: 5,
+                            width: 150,
+                            height: 150,
+                          }}
+                          source={{
+                            uri: item.imageUrl,
+                          }}
+                        />
+                        <View style={{}}>
+                          <Text
+                            style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                          >
+                            {item.arabicTitle}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          ) : null}
-        </View>
-        <FooterScreen />
-      </VirtualizedView>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            ) : null}
+          </View>
+          <FooterScreen />
+        </VirtualizedView>
+      )}
     </View>
   );
 };
@@ -475,7 +491,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     flex: 1,
     marginHorizontal: 1,
     marginVertical: 10,

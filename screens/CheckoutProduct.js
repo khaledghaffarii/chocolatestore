@@ -51,9 +51,9 @@ const CheckoutProduct = ({ chocolate, props }) => {
     const add = count - 1;
     return setCount(add);
   }
-  console.log(chocolate.id);
+
   const removeItemFromBasket = (chocolate) => {
-    dispatch(removeFromBasket({id}));
+    dispatch(removeFromBasket({ id }));
   };
 
   return (
@@ -165,11 +165,19 @@ const CheckoutProduct = ({ chocolate, props }) => {
           </View>
 
           <Image
-            style={{ width: 80, height: 100 }}
+            style={{
+              marginTop:25,
+              width: 85,
+              height: 100,
+              resizeMode: "cover",
+              borderRadius: 5,
+              borderBottomLeftRadius: 5,
+              borderBottomRightRadius: 5,
+            }}
             source={{ uri: chocolate.imageUrl }}
           />
           <Pressable
-            style={{ marginLeft: 25, marginTop: 20 }}
+            style={{ marginLeft: 25, marginTop: 50 }}
             onPress={() => {
               removeItemFromBasket();
             }}

@@ -21,6 +21,7 @@ import {
   Linking,
   FlatList,
   SafeAreaView,
+  ActivityIndicator,
 } from "react-native";
 import { Link } from "@react-navigation/native";
 import firestore from "@react-native-firebase/firestore";
@@ -58,7 +59,7 @@ const All_Product = () => {
   const navigation = useNavigation();
 
   const [product, setProduct] = useState(0);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getAllProduct = async () => {
       try {
@@ -71,62 +72,72 @@ const All_Product = () => {
         console.log(error);
       }
     };
-
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
     getAllProduct();
   }, []);
 
   return (
     <VirtualizedView>
-      <ScrollView style={tw`bg-white`} nestedScrollEnabled={true}>
-        <View style={{ marginLeft: -12, marginBottom: 90 }}>
-          <FlatList
-            data={product}
-            numColumns={2}
-            keyExtractor={(item) => item.id}
-            style={tw`pl-4`}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
-                onPress={() =>
-                  navigation.navigate("productShow", {
-                    product: item,
-                  })
-                }
-              >
-                <View
-                  style={{
-                    marginBottom: 10,
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
+      {loading ? (
+        <ActivityIndicator
+          style={tw` w-full mt-72`}
+          size="large"
+          color="gray"
+        />
+      ) : (
+        <ScrollView style={tw`bg-white`} nestedScrollEnabled={true}>
+          <View style={{ marginLeft: -12, marginBottom: 90 }}>
+            <FlatList
+              data={product}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
+              style={tw`pl-4`}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={tw`p-2 pl-6 pb-8 pt-4 bg-white m-2 w-40`}
+                  onPress={() =>
+                    navigation.navigate("productShow", {
+                      product: item,
+                    })
+                  }
                 >
-                  <Image
+                  <View
                     style={{
-                      resizeMode: "cover",
-                      borderRadius: 5,
-                      borderBottomLeftRadius: 5,
-                      borderBottomRightRadius: 5,
-                      width: 150,
-                      height: 150,
+                      marginBottom: 10,
+                      flexDirection: "column",
+                      justifyContent: "space-between",
                     }}
-                    source={{
-                      uri: item.imageUrl,
-                    }}
-                  />
-                  <View style={{}}>
-                    <Text
-                      style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
-                    >
-                      {item.arabicTitle}
-                    </Text>
+                  >
+                    <Image
+                      style={{
+                        resizeMode: "cover",
+                        borderRadius: 5,
+                        borderBottomLeftRadius: 5,
+                        borderBottomRightRadius: 5,
+                        width: 150,
+                        height: 150,
+                      }}
+                      source={{
+                        uri: item.imageUrl,
+                      }}
+                    />
+                    <View style={{}}>
+                      <Text
+                        style={tw`text-lg font-bold mt-2 text-gray-500 text-left`}
+                      >
+                        {item.arabicTitle}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-        <FooterScreen />
-      </ScrollView>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+          <FooterScreen />
+        </ScrollView>
+      )}
     </VirtualizedView>
   );
 };

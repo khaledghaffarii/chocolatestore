@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Button,
+  ActivityIndicator,
 } from "react-native";
 import {
   useNavigation,
@@ -33,7 +34,7 @@ import { SearchBar, Card } from "react-native-elements";
 import FooterScreen from "./FooterScreen";
 import { useDispatch } from "react-redux";
 import { addToBasket } from "../slice/BasketSlice";
-
+import tw from "tailwind-react-native-classnames";
 const ProductShow = ({ onPress }) => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -48,6 +49,7 @@ const ProductShow = ({ onPress }) => {
   const englishCategory = route.params.product.englishCategory;
   const [product, setProduct] = useState("");
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
   const addItemToBasket = () => {
     const product = {
       arabicTitle,
@@ -72,77 +74,91 @@ const ProductShow = ({ onPress }) => {
         console.log(error);
       }
     };
-
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
     getProduct();
   }, []);
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
-      <View>
-        <Image style={styles.categoriesPhoto} source={{ uri: imageUrl }} />
-      </View>
-      <View>
-        <View style={styles.header}>
-          <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("all_product", {
-                  kandy: product,
-                })
-              }
-            >
-              <Text style={styles.subTitle}> {arabicCategory}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-              <Text style={styles.subTitle}>الرئيسية / </Text>
-            </TouchableOpacity>
-          </View>
-
-          <Text style={styles.title}>{arabicTitle}</Text>
-          <Text
-            style={{
-              textAlign: "right",
-              fontSize: 20,
-              margin: 8,
-              color: "#cab19f",
-            }}
-          >
-            {price} ر.س
-          </Text>
-        </View>
-        <View style={styles.ourProduct}></View>
-        <View style={styles.other}>
-          <Text style={styles.code}>رمز المنتج: {code}</Text>
-          <Text style={styles.weight}>الوزن :g {weight}</Text>
-          <Text style={styles.calory}> سعرة حرارية : {calories} kal</Text>
-          <Text style={styles.description}>{arabicDescription}</Text>
-        </View>
+      {loading ? (
+        <ActivityIndicator
+          style={tw` w-full  mt-72 mb-96`}
+          size="large"
+          color="gray"
+        />
+      ) : (
         <View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View
-              style={{
-                marginLeft: 120,
-                width: 150,
-                marginBottom: 20,
-              }}
-            >
-              <Button
-                onPress={() => {
-                  addItemToBasket();
+          <View>
+            <Image style={styles.categoriesPhoto} source={{ uri: imageUrl }} />
+          </View>
+          <View>
+            <View style={styles.header}>
+              <View
+                style={{ flexDirection: "row", justifyContent: "flex-end" }}
+              >
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("all_product", {
+                      kandy: product,
+                    })
+                  }
+                >
+                  <Text style={styles.subTitle}> {arabicCategory}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+                  <Text style={styles.subTitle}>الرئيسية / </Text>
+                </TouchableOpacity>
+              </View>
+
+              <Text style={styles.title}>{arabicTitle}</Text>
+              <Text
+                style={{
+                  textAlign: "right",
+                  fontSize: 20,
+                  margin: 8,
+                  color: "#cab19f",
                 }}
-                title="أضف إلى السلة"
-                color="#af8d78"
-              />
+              >
+                {price} ر.س
+              </Text>
+            </View>
+            <View style={styles.ourProduct}></View>
+            <View style={styles.other}>
+              <Text style={styles.code}>رمز المنتج: {code}</Text>
+              <Text style={styles.weight}>الوزن :g {weight}</Text>
+              <Text style={styles.calory}> سعرة حرارية : {calories} kal</Text>
+              <Text style={styles.description}>{arabicDescription}</Text>
+            </View>
+            <View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <View
+                  style={{
+                    marginLeft: 120,
+                    width: 150,
+                    marginBottom: 20,
+                  }}
+                >
+                  <Button
+                    onPress={() => {
+                      addItemToBasket();
+                    }}
+                    title="أضف إلى السلة"
+                    color="#af8d78"
+                  />
+                </View>
+              </View>
             </View>
           </View>
-        </View>
-      </View>
 
-      <FooterScreen />
+          <FooterScreen />
+        </View>
+      )}
     </ScrollView>
   );
 };

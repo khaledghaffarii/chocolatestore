@@ -1,0 +1,8 @@
+[2022-04-18 21:29:05.501] [sharedprocess] [info] Starting worker process with pid 38151 (type: fileWatcher, window: 1).
+[2022-04-18 21:29:05.674] [sharedprocess] [info] Deleted from disk streetsidesoftware.code-spell-checker /root/.vscode/extensions/streetsidesoftware.code-spell-checker-2.1.7
+[2022-04-18 21:29:17.405] [sharedprocess] [info] Getting Manifest... esbenp.prettier-vscode
+[2022-04-18 21:29:17.406] [sharedprocess] [info] Getting Manifest... wallabyjs.quokka-vscode
+[2022-04-18 21:29:18.300] [sharedprocess] [info] Installing extension: wallabyjs.quokka-vscode
+[2022-04-18 21:29:18.334] [sharedprocess] [info] Installing extension: esbenp.prettier-vscode
+[2022-04-18 21:29:37.187] [sharedprocess] [info] Starting worker process with pid 38438 (type: fileWatcher, window: 3).
+[2022-04-18 21:29:49.800] [sharedprocess] [info] Worker process with pid 38151 terminated normally (type: fileWatcher, window: 1).

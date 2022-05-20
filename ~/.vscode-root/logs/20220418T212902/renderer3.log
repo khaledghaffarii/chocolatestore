@@ -1,0 +1,7 @@
+[2022-04-18 21:29:37.376] [renderer3] [critical] Extension 'TabNine.tabnine-vscode CANNOT USE these API proposals 'inlineCompletions'. You MUST start in extension development mode or use the --enable-proposed-api command line flag
+[2022-04-18 21:29:37.382] [renderer3] [info] Ignoring configured affinity for 'pub.name' because the extension is unknown or cannot execute.
+[2022-04-18 21:29:37.692] [renderer3] [error] ["Error: Unknown or unsupported transport “disabled” for address “disabled:”"]
+[2022-04-18 21:29:37.692] [renderer3] [warning] Settings Sync: Accounts are not initialized
+[2022-04-18 21:29:37.798] [renderer3] [info] Ignoring configured affinity for 'pub.name' because the extension is unknown or cannot execute.
+[2022-04-18 21:29:38.713] [renderer3] [error] [Extension Host] (node:38437) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+(Use `code --trace-deprecation ...` to show where the warning was created)

@@ -201,6 +201,7 @@
 // export default AppStack;
 import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { ScrollToTop } from "../components/Scroll/ScrollToTop";
 import {
   View,
   StyleSheet,
@@ -378,12 +379,12 @@ const AppStack = ({ navigation }) => {
       </Animatable.Text>
 
       <ChocolateProduct />
-      <Icon
+      {/* <Icon
         name="arrow-up-circle-outline"
         size={50}
     
         style={{ position:"absolute" }}
-      />
+      /> */}
       <View style={styles.ourProduct}></View>
       <Animatable.Text
         animation="bounceInLeft"
@@ -510,6 +511,7 @@ const AppStack = ({ navigation }) => {
               <Text style={styles.textCtegory}> المشروبات الباردة</Text>
             </View>
           </TouchableOpacity>
+        {/* <ScrollToTop /> */}
         </View>
       </ScrollView>
       <FooterScreen />

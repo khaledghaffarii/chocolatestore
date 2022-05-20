@@ -1,0 +1,5 @@
+[2022-04-18 21:32:32.605] [sharedprocess] [info] Starting worker process with pid 40180 (type: fileWatcher, window: 1).
+[2022-04-18 21:32:38.821] [sharedprocess] [info] Getting Manifest... esbenp.prettier-vscode
+[2022-04-18 21:32:38.823] [sharedprocess] [info] Getting Manifest... wallabyjs.quokka-vscode
+[2022-04-18 21:32:40.021] [sharedprocess] [info] Installing extension: esbenp.prettier-vscode
+[2022-04-18 21:32:47.841] [sharedprocess] [info] Installing extension: wallabyjs.quokka-vscode

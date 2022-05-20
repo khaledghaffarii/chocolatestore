@@ -1,0 +1,26 @@
+[2022-04-18 21:29:37.946] [exthost] [info] Extension host with pid 38437 started
+[2022-04-18 21:29:37.946] [exthost] [info] Skipping acquiring lock for /home/khaled/Bureau/chocolatestore/~/.vscode-root/User/workspaceStorage/7f0fe2fbe0fde9f383668a7433596768.
+[2022-04-18 21:29:38.079] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.086] [exthost] [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.090] [exthost] [info] ExtensionService#_doActivateExtension vscode.ipynb, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.096] [exthost] [info] ExtensionService#_doActivateExtension christian-kohler.path-intellisense, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.115] [exthost] [info] ExtensionService#_doActivateExtension formulahendry.auto-close-tag, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.118] [exthost] [info] ExtensionService#_doActivateExtension formulahendry.auto-rename-tag, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.130] [exthost] [info] ExtensionService#_doActivateExtension naumovs.color-highlight, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.141] [exthost] [info] ExtensionService#_doActivateExtension TabNine.tabnine-vscode, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.164] [exthost] [info] ExtensionService#_doActivateExtension WallabyJs.quokka-vscode, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.167] [exthost] [info] ExtensionService#_doActivateExtension vscode.npm, startup: true, activationEvent: 'workspaceContains:package.json'
+[2022-04-18 21:29:38.199] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode.js-debug, startup: true, activationEvent: 'workspaceContains:node_modules/react-native', root cause: msjsdiag.vscode-react-native
+[2022-04-18 21:29:38.601] [exthost] [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+[2022-04-18 21:29:38.614] [exthost] [info] ExtensionService#_doActivateExtension msjsdiag.vscode-react-native, startup: true, activationEvent: 'workspaceContains:node_modules/react-native'
+[2022-04-18 21:29:38.712] [exthost] [info] ExtensionService#_doActivateExtension vscode.configuration-editing, startup: false, activationEvent: 'onLanguage:jsonc'
+[2022-04-18 21:29:38.714] [exthost] [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+[2022-04-18 21:29:38.726] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+[2022-04-18 21:29:38.884] [exthost] [info] Eager extensions activated
+[2022-04-18 21:29:38.888] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:29:38.898] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:29:38.899] [exthost] [info] ExtensionService#_doActivateExtension dsznajder.es7-react-js-snippets, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:29:39.070] [exthost] [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:29:39.214] [exthost] [info] ExtensionService#_doActivateExtension PKief.material-icon-theme, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:29:52.524] [exthost] [info] extension host terminating: renderer closed the socket
+[2022-04-18 21:29:53.541] [exthost] [info] Extension host with pid 38437 exiting with code 0

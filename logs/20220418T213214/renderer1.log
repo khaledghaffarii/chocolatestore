@@ -1,0 +1,10 @@
+[2022-04-18 21:32:16.816] [renderer1] [critical] Extension 'TabNine.tabnine-vscode CANNOT USE these API proposals 'inlineCompletions'. You MUST start in extension development mode or use the --enable-proposed-api command line flag
+[2022-04-18 21:32:16.824] [renderer1] [info] Ignoring configured affinity for 'pub.name' because the extension is unknown or cannot execute.
+[2022-04-18 21:32:16.973] [renderer1] [error] [EQuimper.react-native-react-redux]: Unknown language in `contributes.react-native-react-redux.language`. Provided value: jsx
+[2022-04-18 21:32:16.973] [renderer1] [error] [geyao.html-snippets]: Unknown language in `contributes.html-snippets.language`. Provided value: vue-html
+[2022-04-18 21:32:16.974] [renderer1] [error] [jundat95.react-native-snippet]: Unknown language in `contributes.react-native-snippet.language`. Provided value: jsx
+[2022-04-18 21:32:16.974] [renderer1] [error] [sidthesloth.html5-boilerplate]: Unknown language in `contributes.html5-boilerplate.language`. Provided value: njk
+[2022-04-18 21:32:16.974] [renderer1] [error] [sidthesloth.html5-boilerplate]: Unknown language in `contributes.html5-boilerplate.language`. Provided value: django-html
+[2022-04-18 21:32:17.244] [renderer1] [error] ["Error: Unknown or unsupported transport “disabled” for address “disabled:”"]
+[2022-04-18 21:32:17.244] [renderer1] [warning] Settings Sync: Accounts are not initialized
+[2022-04-18 21:32:17.252] [renderer1] [info] Ignoring configured affinity for 'pub.name' because the extension is unknown or cannot execute.

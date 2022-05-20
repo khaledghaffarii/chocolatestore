@@ -1,0 +1,22 @@
+[2022-04-18 21:32:32.268] [exthost] [info] Extension host with pid 40127 started
+[2022-04-18 21:32:32.367] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.372] [exthost] [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.376] [exthost] [info] ExtensionService#_doActivateExtension vscode.ipynb, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.389] [exthost] [info] ExtensionService#_doActivateExtension christian-kohler.path-intellisense, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.402] [exthost] [info] ExtensionService#_doActivateExtension formulahendry.auto-close-tag, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.403] [exthost] [info] ExtensionService#_doActivateExtension formulahendry.auto-rename-tag, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.437] [exthost] [info] ExtensionService#_doActivateExtension naumovs.color-highlight, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.452] [exthost] [info] ExtensionService#_doActivateExtension TabNine.tabnine-vscode, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.524] [exthost] [info] ExtensionService#_doActivateExtension WallabyJs.quokka-vscode, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.765] [exthost] [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+[2022-04-18 21:32:32.785] [exthost] [info] ExtensionService#_doActivateExtension vscode.configuration-editing, startup: false, activationEvent: 'onLanguage:jsonc'
+[2022-04-18 21:32:32.790] [exthost] [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+[2022-04-18 21:32:32.847] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+[2022-04-18 21:32:32.916] [exthost] [info] Eager extensions activated
+[2022-04-18 21:32:32.942] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:32:32.960] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:32:32.963] [exthost] [info] ExtensionService#_doActivateExtension dsznajder.es7-react-js-snippets, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:32:33.465] [exthost] [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:32:33.860] [exthost] [info] ExtensionService#_doActivateExtension PKief.material-icon-theme, startup: false, activationEvent: 'onStartupFinished'
+[2022-04-18 21:32:51.238] [exthost] [info] extension host terminating: renderer closed the socket
+[2022-04-18 21:32:52.252] [exthost] [info] Extension host with pid 40127 exiting with code 0

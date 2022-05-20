@@ -1,0 +1,20 @@
+[2022-04-18 21:26:35.319] [sharedprocess] [info] Starting worker process with pid 36598 (type: fileWatcher, window: 1).
+[2022-04-18 21:26:35.376] [sharedprocess] [info] Deleted from disk davidanson.vscode-markdownlint /root/.vscode/extensions/davidanson.vscode-markdownlint-0.46.0
+[2022-04-18 21:26:35.377] [sharedprocess] [info] Deleted from disk aaron-bond.better-comments /root/.vscode/extensions/aaron-bond.better-comments-2.1.0
+[2022-04-18 21:26:35.377] [sharedprocess] [info] Deleted from disk tabnine.tabnine-vscode /root/.vscode/extensions/tabnine.tabnine-vscode-3.5.39
+[2022-04-18 21:26:35.379] [sharedprocess] [info] Deleted from disk emmanuelbeziat.vscode-great-icons /root/.vscode/extensions/emmanuelbeziat.vscode-great-icons-2.1.84
+[2022-04-18 21:26:35.412] [sharedprocess] [info] Deleted from disk bradlc.vscode-tailwindcss /root/.vscode/extensions/bradlc.vscode-tailwindcss-0.7.7
+[2022-04-18 21:26:35.412] [sharedprocess] [info] Deleted from disk pkief.material-icon-theme /root/.vscode/extensions/pkief.material-icon-theme-4.13.0
+[2022-04-18 21:26:35.414] [sharedprocess] [info] Deleted from disk ms-ceintl.vscode-language-pack-fr /root/.vscode/extensions/ms-ceintl.vscode-language-pack-fr-1.66.1
+[2022-04-18 21:26:35.445] [sharedprocess] [info] Deleted from disk huuums.vscode-fast-folder-structure /root/.vscode/extensions/huuums.vscode-fast-folder-structure-3.8.0
+[2022-04-18 21:26:37.776] [sharedprocess] [info] Getting Manifest... esbenp.prettier-vscode
+[2022-04-18 21:26:37.779] [sharedprocess] [info] Getting Manifest... streetsidesoftware.code-spell-checker
+[2022-04-18 21:26:37.779] [sharedprocess] [info] Getting Manifest... wallabyjs.quokka-vscode
+[2022-04-18 21:26:39.271] [sharedprocess] [info] Installing extension: esbenp.prettier-vscode
+[2022-04-18 21:26:39.345] [sharedprocess] [info] Installing extension: wallabyjs.quokka-vscode
+[2022-04-18 21:26:39.525] [sharedprocess] [info] Installing extension: streetsidesoftware.code-spell-checker
+[2022-04-18 21:27:18.266] [sharedprocess] [info] Downloaded extension: streetsidesoftware.code-spell-checker /home/khaled/Bureau/chocolatestore/~/.vscode-root/CachedExtensionVSIXs/streetsidesoftware.code-spell-checker-2.1.11
+[2022-04-18 21:27:18.551] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.79bc4ec5-c473-4e45-91ab-eabc2c8c5466: streetsidesoftware.code-spell-checker
+[2022-04-18 21:27:18.561] [sharedprocess] [info] Renamed to /root/.vscode/extensions/streetsidesoftware.code-spell-checker-2.1.11
+[2022-04-18 21:27:18.563] [sharedprocess] [info] Extracting completed. streetsidesoftware.code-spell-checker
+[2022-04-18 21:27:18.569] [sharedprocess] [info] Extension installed successfully: streetsidesoftware.code-spell-checker
